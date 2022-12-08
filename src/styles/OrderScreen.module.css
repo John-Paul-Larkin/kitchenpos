@@ -1,0 +1,16 @@
+.order-screen {
+
+  padding: 1em;
+  overflow-y: scroll;
+  flex-grow: 1;
+}
+
+.order-items {
+  background-color: bisque;
+  display: inline-block;
+  padding: 0.1em;
+  margin:0.2em;
+
+  border: 1px solid white;
+
+}

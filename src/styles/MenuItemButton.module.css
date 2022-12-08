@@ -1,0 +1,33 @@
+.button {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: cadetblue;
+  color: white;
+  font-size: 0.7em;
+  border-radius: 20px;
+  padding: 0.3em;
+  border: 2px solid black;
+  box-shadow: 3px 3px rgb(54, 100, 101);
+  background: linear-gradient(to top, rgb(18, 77, 81), cadetblue);
+  
+}
+
+.button:hover {
+  background-color: rgb(89, 146, 148);
+
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.large-button {
+  display: inline-block;
+  position: absolute;
+  width: 100px;
+  height: 300px;
+  background-color: cadetblue;
+  color: white;
+  font-size: 0.7em;
+  border-radius: 40px;
+  margin: 5px;
+}
