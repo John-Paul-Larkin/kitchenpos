@@ -1,35 +1,5 @@
 import styles from "../styles/OrderScreen.module.css";
 
-// interface opt {
-//   value: number;
-//   label: string;
-// }
-// const selectOptions: opt[] = [
-//   { value: 1, label: "1" },
-//   { value: 2, label: "2" },
-//   { value: 3, label: "3" },
-//   { value: 4, label: "4" },
-//   { value: 5, label: "5" },
-// ];
-
-// export default function TableNumberSelect() {
-//   const [selectVal, setSelectVal] = useState<opt | null>({ value: 1, label: "1" });
-
-//   console.log(selectVal);
-//   return (
-//     <>
-//       <span> Table Number:</span>
-//       <Select
-//         className={styles["table-select"]}
-//         options={selectOptions}
-//         value={selectVal}
-//         onChange={(option) => setSelectVal(option)}
-//         instanceId="table select"
-//       />
-//     </>
-//   );
-// }
-
 export default function TableNumberSelect({
   tableNumber,
   setTableNumber,
