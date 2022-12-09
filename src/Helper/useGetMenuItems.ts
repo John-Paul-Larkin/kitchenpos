@@ -8,8 +8,6 @@ export function useGetMenuItems() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  console.count("in use get menu items component");
-
   useEffect(() => {
     const get = async () => {
       try {

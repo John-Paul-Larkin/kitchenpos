@@ -1,16 +1,57 @@
-.order-screen {
-
-  padding: 1em;
-  overflow-y: scroll;
+.order-screen-container {
   flex-grow: 1;
+  background-color: aquamarine;
+  width: 50%;
+  overflow-y: scroll;
+}
+
+.order-screen {
+  padding: 0.5em;
 }
 
 .order-items {
   background-color: bisque;
-  display: inline-block;
   padding: 0.1em;
-  margin:0.2em;
-
+  margin: 0.2em;
   border: 1px solid white;
-
 }
+
+h2 {
+  font-size: 0.8em;
+  text-decoration: underline;
+  text-align: center;
+  display: inline-block;
+  width: 50%;
+}
+
+span {
+  font-size: 0.8em;
+}
+
+.table-select {
+  color: blue;
+  width:30px;
+  display: inline-block;
+  padding: 0;
+  margin-left: 5px;
+  font-size: .5em;
+  /* background-color: aquamarine; */
+  text-align: center;
+}
+/* 
+
+padding:9px;
+margin: 0;
+-webkit-box-shadow: 
+    0 0px 0 #ccc,
+    0 0px #fff inset;
+background: url('http://i45.tinypic.com/309nb74.png') no-repeat right, -moz-linear-gradient(top, #FBFBFB 0%, #E9E9E9 100%);
+background: url('http://i45.tinypic.com/309nb74.png') no-repeat right, -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FBFBFB), color-stop(100%,#E9E9E9));
+color:black;
+border:none;
+outline:none;
+display: inline-block;
+-webkit-appearance:none; 
+cursor:pointer;
+border: 1px solid #ccc;
+} */

@@ -18,13 +18,21 @@
   }
 }
 
-.button-wrapper {
+.grid-wrapper {
+  background: linear-gradient(to top, #6d695c, #bbae7e);
+
   border-top: 5px solid black;
+  border-radius: 0 0 14px 14px;
+}
+
+.button-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  background: linear-gradient(to top, #6d695c, #bbae7e);
+  justify-items: center;
   height: 340px;
   padding: 5px;
   position: relative;
-  z-index: -1;
+
+  max-width: 390px;
+  margin: 0 auto;
 }

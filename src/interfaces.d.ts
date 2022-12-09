@@ -12,10 +12,8 @@ type Ingredients = "White bread" | "Butter" | "Bacon" | "Lettuce" | "Tomato" | "
 interface MenuItem {
   name: string;
   ingredients?: Ingredients[];
-  id?:number;
+  id?: number;
 }
-
-
 
 interface ReducerAction {
   type: string;
@@ -23,6 +21,13 @@ interface ReducerAction {
 }
 
 interface ContextProvider {
-  orderDetails: MenuItem[];
+  orderDetails: OrderDetails;
   dispatch: React.Dispatch<ReducerAction>;
+}
+
+interface OrderDetails {
+  tableNumber?: number;
+  timeOrderPlaced?:Date;
+  server?:string;
+  orderItemDetails: MenuItem[];
 }
