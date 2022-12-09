@@ -14,7 +14,7 @@ export default function MobileScreen() {
 
   const [screen, setScreen] = useState<Screens | null>(screens[0]);
 
-  const { menuItems, loading, error } = useGetMenuItems();
+  const { menuItems, loading } = useGetMenuItems();
 
   return (
     <>

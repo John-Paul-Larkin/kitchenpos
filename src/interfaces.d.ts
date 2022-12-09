@@ -12,13 +12,20 @@ type Ingredients = "White bread" | "Butter" | "Bacon" | "Lettuce" | "Tomato" | "
 interface MenuItem {
   name: string;
   ingredients?: Ingredients[];
-  id?: number;
+  id: number;
 }
 
-interface ReducerAction {
-  type: string;
+interface ReducerActionAdd {
+  type: "add";
   payload: MenuItem;
 }
+
+interface ReducerActionRemove {
+  type: 'remove';
+  payload: number;
+}
+
+type ReducerAction = ReducerActionAdd | ReducerActionRemove;
 
 interface ContextProvider {
   orderDetails: OrderDetails;
@@ -27,7 +34,7 @@ interface ContextProvider {
 
 interface OrderDetails {
   tableNumber?: number;
-  timeOrderPlaced?:Date;
-  server?:string;
+  timeOrderPlaced?: Date;
+  server?: string;
   orderItemDetails: MenuItem[];
 }

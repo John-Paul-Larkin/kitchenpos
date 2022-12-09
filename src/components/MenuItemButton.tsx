@@ -1,7 +1,7 @@
 import styles from "../styles/MenuItemButton.module.css";
 
 import { menuContext } from "./MenuContext";
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import { motion } from "framer-motion";
 
 export default function MenuItemButton({ item }: { item: MenuItem }) {

@@ -62,7 +62,6 @@ export default function TableNumberSelect({
         <option value="14">14</option>
         <option value="15">15</option>
       </select>
-      {/* <input type="submit" value="Submit"/> */}
     </form>
   );
 }

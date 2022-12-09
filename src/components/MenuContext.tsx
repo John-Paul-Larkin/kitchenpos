@@ -1,44 +1,34 @@
-import produce from "immer";
-import { createContext, ReactNode, useReducer } from "react";
+import { createContext, ReactNode } from "react";
+import { useImmerReducer } from "use-immer";
 
 export const menuContext = createContext({} as ContextProvider);
 
 export default function MenuContext({ children }: { children: ReactNode }) {
-  const reducer = (state: OrderDetails, action: ReducerAction): OrderDetails => {
+  const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails => {
     switch (action.type) {
       case "add": {
-        let out = {} as OrderDetails;
-
-        if (Object.keys(state).length === 0) {
-          out = { tableNumber: 1, orderItemDetails: [{ ...action.payload, id: Math.random() }] };
+        if (Object.keys(draft).length === 0) {
+          // If this is the first item to be added to the order, just add to the array
+          draft.orderItemDetails = [{ ...action.payload, id: Math.random() }];
         } else {
-          out = { ...state, orderItemDetails: [...state.orderItemDetails, { ...action.payload, id: Math.random() }] };
+          //otherwise spread the old items before adding
+          draft.orderItemDetails = [...draft.orderItemDetails, { ...action.payload, id: Math.random() }];
         }
-        console.log(state,'state')
-        console.log(out)
-
-        return out;
+        return draft;
       }
+      case "remove": {
+        draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.id !== action.payload);
+        return draft;
+      }
+
       default:
-        return state;
+        return draft;
     }
   };
 
   const initialOrderDetails = {} as OrderDetails;
 
-  const [orderDetails, dispatch] = useReducer(reducer, initialOrderDetails);
+  const [orderDetails, dispatch] = useImmerReducer(reducer, initialOrderDetails);
 
   return <menuContext.Provider value={{ orderDetails, dispatch }}>{children}</menuContext.Provider>;
 }
-
-// {
-//   let out = {} as OrderDetails;
-
-//   if (Object.keys(state).length === 0) {
-//     out = { tableNumber: 1, orderItemDetails: [{ ...action.payload, id: Math.random() }] };
-//   } else {
-//     out = { ...state, orderItemDetails: [...state.orderItemDetails, { ...action.payload, id: Math.random() }] };
-//   }
-
-//   return out;
-// }
