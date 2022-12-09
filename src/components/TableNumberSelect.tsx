@@ -1,4 +1,3 @@
-import Select from "react-select";
 import styles from "../styles/OrderScreen.module.css";
 
 // interface opt {
