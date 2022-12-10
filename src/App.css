@@ -29,5 +29,11 @@ picture {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
+:root {
+  --one: #ad8b73;
+  --two: #ceab93;
+  --three: #e3caa5;
+  --four: #fffbe9;
 }

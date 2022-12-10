@@ -30,6 +30,9 @@ type ReducerAction = ReducerActionAdd | ReducerActionRemove;
 interface ContextProvider {
   orderDetails: OrderDetails;
   dispatch: React.Dispatch<ReducerAction>;
+  selectedOrderItem:MenuItem|null;
+  setSelectedOrderItem:React.Dispatch<React.SetStateAction<MenuItem | null>>
+
 }
 
 interface OrderDetails {

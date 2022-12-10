@@ -1,19 +1,47 @@
-.order-screen-container {
-  flex-grow: 1;
-  background-color: aquamarine;
-  width: 50%;
-  overflow-y: scroll;
+.order-screen {
+  display: flex;
+  height: calc(100% - 345px);
 }
 
-.order-screen {
+.order-items-screen-container {
+  background-color: var(--three);
+  /* overflow-y: scroll; */
+  width: 50%;
+
+  display: inline-block;
+}
+
+.order-items-screen {
   padding: 0.5em;
 }
 
 .order-items {
-  background-color: bisque;
+  background-color: var(--three);
   padding: 0.1em;
   margin: 0.2em;
   border: 1px solid white;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: var(--one);
+  padding: 0.1em;
+  margin: 0.2em;
+  border: 1px solid white;
+  border-left: none;
+  cursor: pointer;
+  width: 110%;
+  position: relative;
+  left: -12px;
+  font-size: 1.3em;
+  color: white;
+}
+
+.selected::before {
+  display: inline-block;
+  content: "<";
+  position: relative;
+  left:-1em;
 }
 
 h2 {
@@ -30,12 +58,18 @@ span {
 
 .table-select {
   color: blue;
-  width:30px;
+  width: 30px;
   display: inline-block;
   padding: 0;
   margin-left: 5px;
-  font-size: .5em;
-  /* background-color: aquamarine; */
+  font-size: 0.5em;
   text-align: center;
 }
 
+/* Left side of order screen */
+
+.order-item-details {
+  flex-grow: 1;
+  background-color: var(--one);
+  display: inline-block;
+}

@@ -10,31 +10,32 @@ export default function OrderDetails() {
 
   const [tableNumber, setTableNumber] = useState("1");
 
-  const { dispatch } = useContext(menuContext);
+  const { selectedOrderItem, setSelectedOrderItem } = useContext(menuContext);
 
   return (
-    <div className={styles["order-screen-container"]}>
+    <div className={styles["order-items-screen-container"]}>
       <TableNumberSelect tableNumber={tableNumber} setTableNumber={setTableNumber} />
       <span>Open tables (7)</span>
       <h2>Items</h2>
-      <div className={styles["order-screen"]}>
+      <div className={styles["order-items-screen"]}>
         {orderDetails.orderItemDetails &&
           orderDetails.orderItemDetails.map((orderItem) => (
             <motion.div
-              className={styles["order-items"]}
+              className={
+
+                selectedOrderItem?.id === orderItem.id ?
+                
+                  styles["selected"] :   styles["order-items"]
+              
+              
+              }
               key={orderItem.id}
               initial={{ y: 300, opacity: 1, scaleY: 1.5 }}
               animate={{ y: 0, opacity: 1, scaleY: 1 }}
               transition={{ ease: "easeInOut" }}
+              onClick={() => setSelectedOrderItem(orderItem)}
             >
               {orderItem.name}
-              <button
-                onClick={() => {
-                  dispatch({ type: "remove", payload: orderItem.id });
-                }}
-              >
-                x
-              </button>
             </motion.div>
           ))}
       </div>
