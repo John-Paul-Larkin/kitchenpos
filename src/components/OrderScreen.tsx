@@ -5,8 +5,8 @@ import styles from "../styles/OrderScreen.module.css";
 export default function OrderScreen() {
   return (
     <div className={styles["order-screen"]}>
-      <OrderItemOptions />
       <OrderDetails />
+      <OrderItemOptions />
     </div>
   );
 }

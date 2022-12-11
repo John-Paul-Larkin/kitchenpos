@@ -23,21 +23,21 @@ export default function OrderItemOptions() {
       <div className={styles["order-item-details"]}>
         OrderItemOptions
         {selectedOrderItem && <h2>{selectedOrderItem.name}</h2>}
+        <button
+          onClick={() => {
+            dispatch({ type: "remove", payload: selectedOrderItem!.id });
+          }}
+        >
+          Remove
+        </button>
         {selectedOrderItem?.ingredients &&
           selectedOrderItem.ingredients.map((ingredient) => (
-            <div key={ingredient.id}>
+            <div key={ingredient.id} style={ingredient.selected ? {} : { color: "white" } }>
               {ingredient.ingredient}
-              <Switch checked={ingredient.selected} onClick={() => handleSwitchToggle(ingredient.id!)} />
+              <Switch size="small" checked={ingredient.selected} onClick={() => handleSwitchToggle(ingredient.id!)} />
             </div>
           ))}
       </div>
-      <button
-        onClick={() => {
-          dispatch({ type: "remove", payload: selectedOrderItem!.id });
-        }}
-      >
-        Remove
-      </button>
     </>
   );
 }

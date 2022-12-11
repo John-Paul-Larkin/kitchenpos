@@ -40,7 +40,6 @@ export default function OrderDetails() {
           ))}
       </div>
 
-      <button onClick={() => console.log(tableNumber)}>sdasf</button>
     </div>
   );
 }

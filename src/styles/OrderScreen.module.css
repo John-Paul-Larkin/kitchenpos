@@ -6,9 +6,9 @@
 .order-items-screen-container {
   background-color: var(--three);
   /* overflow-y: scroll; */
-  width: 50%;
+  width: 60%;
 
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .order-items-screen {
@@ -33,15 +33,8 @@
   width: 110%;
   position: relative;
   left: -12px;
-  font-size: 1.3em;
+  /* font-size: 1.3em; */
   color: white;
-}
-
-.selected::before {
-  display: inline-block;
-  content: "<";
-  position: relative;
-  left:-1em;
 }
 
 h2 {
@@ -49,7 +42,6 @@ h2 {
   text-decoration: underline;
   text-align: center;
   display: inline-block;
-  width: 50%;
 }
 
 span {
@@ -69,7 +61,7 @@ span {
 /* Left side of order screen */
 
 .order-item-details {
-  flex-grow: 1;
   background-color: var(--one);
-  display: inline-block;
+  /* display: inline-block; */
+  width:40%;
 }
