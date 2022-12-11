@@ -29,6 +29,7 @@ export function useGetMenuItems() {
     };
     get();
   }, []);
+  console.log(data)
 
   return { menuItems: data, loading, error };
 }

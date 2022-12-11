@@ -7,12 +7,42 @@ interface Screens {
   label: string;
 }
 
-type Ingredients = "White bread" | "Butter" | "Bacon" | "Lettuce" | "Tomato" | "Cheese" | "Onion" | "Chicken" | "Ham" | "Mayo";
+type Ingredient =
+  | "White bread"
+  | "Butter"
+  | "Bacon"
+  | "Lettuce"
+  | "Tomato"
+  | "Cheese"
+  | "Onion"
+  | "Chicken"
+  | "Ham"
+  | "Mayo"
+  | "Pepper sauce"
+  | "Onion rings"
+  | "Ketchup"
+  | "Fried onions"
+  | "Parmesan"
+  | "Croutons"
+  | "Blue cheese dip"
+  | "Side salad"
+  | "Celery"
+  | "Mushy peas"
+  | "Lemon"
+  | "Dill sauce"
+  | "Pastry"
+  | "Gravy";
+
+interface Ingredients {
+  ingredient: Ingredient;
+  selected: boolean;
+  id?: string;
+}
 
 interface MenuItem {
+  id: string;
   name: string;
   ingredients?: Ingredients[];
-  id: number;
 }
 
 interface ReducerActionAdd {
@@ -21,18 +51,22 @@ interface ReducerActionAdd {
 }
 
 interface ReducerActionRemove {
-  type: 'remove';
-  payload: number;
+  type: "remove";
+  payload: string;
 }
 
-type ReducerAction = ReducerActionAdd | ReducerActionRemove;
+interface ReducerToggle {
+  type: "toggleIngredient";
+  payload: string;
+}
+
+type ReducerAction = ReducerActionAdd | ReducerActionRemove | ReducerToggle;
 
 interface ContextProvider {
   orderDetails: OrderDetails;
   dispatch: React.Dispatch<ReducerAction>;
-  selectedOrderItem:MenuItem|null;
-  setSelectedOrderItem:React.Dispatch<React.SetStateAction<MenuItem | null>>
-
+  selectedOrderItem: MenuItem | null;
+  setSelectedOrderItem: React.Dispatch<React.SetStateAction<MenuItem | null>>;
 }
 
 interface OrderDetails {

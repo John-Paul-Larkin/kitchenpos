@@ -1,9 +1,9 @@
 import styles from "../styles/MobileScreen.module.css";
 import ScreenSizeSelector from "./ScreenSizeSelector";
 import React, { useState } from "react";
-import { useGetMenuItems } from "../Helper/useGetMenuItems";
 import MenuItemButton from "./MenuItemButton";
 import OrderScreen from "./OrderScreen";
+import initialMenuItemsList from "../Helper/InitialMenuItems";
 
 export default function MobileScreen() {
   const screens = [
@@ -14,7 +14,7 @@ export default function MobileScreen() {
 
   const [screen, setScreen] = useState<Screens | null>(screens[0]);
 
-  const { menuItems, loading } = useGetMenuItems();
+  const menuItems = initialMenuItemsList;
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function MobileScreen() {
         <OrderScreen />
 
         <div className={styles["grid-wrapper"]}>
-          {loading && <div>Loading...</div>}
+          {/* {loading && <div>Loading...</div>} */}
           <div className={styles["button-grid"]}>
             {menuItems &&
               menuItems.map((item) => {
