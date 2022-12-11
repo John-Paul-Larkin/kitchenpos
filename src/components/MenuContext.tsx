@@ -30,10 +30,10 @@ export default function MenuContext({ children }: { children: ReactNode }) {
       }
       case "remove": {
         draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.id !== action.payload);
-        setSelectedOrderItem(null);
         return draft;
       }
       case "toggleIngredient": {
+        //iterate through the items in the order, on finding the specified option, negate it.
         draft.orderItemDetails.forEach((item) =>
           item.ingredients?.forEach((ingredient) => {
             if (ingredient.id === action.payload) {
@@ -51,7 +51,6 @@ export default function MenuContext({ children }: { children: ReactNode }) {
           });
           setSelectedOrderItem({ ...selectedOrderItem, ingredients: updatedIngredients });
         }
-        // setSelectedOrderItem(selectedOrderItem)
         return draft;
       }
       default:
@@ -62,6 +61,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const initialOrderDetails = {} as OrderDetails;
 
   const [orderDetails, dispatch] = useImmerReducer(reducer, initialOrderDetails);
+
+  // console.log(orderDetails);
 
   const contextValues = { orderDetails, dispatch, selectedOrderItem, setSelectedOrderItem };
 

@@ -1,13 +1,22 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styles from "../styles/OrderScreen.module.css";
 import { menuContext } from "./MenuContext";
 import { Switch } from "@mui/material";
 
 export default function OrderItemOptions() {
-  const { selectedOrderItem, dispatch } = useContext(menuContext);
+  const { setSelectedOrderItem, orderDetails, selectedOrderItem, dispatch } = useContext(menuContext);
   const handleSwitchToggle = (id: string) => {
     dispatch({ type: "toggleIngredient", payload: id });
   };
+
+  useEffect(() => {
+    if (orderDetails.orderItemDetails) {
+      console.log(orderDetails.orderItemDetails);
+      setSelectedOrderItem(() => orderDetails.orderItemDetails[orderDetails.orderItemDetails.length - 1]);
+    } else {
+      setSelectedOrderItem(null);
+    }
+  }, [setSelectedOrderItem, orderDetails.orderItemDetails]);
 
   return (
     <>
