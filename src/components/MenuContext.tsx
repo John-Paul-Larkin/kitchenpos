@@ -31,10 +31,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
       case "remove": {
         draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.id !== action.payload);
         setSelectedOrderItem(null);
-
         return draft;
       }
-
       case "toggleIngredient": {
         draft.orderItemDetails.forEach((item) =>
           item.ingredients?.forEach((ingredient) => {
