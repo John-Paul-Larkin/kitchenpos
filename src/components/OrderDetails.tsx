@@ -26,36 +26,50 @@ export default function OrderDetails() {
 
   return (
     <div className={styles["order-items-screen-container"]}>
-      <TableNumberSelect tableNumber={tableNumber} setTableNumber={setTableNumber} />
-      <span>Open tables (7)</span>
-      <h2>Items</h2>
-      <div className={styles["order-items-screen"]}>
-        {orderDetails.orderItemDetails &&
-          orderDetails.orderItemDetails.map((orderItem) => (
-            <motion.div
-              className={selectedOrderItem?.id === orderItem.id ? styles["selected"] : styles["order-items"]}
-              key={orderItem.id}
-              initial={{ y: 300, opacity: 1, scaleY: 1.5 }}
-              animate={{ y: 0, opacity: 1, scaleY: 1 }}
-              transition={{ ease: "easeInOut" }}
-              onClick={() => setSelectedOrderItem(orderItem)}
-            >
-              <div className={styles["name-price"]}>
-                <span className={styles["name"]}>{orderItem.name}</span>
-                <Alterations ingredients={orderItem.ingredients} />
-                <span className={styles["price-container"]}>
-                  <span className={styles["price"]}>
-                    {orderItem.price.toLocaleString(undefined, {
-                      maximumFractionDigits: 2,
-                      minimumFractionDigits: 2,
-                    })}
-                  </span>
-                </span>
-              </div>
-            </motion.div>
-          ))}
+      <div className={styles["top"]}>
+        <TableNumberSelect tableNumber={tableNumber} setTableNumber={setTableNumber} />
+        <span>Open tables (7)</span>
       </div>
-      <div>Total: {orderDetails.orderItemDetails && calcTotal()}</div>
+      <div className={styles["middle"]}>
+        <div className={styles["order-items-screen"]}>
+          {orderDetails.orderItemDetails &&
+            orderDetails.orderItemDetails.map((orderItem) => (
+              <motion.div
+                className={selectedOrderItem?.id === orderItem.id ? styles["selected"] : styles["order-items"]}
+                key={orderItem.id}
+                initial={{ y: 300, opacity: 1, scaleY: 1.5 }}
+                animate={{ y: 0, opacity: 1, scaleY: 1 }}
+                transition={{ ease: "easeInOut" }}
+                onClick={() => setSelectedOrderItem(orderItem)}
+              >
+                <div className={styles["name-price"]}>
+                  <span className={styles["name"]}>{orderItem.name}</span>
+                  <Alterations ingredients={orderItem.ingredients} />
+                  <span className={styles["price-container"]}>
+                    <span className={styles["price"]}>
+                      {orderItem.price.toLocaleString(undefined, {
+                        maximumFractionDigits: 2,
+                        minimumFractionDigits: 2,
+                      })}
+                    </span>
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+        </div>
+      </div>
+      <div className={styles["total-amount"]}>
+        <div>Total:</div>
+        <div className={styles["amount"]}>
+          {orderDetails.orderItemDetails && calcTotal()}
+          {!orderDetails.orderItemDetails && "€0.00"}
+        </div>
+      </div>
+      <div className={styles["buttons"]}>
+        <button>Cancel</button>
+        <button>Message</button>
+        <button>Send</button>
+      </div>
     </div>
   );
 }

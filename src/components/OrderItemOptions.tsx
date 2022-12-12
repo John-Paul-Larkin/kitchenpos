@@ -32,6 +32,13 @@ export default function OrderItemOptions() {
       <div className={styles["order-item-details"]}>
         OrderItemOptions
         {selectedOrderItem && <h2>{selectedOrderItem.name}</h2>}
+        {selectedOrderItem?.ingredients &&
+          selectedOrderItem.ingredients.map((ingredient) => (
+            <div key={ingredient.id} style={ingredient.selected ? {} : { color: "white" }}>
+              {ingredient.ingredient}
+              <Switch size='small' checked={ingredient.selected} onClick={() => handleSwitchToggleIngredient(ingredient.id!)} />
+            </div>
+          ))}
         {selectedOrderItem && (
           <button
             onClick={() => {
@@ -41,13 +48,6 @@ export default function OrderItemOptions() {
             Remove
           </button>
         )}
-        {selectedOrderItem?.ingredients &&
-          selectedOrderItem.ingredients.map((ingredient) => (
-            <div key={ingredient.id} style={ingredient.selected ? {} : { color: "white" }}>
-              {ingredient.ingredient}
-              <Switch size="small" checked={ingredient.selected} onClick={() => handleSwitchToggleIngredient(ingredient.id!)} />
-            </div>
-          ))}
       </div>
     </>
   );

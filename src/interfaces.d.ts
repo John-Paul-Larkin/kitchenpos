@@ -31,7 +31,8 @@ type Ingredient =
   | "Lemon"
   | "Dill sauce"
   | "Pastry"
-  | "Gravy";
+  | "Gravy"
+  | "Mushrooms";
 
 interface Ingredients {
   ingredient: Ingredient;
@@ -43,7 +44,7 @@ interface MenuItem {
   id: string;
   name: string;
   ingredients?: Ingredients[];
-  price:number;
+  price: number;
 }
 
 interface ReducerActionAdd {

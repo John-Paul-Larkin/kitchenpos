@@ -96,6 +96,8 @@ const initialMenuItemsList: MenuItem[] = [
       { ingredient: "Lettuce", selected: true },
       { ingredient: "Tomato", selected: true },
       { ingredient: "Side salad", selected: true },
+      { ingredient: "Mushrooms", selected: true },
+
     ],
   },
 
