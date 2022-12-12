@@ -5,6 +5,7 @@ import MenuItemButton from "./MenuItemButton";
 import OrderScreen from "./OrderScreen";
 import initialMenuItemsList from "../Helper/InitialMenuItems";
 import Floorplan from "./Floorplan";
+import { motion } from "framer-motion";
 
 export default function MobileScreen() {
   const screens = [
@@ -21,29 +22,38 @@ export default function MobileScreen() {
 
   return (
     <>
-      <div className={styles["mobile-screen"]} style={{ width: screen?.value.width, height: screen?.value.height }}>
-        {!isShowFloorPlan && (
-          <>
-            <ScreenSizeSelector screen={screen} setScreen={setScreen} screens={screens} />
+      {!isShowFloorPlan && (
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ ease: "easeOut" }}
+          className={styles["mobile-screen"]}
+          style={{ width: screen?.value.width, height: screen?.value.height }}
+        >
+          <ScreenSizeSelector screen={screen} setScreen={setScreen} screens={screens} />
 
-            <OrderScreen />
+          <OrderScreen />
 
-            <div className={styles["grid-wrapper"]}>
-              <div className={styles["button-grid"]}>
-                {menuItems &&
-                  menuItems.map((item) => {
-                    return (
-                      <div key={item.id}>
-                        <MenuItemButton item={item} />
-                      </div>
-                    );
-                  })}
-              </div>
+          <div className={styles["grid-wrapper"]}>
+            <div className={styles["button-grid"]}>
+              {menuItems &&
+                menuItems.map((item) => {
+                  return (
+                    <div key={item.id}>
+                      <MenuItemButton item={item} />
+                    </div>
+                  );
+                })}
             </div>
-          </>
-        )}
-        {isShowFloorPlan && <Floorplan setisShowFloorPlan={setisShowFloorPlan}/>}
-      </div>
+          </div>
+        </motion.div>
+      )}
+
+      {isShowFloorPlan && (
+        <div className={styles["mobile-screen"]} style={{ width: screen?.value.width, height: screen?.value.height }}>
+          <Floorplan setisShowFloorPlan={setisShowFloorPlan} />
+        </div>
+      )}
     </>
   );
 }
