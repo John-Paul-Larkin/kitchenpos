@@ -43,6 +43,7 @@ interface MenuItem {
   id: string;
   name: string;
   ingredients?: Ingredients[];
+  price:number;
 }
 
 interface ReducerActionAdd {

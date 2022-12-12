@@ -4,6 +4,7 @@
 }
 
 .order-items-screen-container {
+  border-right: 3px solid black;
   background-color: var(--three);
   /* overflow-y: scroll; */
   width: 60%;
@@ -27,13 +28,13 @@
   background-color: var(--one);
   padding: 0.1em;
   margin: 0.2em;
-  border: 1px solid white;
-  border-left: none;
+  border: 1px solid black;
+  border-right: none;
   cursor: pointer;
   width: 110%;
   position: relative;
-  left: -12px;
-  /* font-size: 1.3em; */
+  left: -11px;
+  min-height: 1.2em;
   color: white;
 }
 
@@ -63,5 +64,32 @@ span {
 .order-item-details {
   background-color: var(--one);
   /* display: inline-block; */
-  width:40%;
+  padding-left: 1em;
+  /* border-left: 5px solid white; */
+  width: 40%;
+}
+
+.name-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-container {
+  /* flex-grow: 1; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price {
+  width: 20px;
+}
+
+.order-alterations {
+  width: 50px;
+  font-size: 0.6em;
+}
+
+.name {
+  flex-grow: 1;
 }
