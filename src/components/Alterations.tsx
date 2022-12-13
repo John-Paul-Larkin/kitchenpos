@@ -3,7 +3,7 @@ import styles from "../styles/OrderScreen.module.css";
 export default function Alterations({ ingredients }: { ingredients: Ingredients[] | undefined }) {
   return (
     <span className={styles["order-alterations"]}>
-      <span>
+      <div>
         {ingredients &&
           ingredients.map((ingredient) => {
             if (!ingredient.selected) {
@@ -12,7 +12,7 @@ export default function Alterations({ ingredients }: { ingredients: Ingredients[
 
           
           })}
-      </span>
+      </div>
     </span>
   );
 }

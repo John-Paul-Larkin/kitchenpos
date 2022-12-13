@@ -1,7 +1,7 @@
 .floor-plan {
   width: 100%;
   height: 70%;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   border-radius: 14px;
   display: grid;
   grid-template-columns: repeat(4, 25%);
@@ -11,6 +11,14 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.table-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .bar {
@@ -19,40 +27,133 @@ span {
   left: -10px;
 }
 
-
 .table-5 {
-    position: relative;
-    transform: rotate(90deg);
+  position: relative;
+  transform: rotate(90deg);
 }
 .table-6 {
-    position: relative;
-    left:10px;
+  position: relative;
+  left: 10px;
 }
 
 .table-8 {
   position: relative;
   transform: rotate(90deg);
-  top:-30px;
+  top: -30px;
 }
 
 .table-9 {
-    position: relative;
-   left:15px;
-  }
+  position: relative;
+  left: 15px;
+  top: -20px;
+}
 
-  .table-11 {
-    position: relative;
+.table-10 {
+  position: relative;
+  left: -5px;
+  top: -20px;
+}
+
+.table-11 {
+  position: relative;
   transform: rotate(90deg);
-  top:-30px;
+  top: -30px;
+}
 
-   
-  }
-
+.table-12 {
+  position: relative;
+  /* top: -30px; */
+  left: 20px;
+}
 
 .footer-info {
-    background-color: blueviolet;
-    height: 30%;
+  background-color: blueviolet;
+  height: 30%;
   border-radius: 0 0 14px 14px;
   border-top: 5px solid black;
+}
 
+/* Positioning of table numbers */
+
+.table-num {
+  position: absolute;
+  border-radius: 50%;
+  width: 1.1em;
+  height: 1.1em;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  z-index: 1;
+}
+
+.one {
+  top: 28px;
+  left: -8px;
+}
+
+.two {
+  top: 27px;
+  left: -10px;
+}
+
+.three {
+  top: 25px;
+  left: -9px;
+}
+
+.four {
+  top: 28px;
+  left: -8px;
+}
+
+.five {
+  top: 85px;
+  left: 0px;
+}
+
+.six {
+  top: 26px;
+  left: -10px;
+}
+
+.seven {
+  top: 27px;
+  left: -9px;
+}
+.eight {
+  top: 72px;
+  left: 30px;
+  transform: rotate(270deg);
+}
+
+.nine {
+  top: 27px;
+  left: -10px;
+}
+
+.ten {
+  top: 25px;
+  left: -10px;
+}
+
+.eleven {
+  top: 72px;
+  left: 30px;
+  transform: rotate(270deg);
+}
+
+.twelve {
+  top: 28px;
+  left: -12px;
+}
+
+.thirteen {
+  top: 28px;
+  left: -10px;
+}
+
+.fourteen {
+  top: 28px;
+  left: -10px;
 }

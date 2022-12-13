@@ -9,9 +9,9 @@ import { motion } from "framer-motion";
 
 export default function MobileScreen() {
   const screens = [
+    { value: { width: 412, height: 914 }, label: "Samsung Galaxy S20FE - Width: 412 Height: 914  " },
     { value: { width: 360, height: 780 }, label: "Samsung Galaxy S22 - Width: 360 Height: 780    " },
     { value: { width: 390, height: 844 }, label: "Iphone 12 PRO - Width: 390 Height: 844        " },
-    { value: { width: 412, height: 914 }, label: "Samsung Galaxy S20FE - Width: 412 Height: 914  " },
   ];
 
   const [screen, setScreen] = useState<Screens | null>(screens[0]);
