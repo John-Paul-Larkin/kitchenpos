@@ -13,7 +13,7 @@ export default function TableNumberSelect({
 
   return (
     <form>
-      <label htmlFor="cars">Table number:</label>
+      <label className={styles['table-number']} htmlFor="cars">Table number:</label>
       <select value={tableNumber} className={styles["table-select"]} onChange={(e) => handleSelectChange(e)}>
         <option value="1">1</option>
         <option value="2">2</option>

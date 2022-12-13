@@ -1,60 +1,58 @@
 .floor-plan {
-    width:100%;
-    height: 100%;
-    background-color: aquamarine;
-    border-radius: 14px;
-    display: grid;
-    grid-template-columns: repeat(4, 25%);
-
-
+  width: 100%;
+  height: 70%;
+  background-color: aquamarine;
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
 }
 
-.table-1 {
-    position: relative;
-    top:0px; 
-    transform: rotate(0deg);
+span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.table-2 {
-    position: relative;
-    top:0px;
+.bar {
+  grid-row-start: span 2;
+  position: relative;
+  left: -10px;
 }
 
-.table-3 {
-    position: relative;
-    top:0px;
-}
 
-.table-4 {
-    position: relative;
-    top:0px;
-}
 .table-5 {
     position: relative;
-    top:10px; 
+    transform: rotate(90deg);
 }
-
 .table-6 {
     position: relative;
-    top:-30px;
-}
-
-.table-7 {
-    position: relative;
-    top:0px;
+    left:10px;
 }
 
 .table-8 {
-    position: relative;
-    top:0px;
+  position: relative;
+  transform: rotate(90deg);
+  top:-30px;
 }
+
 .table-9 {
     position: relative;
-    top:0px; 
-}
+   left:15px;
+  }
 
-.table-10 {
+  .table-11 {
     position: relative;
-    top:0px;
-}
+  transform: rotate(90deg);
+  top:-30px;
 
+   
+  }
+
+
+.footer-info {
+    background-color: blueviolet;
+    height: 30%;
+  border-radius: 0 0 14px 14px;
+  border-top: 5px solid black;
+
+}
