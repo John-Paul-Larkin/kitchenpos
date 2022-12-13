@@ -9,6 +9,7 @@ export default function OrderItemOptions() {
     dispatch({ type: "toggleIngredient", payload: id });
   };
 
+
   const handleRemoveItem = () => {
     // find the menu item object which mathches the id of item to remove
     const indexOfRemovedItemInArray = orderDetails.orderItemDetails.indexOf(
@@ -20,7 +21,7 @@ export default function OrderItemOptions() {
       // if the removed item was the last remaining in the array => set selected to null
       setSelectedOrderItem(null);
     } else if (indexOfRemovedItemInArray === 0) {
-      // if its not the last item, nut is the first in the array. note position 1 as orderdetails state has not updated yet.
+      // if its not the last item, but it is the first in the array. note position 1 as orderdetails state has not updated yet.
       setSelectedOrderItem(orderDetails.orderItemDetails[1]);
     } else {
       setSelectedOrderItem(orderDetails.orderItemDetails[indexOfRemovedItemInArray - 1]);
@@ -36,7 +37,7 @@ export default function OrderItemOptions() {
           selectedOrderItem.ingredients.map((ingredient) => (
             <div key={ingredient.id} style={ingredient.selected ? {} : { color: "white" }}>
               {ingredient.ingredient}
-              <Switch size='small' checked={ingredient.selected} onClick={() => handleSwitchToggleIngredient(ingredient.id!)} />
+              <Switch size="small" checked={ingredient.selected} onClick={() => handleSwitchToggleIngredient(ingredient.id!)} />
             </div>
           ))}
         {selectedOrderItem && (

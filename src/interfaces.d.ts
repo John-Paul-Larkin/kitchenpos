@@ -41,10 +41,10 @@ interface Ingredients {
 }
 
 interface MenuItem {
-  id: string;
   name: string;
-  ingredients?: Ingredients[];
   price: number;
+  id: string;
+  ingredients?: Ingredients[];
 }
 
 interface ReducerActionAdd {
@@ -62,18 +62,34 @@ interface ReducerToggle {
   payload: string;
 }
 
-type ReducerAction = ReducerActionAdd | ReducerActionRemove | ReducerToggle;
+interface ReducerChangeTableNumber {
+  type: "change table number";
+  payload: string;
+}
+
+interface ReducerAddOrderTime {
+  type: "add order time";
+  payload: Date;
+}
+
+interface ReducerClearOrder {
+  type: "clear order";
+}
+
+type ReducerAction = ReducerActionAdd | ReducerActionRemove | ReducerToggle | ReducerChangeTableNumber | ReducerAddOrderTime | ReducerClearOrder;
 
 interface ContextProvider {
   orderDetails: OrderDetails;
   dispatch: React.Dispatch<ReducerAction>;
   selectedOrderItem: MenuItem | null;
   setSelectedOrderItem: React.Dispatch<React.SetStateAction<MenuItem | null>>;
+  tableNumber: string;
+  setTableNumber: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface OrderDetails {
-  tableNumber?: number;
-  timeOrderPlaced?: Date;
+  tableNumber: string;
+  timeOrderPlaced: Date;
   server?: string;
   orderItemDetails: MenuItem[];
 }

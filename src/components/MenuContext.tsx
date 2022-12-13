@@ -6,6 +6,7 @@ export const menuContext = createContext({} as ContextProvider);
 
 export default function MenuContext({ children }: { children: ReactNode }) {
   const [selectedOrderItem, setSelectedOrderItem] = useState<MenuItem | null>(null);
+  const [tableNumber, setTableNumber] = useState("1");
 
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
@@ -17,7 +18,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         item.ingredients = item.ingredients!.map((cur) => {
           return { ...cur, id: uuid() };
         });
-        if (Object.keys(draft).length === 0) {
+        if (Object.keys(draft).length === 0 || draft.orderItemDetails === undefined) {
           // If this is the first item to be added to the order, just add to the array
           draft.orderItemDetails = [item];
         } else {
@@ -30,6 +31,18 @@ export default function MenuContext({ children }: { children: ReactNode }) {
       }
       case "remove": {
         draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.id !== action.payload);
+        return draft;
+      }
+      case "change table number": {
+        draft.tableNumber = action.payload;
+        return draft;
+      }
+      case "add order time": {
+        draft.timeOrderPlaced = action.payload;
+        return draft;
+      }
+      case "clear order": {
+        
         return draft;
       }
       case "toggleIngredient": {
@@ -62,9 +75,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
 
   const [orderDetails, dispatch] = useImmerReducer(reducer, initialOrderDetails);
 
-  // console.log(orderDetails);
-
-  const contextValues = { orderDetails, dispatch, selectedOrderItem, setSelectedOrderItem };
+  const contextValues = { orderDetails, dispatch, selectedOrderItem, setSelectedOrderItem, tableNumber, setTableNumber };
 
   return <menuContext.Provider value={contextValues}>{children}</menuContext.Provider>;
 }

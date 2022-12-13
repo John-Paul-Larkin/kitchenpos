@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { menuContext } from "./MenuContext";
 import styles from "../styles/OrderScreen.module.css";
 import TableNumberSelect from "./TableNumberSelect";
-import { useState } from "react";
 import Alterations from "./Alterations";
+import useSendOrder from "../Helper/useSendOrder";
 
 export default function OrderDetails() {
   const { orderDetails } = useContext(menuContext);
-
-  const [tableNumber, setTableNumber] = useState("1");
+  const { dispatch } = useContext(menuContext);
 
   const { selectedOrderItem, setSelectedOrderItem } = useContext(menuContext);
 
@@ -24,10 +23,24 @@ export default function OrderDetails() {
     });
   };
 
+  const sendOrder = useSendOrder();
+
+  const handleSendOrder = () => {
+    const timeNow = new Date();
+    dispatch({ type: "add order time", payload: timeNow });
+  };
+
+  useEffect(() => {
+    sendOrder(orderDetails);
+    dispatch({ type: "clear order" });
+    console.count("in use effect");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderDetails.timeOrderPlaced]);
+
   return (
     <div className={styles["order-items-screen-container"]}>
       <div className={styles["top"]}>
-        <TableNumberSelect tableNumber={tableNumber} setTableNumber={setTableNumber} />
+        <TableNumberSelect />
         <span>Open tables (7)</span>
       </div>
       <div className={styles["middle"]}>
@@ -68,7 +81,7 @@ export default function OrderDetails() {
       <div className={styles["buttons"]}>
         <button>Cancel</button>
         <button>Message</button>
-        <button>Send</button>
+        <button onClick={() => handleSendOrder()}>Send</button>
       </div>
     </div>
   );

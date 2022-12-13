@@ -7,10 +7,10 @@ export default function Alterations({ ingredients }: { ingredients: Ingredients[
         {ingredients &&
           ingredients.map((ingredient) => {
             if (!ingredient.selected) {
-              return <div>No {ingredient.ingredient}</div>;
-            } else {return <></>}
-
-          
+              return <div key={ingredient.id}>No {ingredient.ingredient}</div>;
+            } else {
+              return null;
+            }
           })}
       </div>
     </span>
