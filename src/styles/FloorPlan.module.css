@@ -1,3 +1,18 @@
+.open-orders-container {
+  background-color: antiquewhite;
+  height: 30%;
+  border-radius: 0 0 14px 14px;
+  border-top: 5px solid black;
+}
+
+.open-orders {
+  font-size: 0.6em;
+  border: 1px solid black;
+  display: inline-block;
+  padding: 3px;
+  margin: 5px;
+}
+
 .floor-plan {
   width: 100%;
   height: 70%;
@@ -84,13 +99,6 @@ span {
   left: 20px;
 }
 
-.footer-info {
-  background-color: blueviolet;
-  height: 30%;
-  border-radius: 0 0 14px 14px;
-  border-top: 5px solid black;
-}
-
 /* Positioning of table numbers */
 
 .table-num {
@@ -129,7 +137,6 @@ span {
   top: 73px;
   left: 30px;
   transform: rotate(270deg);
-
 }
 
 .six {

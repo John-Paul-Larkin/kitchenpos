@@ -7,6 +7,7 @@ export const menuContext = createContext({} as ContextProvider);
 export default function MenuContext({ children }: { children: ReactNode }) {
   const [selectedOrderItem, setSelectedOrderItem] = useState<MenuItem | null>(null);
   const [tableNumber, setTableNumber] = useState("1");
+  const [openOrders, setOpenOrders] = useState([] as OrderDetails[]);
 
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
@@ -37,8 +38,11 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         draft.tableNumber = action.payload;
         return draft;
       }
-      case "add order time": {
+      case "add order time and id": {
+       
+       // adding id and time when order is sent through to firebase/kitchen
         draft.timeOrderPlaced = action.payload;
+        draft.orderId = uuid();
         return draft;
       }
       case "clear order": {
@@ -80,7 +84,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
 
   const [orderDetails, dispatch] = useImmerReducer(reducer, initialOrderDetails);
 
-  const contextValues = { orderDetails, dispatch, selectedOrderItem, setSelectedOrderItem, tableNumber, setTableNumber };
+  const contextValues = { orderDetails, dispatch, selectedOrderItem, setSelectedOrderItem, tableNumber, setTableNumber, openOrders, setOpenOrders };
 
   return <menuContext.Provider value={contextValues}>{children}</menuContext.Provider>;
 }

@@ -5,6 +5,7 @@ import { menuContext } from "./MenuContext";
 export default function Floorplan({ setisShowFloorPlan }: FloorPlanSet) {
   const { setTableNumber } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
+  const { openOrders } = useContext(menuContext);
 
   const handleTableClick = (table: string) => {
     setisShowFloorPlan((cur) => !cur);
@@ -247,7 +248,22 @@ export default function Floorplan({ setisShowFloorPlan }: FloorPlanSet) {
           </span>
         </div>
       </div>
-      <div className={styles["footer-info"]}>ds</div>
+      <div className={styles["open-orders-container"]}>
+        {openOrders &&
+          openOrders.map((order) => {
+            return (
+              <div key={order.orderId} className={styles["open-orders"]}>
+                <div>{order.timeOrderPlaced!.toLocaleString()}</div>
+                <div>{order.tableNumber}</div>
+                <div>
+                  {order.orderItemDetails.map((item) => (
+                    <div key={item.itemId}>{item.name}</div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+      </div>
     </>
   );
 }

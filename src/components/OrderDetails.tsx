@@ -9,6 +9,7 @@ import useSendOrder from "../Helper/useSendOrder";
 export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
   const { orderDetails } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
+  const { setOpenOrders } = useContext(menuContext);
 
   const { selectedOrderItem, setSelectedOrderItem } = useContext(menuContext);
 
@@ -27,12 +28,16 @@ export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
 
   const handleSendOrder = () => {
     const timeNow = new Date();
-    dispatch({ type: "add order time", payload: timeNow });
+    dispatch({ type: "add order time and id", payload: timeNow });
   };
 
   useEffect(() => {
     if (orderDetails.timeOrderPlaced) {
+      // Send the order to firebase
       sendOrder(orderDetails);
+      // Add the order to an array of open Orders
+      setOpenOrders((cur) => [...cur, orderDetails]);
+      //dispatch reducer to clear order object
       dispatch({ type: "clear order" });
       setisShowFloorPlan((cur) => !cur);
     }

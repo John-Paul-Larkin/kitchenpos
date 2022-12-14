@@ -7,7 +7,9 @@ interface Screens {
   label: string;
 }
 
-interface FloorPlanSet { setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>> }
+interface FloorPlanSet {
+  setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 type Ingredient =
   | "White bread"
@@ -70,7 +72,7 @@ interface ReducerChangeTableNumber {
 }
 
 interface ReducerAddOrderTime {
-  type: "add order time";
+  type: "add order time and id";
   payload: Date;
 }
 
@@ -87,11 +89,14 @@ interface ContextProvider {
   setSelectedOrderItem: React.Dispatch<React.SetStateAction<MenuItem | null>>;
   tableNumber: string;
   setTableNumber: React.Dispatch<React.SetStateAction<string>>;
+  openOrders: OrderDetails[];
+  setOpenOrders: React.Dispatch<React.SetStateAction<OrderDetails[]>>;
 }
 
 interface OrderDetails {
   tableNumber: string;
-  timeOrderPlaced: Date|null;
+  timeOrderPlaced: Date | null;
   server?: string;
   orderItemDetails: MenuItem[];
+  orderId: string;
 }
