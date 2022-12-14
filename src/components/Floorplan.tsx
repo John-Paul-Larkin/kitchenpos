@@ -2,7 +2,7 @@ import { useContext } from "react";
 import styles from "../styles/FloorPlan.module.css";
 import { menuContext } from "./MenuContext";
 
-export default function Floorplan({ setisShowFloorPlan }: { setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>> }) {
+export default function Floorplan({ setisShowFloorPlan }: FloorPlanSet) {
   const { setTableNumber } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
 

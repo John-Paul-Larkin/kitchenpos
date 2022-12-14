@@ -32,14 +32,14 @@ export default function MobileScreen() {
         >
           <ScreenSizeSelector screen={screen} setScreen={setScreen} screens={screens} />
 
-          <OrderScreen />
+          <OrderScreen setisShowFloorPlan={setisShowFloorPlan} />
 
           <div className={styles["grid-wrapper"]}>
             <div className={styles["button-grid"]}>
               {menuItems &&
                 menuItems.map((item) => {
                   return (
-                    <div key={item.id}>
+                    <div key={item.itemId}>
                       <MenuItemButton item={item} />
                     </div>
                   );
@@ -50,9 +50,15 @@ export default function MobileScreen() {
       )}
 
       {isShowFloorPlan && (
-        <div className={styles["mobile-screen"]} style={{ width: screen?.value.width, height: screen?.value.height }}>
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ ease: "easeOut" }}
+          className={styles["mobile-screen"]}
+          style={{ width: screen?.value.width, height: screen?.value.height }}
+        >
           <Floorplan setisShowFloorPlan={setisShowFloorPlan} />
-        </div>
+        </motion.div>
       )}
     </>
   );

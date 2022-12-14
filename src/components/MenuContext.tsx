@@ -13,10 +13,10 @@ export default function MenuContext({ children }: { children: ReactNode }) {
       case "add": {
         const id = uuid();
         //create an id for the item, as the same item can be in the basket multiple times
-        const item = { ...action.payload, id: id };
+        const item = { ...action.payload, itemId: id };
         //also create an id for each ingredient/option of that individul order item
         item.ingredients = item.ingredients!.map((cur) => {
-          return { ...cur, id: uuid() };
+          return { ...cur, ingredientId: uuid() };
         });
         if (Object.keys(draft).length === 0 || draft.orderItemDetails === undefined) {
           // If this is the first item to be added to the order, just add to the array
@@ -30,7 +30,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         return draft;
       }
       case "remove": {
-        draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.id !== action.payload);
+        draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.itemId !== action.payload);
         return draft;
       }
       case "change table number": {
@@ -42,14 +42,19 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         return draft;
       }
       case "clear order": {
-        
+        draft.tableNumber = "";
+        draft.orderItemDetails = [];
+        draft.server = "";
+        draft.timeOrderPlaced = null;
+        setSelectedOrderItem(null);
+
         return draft;
       }
       case "toggleIngredient": {
         //iterate through the items in the order, on finding the specified option, negate it.
         draft.orderItemDetails.forEach((item) =>
           item.ingredients?.forEach((ingredient) => {
-            if (ingredient.id === action.payload) {
+            if (ingredient.ingredientId === action.payload) {
               ingredient.selected = !ingredient.selected;
             }
           })
@@ -57,7 +62,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
 
         if (selectedOrderItem && selectedOrderItem.ingredients) {
           const updatedIngredients = selectedOrderItem.ingredients.map((ingredient) => {
-            if (ingredient.id === action.payload) {
+            if (ingredient.ingredientId === action.payload) {
               return { ...ingredient, selected: !ingredient.selected };
             }
             return ingredient;

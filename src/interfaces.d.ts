@@ -7,6 +7,8 @@ interface Screens {
   label: string;
 }
 
+interface FloorPlanSet { setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>> }
+
 type Ingredient =
   | "White bread"
   | "Butter"
@@ -37,13 +39,13 @@ type Ingredient =
 interface Ingredients {
   ingredient: Ingredient;
   selected: boolean;
-  id?: string;
+  ingredientId?: string;
 }
 
 interface MenuItem {
   name: string;
   price: number;
-  id: string;
+  itemId: string;
   ingredients?: Ingredients[];
 }
 
@@ -89,7 +91,7 @@ interface ContextProvider {
 
 interface OrderDetails {
   tableNumber: string;
-  timeOrderPlaced: Date;
+  timeOrderPlaced: Date|null;
   server?: string;
   orderItemDetails: MenuItem[];
 }

@@ -1,6 +1,6 @@
 const initialMenuItemsList: MenuItem[] = [
   {
-    id: "1",
+    itemId: "1",
     name: "B.L.T.",
     price: 7.95,
     ingredients: [
@@ -12,7 +12,7 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "2",
+    itemId: "2",
     name: "Bacon Cheese Burger",
     price: 13.95,
     ingredients: [
@@ -25,7 +25,7 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "3",
+    itemId: "3",
     name: "Caesar salad",
     price: 10.95,
     ingredients: [
@@ -37,7 +37,7 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "4",
+    itemId: "4",
     name: "Chicken wings",
     price: 8.95,
     ingredients: [
@@ -47,7 +47,7 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "5",
+    itemId: "5",
     name: "Club sandwich",
     price: 9.95,
     ingredients: [
@@ -60,7 +60,7 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "6",
+    itemId: "6",
     name: "Cod",
     price: 12.5,
     ingredients: [
@@ -70,7 +70,7 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "7",
+    itemId: "7",
     name: "Regular burger",
     price: 9.95,
     ingredients: [
@@ -79,7 +79,7 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "8",
+    itemId: "8",
     name: "Salmon",
     price: 13.95,
     ingredients: [
@@ -88,7 +88,7 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "9",
+    itemId: "9",
     name: "Steak sandwich",
     price: 15.95,
     ingredients: [
@@ -101,7 +101,7 @@ const initialMenuItemsList: MenuItem[] = [
   },
 
   {
-    id: "10",
+    itemId: "10",
     name: "Toasted Special",
     price: 7.95,
     ingredients: [
@@ -115,7 +115,7 @@ const initialMenuItemsList: MenuItem[] = [
   },
 
   {
-    id: "11",
+    itemId: "11",
     name: "Vol Au Vont",
     price: 11.5,
     ingredients: [
@@ -124,13 +124,13 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "12",
+    itemId: "12",
     name: "Lamb Shank",
     price: 14.9,
     ingredients: [{ ingredient: "Gravy", selected: true }],
   },
   {
-    id: "13",
+    itemId: "13",
     name: "8 oZ Steak",
     price: 19.95,
     ingredients: [
@@ -139,73 +139,73 @@ const initialMenuItemsList: MenuItem[] = [
     ],
   },
   {
-    id: "14",
+    itemId: "14",
     name: "Chips",
     price: 3.7,
     ingredients: [],
   },
   {
-    id: "15",
+    itemId: "15",
     name: "Soup",
     price: 4.95,
     ingredients: [],
   },
   {
-    id: "16",
+    itemId: "16",
     name: "extra 16",
     price: 0,
     ingredients: [],
   },
   {
-    id: "17",
+    itemId: "17",
     name: "extra 17",
     price: 0,
     ingredients: [],
   },
   {
-    id: "18",
+    itemId: "18",
     name: "extra 18",
     price: 0,
     ingredients: [],
   },
   {
-    id: "19",
+    itemId: "19",
     name: "extra 19",
     price: 0,
     ingredients: [],
   },
   {
-    id: "20",
+    itemId: "20",
     name: "extra 20",
     price: 0,
     ingredients: [],
   },
   {
-    id: "21",
+    itemId: "21",
     name: "extra 21",
     price: 0,
     ingredients: [],
   },
   {
-    id: "22",
+    itemId: "22",
     name: "extra 22",
     price: 0,
     ingredients: [],
   },
   {
-    id: "23",
+    itemId: "23",
     name: "extra 23",
     price: 0,
     ingredients: [],
   },
   {
-    id: "24",
+    itemId: "24",
     name: "extra 24",
     price: 0,
     ingredients: [],
   },
   {
-    id: "25",
+    itemId: "25",
     name: "extra 25",
     price: 0,
     ingredients: [],

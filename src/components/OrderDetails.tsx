@@ -6,7 +6,7 @@ import TableNumberSelect from "./TableNumberSelect";
 import Alterations from "./Alterations";
 import useSendOrder from "../Helper/useSendOrder";
 
-export default function OrderDetails() {
+export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
   const { orderDetails } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
 
@@ -31,9 +31,12 @@ export default function OrderDetails() {
   };
 
   useEffect(() => {
-    sendOrder(orderDetails);
-    dispatch({ type: "clear order" });
-    console.count("in use effect");
+    if (orderDetails.timeOrderPlaced) {
+      sendOrder(orderDetails);
+      dispatch({ type: "clear order" });
+      setisShowFloorPlan((cur) => !cur);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderDetails.timeOrderPlaced]);
 
@@ -48,8 +51,8 @@ export default function OrderDetails() {
           {orderDetails.orderItemDetails &&
             orderDetails.orderItemDetails.map((orderItem) => (
               <motion.div
-                className={selectedOrderItem?.id === orderItem.id ? styles["selected"] : styles["order-items"]}
-                key={orderItem.id}
+                className={selectedOrderItem?.itemId === orderItem.itemId ? styles["selected"] : styles["order-items"]}
+                key={orderItem.itemId}
                 initial={{ y: 300, opacity: 1, scaleY: 1.5 }}
                 animate={{ y: 0, opacity: 1, scaleY: 1 }}
                 transition={{ ease: "easeInOut" }}
