@@ -3,14 +3,12 @@ import styles from "../styles/OrderScreen.module.css";
 import { menuContext } from "./MenuContext";
 
 export default function TableNumberSelect() {
-  const { tableNumber, setTableNumber } = useContext(menuContext);
+  const { tableNumber } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTableNumber(() => e.target.value);
     dispatch({ type: "change table number", payload: e.target.value });
   };
-
   return (
     <form>
       <label className={styles["table-number"]} htmlFor="cars">

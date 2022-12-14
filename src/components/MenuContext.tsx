@@ -36,6 +36,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
       }
       case "change table number": {
         draft.tableNumber = action.payload;
+        setTableNumber(action.payload);
         return draft;
       }
       case "add order time and id": {
