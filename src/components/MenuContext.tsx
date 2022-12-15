@@ -9,6 +9,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const [tableNumber, setTableNumber] = useState("1");
   const [openOrders, setOpenOrders] = useState([] as OrderDetails[]);
 
+
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
       case "add": {
@@ -40,8 +41,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         return draft;
       }
       case "add order time and id": {
-       
-       // adding id and time when order is sent through to firebase/kitchen
+        // adding id and time when order is sent through to firebase/kitchen
         draft.timeOrderPlaced = action.payload;
         draft.orderId = uuid();
         return draft;
