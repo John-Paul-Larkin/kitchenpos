@@ -9,7 +9,6 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const [tableNumber, setTableNumber] = useState("1");
   const [openOrders, setOpenOrders] = useState([] as OrderDetails[]);
 
-
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
       case "add new item to order": {
@@ -31,6 +30,10 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         setSelectedOrderItem(item);
         return draft;
       }
+      case "add already ordered items": {
+        draft.orderItemDetails = action.payload;
+        return draft;
+      }
       case "remove": {
         draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.itemId !== action.payload);
         return draft;
@@ -40,10 +43,12 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         setTableNumber(action.payload);
         return draft;
       }
-      case "add order time and id": {
+      case "add order/time- strip out sentToKitchen ": {
         // adding id and time when order is sent through to firebase/kitchen
         draft.timeOrderPlaced = action.payload;
         draft.orderId = uuid();
+        // Strip out the items which have already been sent on previous orders.
+        draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
         return draft;
       }
       case "clear order": {

@@ -49,7 +49,7 @@ interface MenuItem {
   price: number;
   itemId: string;
   ingredients?: Ingredients[];
-  oldOrder?: boolean;
+  isSentToKitchen?: boolean;
 }
 
 interface ReducerActionAdd {
@@ -73,15 +73,27 @@ interface ReducerChangeTableNumber {
 }
 
 interface ReducerAddOrderTime {
-  type: "add order time and id";
+  type: "add order/time- strip out sentToKitchen ";
   payload: Date;
+}
+
+interface ReducerAddOrdered {
+  type: "add already ordered items";
+  payload: MenuItem[];
 }
 
 interface ReducerClearOrder {
   type: "clear order";
 }
 
-type ReducerAction = ReducerActionAdd | ReducerActionRemove | ReducerToggle | ReducerChangeTableNumber | ReducerAddOrderTime | ReducerClearOrder;
+type ReducerAction =
+  | ReducerActionAdd
+  | ReducerActionRemove
+  | ReducerToggle
+  | ReducerChangeTableNumber
+  | ReducerAddOrderTime
+  | ReducerClearOrder
+  | ReducerAddOrdered;
 
 interface ContextProvider {
   orderDetails: OrderDetails;

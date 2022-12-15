@@ -10,9 +10,9 @@ export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
   const { orderDetails } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
   const { setOpenOrders } = useContext(menuContext);
-
   const { selectedOrderItem, setSelectedOrderItem } = useContext(menuContext);
 
+  // calculates the total price of all items and returns as formatted string
   const calcTotal = (): string => {
     const totalPrice = orderDetails.orderItemDetails.reduce((total, current) => {
       return total + current.price;
@@ -28,13 +28,15 @@ export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
 
   const handleSendOrder = () => {
     const timeNow = new Date();
-    dispatch({ type: "add order time and id", payload: timeNow });
+    dispatch({ type: "add order/time- strip out sentToKitchen ", payload: timeNow });
   };
 
   useEffect(() => {
     if (orderDetails.timeOrderPlaced) {
       // Send the order to firebase
       sendOrder(orderDetails);
+      console.log(orderDetails, "useeffect");
+
       // Add the order to an array of open Orders
       setOpenOrders((cur) => [...cur, orderDetails]);
       //dispatch reducer to clear order object
