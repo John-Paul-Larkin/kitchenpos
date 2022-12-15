@@ -8,7 +8,7 @@ export default function MenuItemButton({ item }: { item: MenuItem }) {
   const { dispatch } = useContext(menuContext);
 
   const handleMenuButtonClick = (item: MenuItem) => {
-    dispatch({ type: "add", payload: item });
+    dispatch({ type: "add new item to order", payload: item });
   };
 
   return (

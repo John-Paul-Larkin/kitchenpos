@@ -7,9 +7,24 @@ import TableDrawing from "./TableDrawing";
 export default function Floorplan({ setisShowFloorPlan }: FloorPlanSet) {
   const { setTableNumber } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
+  const { openOrders } = useContext(menuContext);
 
   const handleTableClick = (table: string) => {
     setisShowFloorPlan((cur) => !cur);
+
+    //check if there are any orders
+    const ordersAlreadyOnTable = openOrders.filter((orders) => orders.tableNumber === table);
+    if (ordersAlreadyOnTable.length > 0) {
+      let oldOrderItems = [] as MenuItem[];
+
+      
+      ordersAlreadyOnTable.forEach((order) => order.orderItemDetails.forEach((item) => oldOrderItems.push(item)))
+
+
+
+      console.log(oldOrderItems)
+    }
+
     setTableNumber(table);
     dispatch({ type: "change table number", payload: table });
   };

@@ -49,10 +49,11 @@ interface MenuItem {
   price: number;
   itemId: string;
   ingredients?: Ingredients[];
+  oldOrder?: boolean;
 }
 
 interface ReducerActionAdd {
-  type: "add";
+  type: "add new item to order";
   payload: MenuItem;
 }
 

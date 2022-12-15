@@ -12,7 +12,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
 
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
-      case "add": {
+      case "add new item to order": {
         const id = uuid();
         //create an id for the item, as the same item can be in the basket multiple times
         const item = { ...action.payload, itemId: id };
