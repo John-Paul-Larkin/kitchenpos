@@ -27,15 +27,17 @@ export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
   const sendOrder = useSendOrder();
 
   const handleSendOrder = () => {
-    const timeNow = new Date();
-    dispatch({ type: "add order/time- strip out sentToKitchen ", payload: timeNow });
+    // Only send thought the order if at least one new item has been added
+    if (orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true).length > 0) {
+      const timeNow = new Date();
+      dispatch({ type: "add order/time- strip out sentToKitchen ", payload: timeNow });
+    }
   };
 
   useEffect(() => {
     if (orderDetails.timeOrderPlaced) {
       // Send the order to firebase
       sendOrder(orderDetails);
-      console.log(orderDetails, "useeffect");
 
       // Add the order to an array of open Orders
       setOpenOrders((cur) => [...cur, orderDetails]);

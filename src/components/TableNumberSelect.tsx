@@ -1,13 +1,25 @@
 import { useContext } from "react";
+import useChangeTableNumber from "../Helper/useChangeTableNumber";
 import styles from "../styles/OrderScreen.module.css";
 import { menuContext } from "./MenuContext";
 
 export default function TableNumberSelect() {
   const { tableNumber } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
+  const { orderDetails } = useContext(menuContext);
+
+  const changeTableNumber = useChangeTableNumber();
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch({ type: "change table number", payload: e.target.value });
+    // If there is at least one new item added
+    if (orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true).length > 0) {
+      console.log('send or cancel items??')
+    } else {
+      dispatch({ type: "change table number", payload: e.target.value });
+
+      // clear order???
+      changeTableNumber(e.target.value);
+    }
   };
   return (
     <form>
