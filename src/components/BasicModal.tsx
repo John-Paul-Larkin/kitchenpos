@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useContext } from "react";
+import { menuContext } from "./MenuContext";
 
 const style = {
   position: "absolute" as "absolute",
@@ -14,24 +14,45 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  borderRadius: "14px",
 };
 
-export default function BasicModal() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function BasicModal({
+  isModalOpen,
+  setIsModalOpen,
+}: {
+  isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const handleCloseModal = () => setIsModalOpen(false);
+
+  const { orderDetails } = useContext(menuContext);
+
+  const handleTransferItems = () => {
+    const itemsToTranfer = orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
+    console.log(itemsToTranfer);
+  };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+      <Modal open={isModalOpen} onClose={handleCloseModal}>
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          {/* <Typography id="modal-modal-title" variant="h6" component="h2">
             Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Send item or cancel before changing table?
-          </Typography>
+          </Typography> */}
+          {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}> */}
+
+          <div>There are items added to this order which have not been sent to the kitchen. </div>
+          <br />
+          <div>Would you like to cancel these items?</div>
+          <div>Transfer them to the new table?</div>
+          <div>Or send them to the kitchen on this table?</div>
+
+          {/* </Typography> */}
+          <br />
+          <button>Cancel</button>
+          <button onClick={() => handleTransferItems()}>Transfer</button>
+          <button>Send</button>
         </Box>
       </Modal>
     </div>

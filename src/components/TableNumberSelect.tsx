@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import useChangeTableNumber from "../Helper/useChangeTableNumber";
 import styles from "../styles/OrderScreen.module.css";
+import BasicModal from "./BasicModal";
 import { menuContext } from "./MenuContext";
 
 export default function TableNumberSelect() {
@@ -8,21 +9,28 @@ export default function TableNumberSelect() {
   const { dispatch } = useContext(menuContext);
   const { orderDetails } = useContext(menuContext);
 
+  console.log(orderDetails);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => setIsModalOpen(true);
+
   const changeTableNumber = useChangeTableNumber();
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // If there is at least one new item added
-    if (orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true).length > 0) {
-      console.log('send or cancel items??')
+    if (orderDetails.orderItemDetails && orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true).length > 0) {
+      // if there is at least one new item added
+      // modal to ask user if they want to cancel those items, send the order, or transfer to  the new table.
+      handleOpenModal();
     } else {
+      // just change the table number
       dispatch({ type: "change table number", payload: e.target.value });
-
-      // clear order???
       changeTableNumber(e.target.value);
     }
   };
+
   return (
     <form>
+      <BasicModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       <label className={styles["table-number"]} htmlFor="cars">
         Table number:
       </label>

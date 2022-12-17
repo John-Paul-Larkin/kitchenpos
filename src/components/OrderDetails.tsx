@@ -6,11 +6,13 @@ import TableNumberSelect from "./TableNumberSelect";
 import Alterations from "./Alterations";
 import useSendOrder from "../Helper/useSendOrder";
 
+
 export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
   const { orderDetails } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
   const { setOpenOrders } = useContext(menuContext);
   const { selectedOrderItem, setSelectedOrderItem } = useContext(menuContext);
+
 
   // calculates the total price of all items and returns as formatted string
   const calcTotal = (): string => {
@@ -94,6 +96,7 @@ export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
         <button>Cancel</button>
         <button>Message</button>
         <button onClick={() => handleSendOrder()}>Send</button>
+
       </div>
     </div>
   );

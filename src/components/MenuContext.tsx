@@ -31,6 +31,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         return draft;
       }
       case "add already ordered items": {
+        // adds any items which are already open on a table
+        // to the new order details
         draft.orderItemDetails = action.payload;
         return draft;
       }

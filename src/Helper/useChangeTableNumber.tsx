@@ -22,6 +22,7 @@ export default function useChangeTableNumber() {
 
       dispatch({ type: "add already ordered items", payload: oldOrderItems });
     }
+    console.log(table);
     setTableNumber(table);
     dispatch({ type: "change table number", payload: table });
   }
