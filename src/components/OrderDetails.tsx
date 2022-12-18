@@ -6,12 +6,12 @@ import TableNumberSelect from "./TableNumberSelect";
 import Alterations from "./Alterations";
 import useSendOrder from "../Helper/useSendOrder";
 
-
-export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
+export default function OrderDetails() {
   const { orderDetails } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
   const { setOpenOrders } = useContext(menuContext);
   const { selectedOrderItem, setSelectedOrderItem } = useContext(menuContext);
+  const { setisShowFloorPlan } = useContext(menuContext);
 
 
   // calculates the total price of all items and returns as formatted string
@@ -29,10 +29,9 @@ export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
   const sendOrder = useSendOrder();
 
   const handleSendOrder = () => {
-    // Only send thought the order if at least one new item has been added
+    // Only send through the order if at least one new item has been added
     if (orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true).length > 0) {
-      const timeNow = new Date();
-      dispatch({ type: "add order/time- strip out sentToKitchen ", payload: timeNow });
+      dispatch({ type: "add order/time- strip out sentToKitchen " });
     }
   };
 
@@ -45,7 +44,7 @@ export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
       setOpenOrders((cur) => [...cur, orderDetails]);
       //dispatch reducer to clear order object
       dispatch({ type: "clear order" });
-      setisShowFloorPlan((cur) => !cur);
+      setisShowFloorPlan(true);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -96,7 +95,6 @@ export default function OrderDetails({ setisShowFloorPlan }: FloorPlanSet) {
         <button>Cancel</button>
         <button>Message</button>
         <button onClick={() => handleSendOrder()}>Send</button>
-
       </div>
     </div>
   );

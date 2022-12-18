@@ -1,8 +1,9 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { menuContext } from "./MenuContext";
+import useSendOrder from "../Helper/useSendOrder";
 
 const style = {
   position: "absolute" as "absolute",
@@ -28,10 +29,14 @@ export default function BasicModal({
 
   const { orderDetails } = useContext(menuContext);
 
+
   const handleTransferItems = () => {
     const itemsToTranfer = orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
     console.log(itemsToTranfer);
   };
+
+  const handleSendOrder = () => {}
+
 
   return (
     <div>
@@ -44,15 +49,14 @@ export default function BasicModal({
 
           <div>There are items added to this order which have not been sent to the kitchen. </div>
           <br />
-          <div>Would you like to cancel these items?</div>
           <div>Transfer them to the new table?</div>
           <div>Or send them to the kitchen on this table?</div>
 
           {/* </Typography> */}
           <br />
-          <button>Cancel</button>
+          <button onClick={() => handleCloseModal()}>Cancel</button>
           <button onClick={() => handleTransferItems()}>Transfer</button>
-          <button>Send</button>
+          <button onClick={() => handleSendOrder()}>Send</button>
         </Box>
       </Modal>
     </div>

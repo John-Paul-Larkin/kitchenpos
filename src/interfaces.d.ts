@@ -7,9 +7,6 @@ interface Screens {
   label: string;
 }
 
-interface FloorPlanSet {
-  setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 type Ingredient =
   | "White bread"
@@ -74,7 +71,6 @@ interface ReducerChangeTableNumber {
 
 interface ReducerAddOrderTime {
   type: "add order/time- strip out sentToKitchen ";
-  payload: Date;
 }
 
 interface ReducerAddOrdered {
@@ -104,6 +100,8 @@ interface ContextProvider {
   setTableNumber: React.Dispatch<React.SetStateAction<string>>;
   openOrders: OrderDetails[];
   setOpenOrders: React.Dispatch<React.SetStateAction<OrderDetails[]>>;
+  isShowFloorPlan: boolean;
+  setisShowFloorPlan:React.Dispatch<React.SetStateAction<boolean>>
 }
 
 interface OrderDetails {

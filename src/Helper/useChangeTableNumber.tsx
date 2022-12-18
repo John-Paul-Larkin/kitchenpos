@@ -18,11 +18,11 @@ export default function useChangeTableNumber() {
       oldOrderItems = oldOrderItems.map((item) => {
         return { ...item, isSentToKitchen: true };
       });
-      console.log(table);
+
 
       dispatch({ type: "add already ordered items", payload: oldOrderItems });
     }
-    console.log(table);
+ 
     setTableNumber(table);
     dispatch({ type: "change table number", payload: table });
   }

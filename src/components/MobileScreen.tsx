@@ -1,11 +1,12 @@
 import styles from "../styles/MobileScreen.module.css";
 import ScreenSizeSelector from "./ScreenSizeSelector";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MenuItemButton from "./MenuItemButton";
 import OrderScreen from "./OrderScreen";
 import initialMenuItemsList from "../Helper/InitialMenuItems";
 import Floorplan from "./Floorplan";
 import { motion } from "framer-motion";
+import { menuContext } from "./MenuContext";
 
 export default function MobileScreen() {
   const screens = [
@@ -18,7 +19,7 @@ export default function MobileScreen() {
 
   const menuItems = initialMenuItemsList;
 
-  const [isShowFloorPlan, setisShowFloorPlan] = useState(true);
+  const { isShowFloorPlan } = useContext(menuContext);
 
   return (
     <>
@@ -32,7 +33,7 @@ export default function MobileScreen() {
         >
           <ScreenSizeSelector screen={screen} setScreen={setScreen} screens={screens} />
 
-          <OrderScreen setisShowFloorPlan={setisShowFloorPlan} />
+          <OrderScreen />
 
           <div className={styles["grid-wrapper"]}>
             <div className={styles["button-grid"]}>
@@ -57,7 +58,7 @@ export default function MobileScreen() {
           className={styles["mobile-screen"]}
           style={{ width: screen?.value.width, height: screen?.value.height }}
         >
-          <Floorplan setisShowFloorPlan={setisShowFloorPlan} />
+          <Floorplan />
         </motion.div>
       )}
     </>

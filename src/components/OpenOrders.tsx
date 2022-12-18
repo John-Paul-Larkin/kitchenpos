@@ -6,6 +6,7 @@ import SingleOpenOrder from "./SingleOpenOrder";
 export default function OpenOrders() {
   const { openOrders } = useContext(menuContext);
 
+
   return (
     <div className={styles["open-orders-container"]}>
       {openOrders &&

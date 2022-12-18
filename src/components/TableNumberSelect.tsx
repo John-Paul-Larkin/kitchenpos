@@ -9,12 +9,15 @@ export default function TableNumberSelect() {
   const { dispatch } = useContext(menuContext);
   const { orderDetails } = useContext(menuContext);
 
-  console.log(orderDetails);
+ 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
 
   const changeTableNumber = useChangeTableNumber();
+
+
+
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (orderDetails.orderItemDetails && orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true).length > 0) {
@@ -30,7 +33,7 @@ export default function TableNumberSelect() {
 
   return (
     <form>
-      <BasicModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <BasicModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}  />
       <label className={styles["table-number"]} htmlFor="cars">
         Table number:
       </label>
