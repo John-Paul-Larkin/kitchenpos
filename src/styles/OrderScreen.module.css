@@ -125,5 +125,9 @@ span {
 }
 
 .table-number {
-  font-size: 0.6em;
+  font-size: 1em;
+  /* text-align: center; */
+  width: 30%;
+  display: inline-block;
+  text-align: right;
 }

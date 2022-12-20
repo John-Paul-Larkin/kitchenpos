@@ -55,7 +55,7 @@ interface ReducerActionAdd {
 }
 
 interface ReducerActionRemove {
-  type: "remove";
+  type: "remove item";
   payload: string;
 }
 
@@ -82,6 +82,12 @@ interface ReducerClearOrder {
   type: "clear order";
 }
 
+interface AddTransferedItems {
+  type: "add transfered items";
+  payload: MenuItem[];
+
+}
+
 type ReducerAction =
   | ReducerActionAdd
   | ReducerActionRemove
@@ -89,7 +95,8 @@ type ReducerAction =
   | ReducerChangeTableNumber
   | ReducerAddOrderTime
   | ReducerClearOrder
-  | ReducerAddOrdered;
+  | ReducerAddOrdered
+  |  AddTransferedItems;
 
 interface ContextProvider {
   orderDetails: OrderDetails;
@@ -105,9 +112,10 @@ interface ContextProvider {
 }
 
 interface OrderDetails {
+  orderId: string;
   tableNumber: string;
   timeOrderPlaced: Date | null;
   server?: string;
   orderItemDetails: MenuItem[];
-  orderId: string;
+  orderStatus: 'time up' | 'ready';
 }

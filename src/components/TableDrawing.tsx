@@ -17,7 +17,7 @@ export default function TableDrawing({
 
   openOrders.forEach((order) => {
     if (order.tableNumber === tableNumber) {
-      color = "blue";
+      order.orderStatus === "time up" ? (color = "orange") : (color = "red");
     }
   });
 
@@ -30,10 +30,10 @@ export default function TableDrawing({
             <svg width="70" height="90">
               <rect width="30" height="30" style={{ fill: color }} rx="7" x="20" y="25" />
 
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="40" y="10" />
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="15" y="10" />
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="40" y="60" />
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="15" y="60" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="40" y="10" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="15" y="10" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="40" y="60" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="15" y="60" />
             </svg>
           </span>
         </div>
@@ -44,10 +44,10 @@ export default function TableDrawing({
           <span className={styles["table-" + tableNumber]} onClick={() => handleTableClick(tableNumber)}>
             <span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
             <svg width="50" height="90">
-              <rect width="20" height="25" style={{ fill: "black" }} rx="7" x="15" y="25" />
+              <rect width="20" height="25" style={{ fill: color }} rx="7" x="15" y="25" />
 
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="18" y="10" />
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="18" y="55" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="18" y="10" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="18" y="55" />
             </svg>
           </span>
         </div>
@@ -58,15 +58,15 @@ export default function TableDrawing({
           <span className={styles["table-" + tableNumber]} onClick={() => handleTableClick(tableNumber)}>
             <span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
             <svg width="90" height="90">
-              <rect width="65" height="30" style={{ fill: "black" }} rx="7" x="13" y="25" />
+              <rect width="65" height="30" style={{ fill: color }} rx="7" x="13" y="25" />
 
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="10" y="10" />
-              <rect width="17" height="10" style={{ fill: "black" }} rx="3" x="37" y="10" />
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="65" y="10" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="10" y="10" />
+              <rect width="17" height="10" style={{ fill: color }} rx="3" x="37" y="10" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="65" y="10" />
 
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="10" y="60" />
-              <rect width="17" height="10" style={{ fill: "black" }} rx="3" x="37" y="60" />
-              <rect width="15" height="10" style={{ fill: "black" }} rx="3" x="65" y="60" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="10" y="60" />
+              <rect width="17" height="10" style={{ fill: color }} rx="3" x="37" y="60" />
+              <rect width="15" height="10" style={{ fill: color }} rx="3" x="65" y="60" />
             </svg>
           </span>
         </div>

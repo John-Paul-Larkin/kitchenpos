@@ -1,14 +1,16 @@
 import { createContext, ReactNode, useState } from "react";
 import uuid from "react-uuid";
-import { useImmerReducer } from "use-immer";
+import { useImmer, useImmerReducer } from "use-immer";
 
 export const menuContext = createContext({} as ContextProvider);
 
 export default function MenuContext({ children }: { children: ReactNode }) {
   const [selectedOrderItem, setSelectedOrderItem] = useState<MenuItem | null>(null);
   const [tableNumber, setTableNumber] = useState("1");
-  const [openOrders, setOpenOrders] = useState([] as OrderDetails[]);
+  const [openOrders, setOpenOrders] = useImmer([] as OrderDetails[]);
   const [isShowFloorPlan, setisShowFloorPlan] = useState(true);
+
+  
 
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
@@ -33,11 +35,15 @@ export default function MenuContext({ children }: { children: ReactNode }) {
       }
       case "add already ordered items": {
         // adds any items which are already open on a table
-        // to the new order details
+        // when user opens that table again
         draft.orderItemDetails = action.payload;
         return draft;
       }
-      case "remove": {
+      case "add transfered items": {
+        draft.orderItemDetails = [...draft.orderItemDetails, ...action.payload];
+        return draft;
+      }
+      case "remove item": {
         draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.itemId !== action.payload);
         return draft;
       }
@@ -73,6 +79,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
           })
         );
 
+        // Update the selected order item - ie the item ingredients details screen
+
         if (selectedOrderItem && selectedOrderItem.ingredients) {
           const updatedIngredients = selectedOrderItem.ingredients.map((ingredient) => {
             if (ingredient.ingredientId === action.payload) {
@@ -93,7 +101,18 @@ export default function MenuContext({ children }: { children: ReactNode }) {
 
   const [orderDetails, dispatch] = useImmerReducer(reducer, initialOrderDetails);
 
-  const contextValues = { orderDetails, dispatch, selectedOrderItem, setSelectedOrderItem, tableNumber, setTableNumber, openOrders, setOpenOrders,isShowFloorPlan, setisShowFloorPlan };
+  const contextValues = {
+    orderDetails,
+    dispatch,
+    selectedOrderItem,
+    setSelectedOrderItem,
+    tableNumber,
+    setTableNumber,
+    openOrders,
+    setOpenOrders,
+    isShowFloorPlan,
+    setisShowFloorPlan,
+  };
 
   return <menuContext.Provider value={contextValues}>{children}</menuContext.Provider>;
 }

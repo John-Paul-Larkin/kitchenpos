@@ -1,9 +1,8 @@
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { menuContext } from "./MenuContext";
-import useSendOrder from "../Helper/useSendOrder";
+import useChangeTableNumber from "../Helper/useChangeTableNumber";
 
 const style = {
   position: "absolute" as "absolute",
@@ -21,22 +20,28 @@ const style = {
 export default function BasicModal({
   isModalOpen,
   setIsModalOpen,
+  handleSendOrder,
+  tableNumToChangeTo,
 }: {
+  tableNumToChangeTo: string | null;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSendOrder: () => void;
 }) {
   const handleCloseModal = () => setIsModalOpen(false);
 
   const { orderDetails } = useContext(menuContext);
-
+  const { dispatch } = useContext(menuContext);
+  const changeTableNumber = useChangeTableNumber();
 
   const handleTransferItems = () => {
     const itemsToTranfer = orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
-    console.log(itemsToTranfer);
+    dispatch({ type: "clear order" });
+    changeTableNumber(tableNumToChangeTo!);
+    dispatch({ type: "add transfered items", payload: itemsToTranfer });
+
+    setIsModalOpen(false);
   };
-
-  const handleSendOrder = () => {}
-
 
   return (
     <div>

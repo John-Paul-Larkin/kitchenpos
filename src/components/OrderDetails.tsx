@@ -53,8 +53,8 @@ export default function OrderDetails() {
   return (
     <div className={styles["order-items-screen-container"]}>
       <div className={styles["top"]}>
-        <TableNumberSelect />
-        <span>Open tables (7)</span>
+        <TableNumberSelect handleSendOrder={handleSendOrder}/>
+  
       </div>
       <div className={styles["middle"]}>
         <div className={styles["order-items-screen"]}>
@@ -92,7 +92,7 @@ export default function OrderDetails() {
         </div>
       </div>
       <div className={styles["buttons"]}>
-        <button>Cancel</button>
+        <button onClick={() => setisShowFloorPlan(true)}>FLoor plan</button>
         <button>Message</button>
         <button onClick={() => handleSendOrder()}>Send</button>
       </div>

@@ -1,8 +1,10 @@
 import { add } from "date-fns";
-import React from "react";
+import React, { useContext } from "react";
 import { useRef, useState } from "react";
 import { useStopwatch, useTimer } from "react-timer-hook";
+import useChangeTableNumber from "../Helper/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
+import { menuContext } from "./MenuContext";
 
 function Stopwatch() {
   const { seconds, minutes } = useStopwatch({ autoStart: true });
@@ -14,8 +16,34 @@ function Stopwatch() {
   );
 }
 
-function Timer({ setIsShowStopWatch, finishTime }: { setIsShowStopWatch: React.Dispatch<React.SetStateAction<boolean>>; finishTime: Date }) {
-  const { seconds, minutes } = useTimer({ expiryTimestamp: finishTime, onExpire: () => setIsShowStopWatch(true) });
+function Timer({
+  setIsShowStopWatch,
+  finishTime,
+  orderID,
+}: {
+  setIsShowStopWatch: React.Dispatch<React.SetStateAction<boolean>>;
+  finishTime: Date;
+  orderID: String;
+}) {
+  const { setOpenOrders } = useContext(menuContext);
+
+  const { seconds, minutes } = useTimer({
+    expiryTimestamp: finishTime,
+    onExpire: () => {
+      setOpenOrders((cur) =>
+        // once the timer runs out
+        // change the status of the table and color will change to orange
+        cur.map((order) => {
+          if (order.orderId === orderID) {
+            return { ...order, orderStatus: "time up" };
+          } else {
+            return order;
+          }
+        })
+      );
+      setIsShowStopWatch(true);
+    },
+  });
 
   return (
     <div>
@@ -31,11 +59,27 @@ export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
 
   const MemoizedTimer = React.memo(Stopwatch);
 
-  return (
-    <div className={styles["open-orders"]}>
-      <div>{order.timeOrderPlaced!.toLocaleString()}</div>
+  const { setisShowFloorPlan, dispatch } = useContext(menuContext);
 
-      {!isShowStopWatch && <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={finishTime.current} />}
+  const changeTableNumber = useChangeTableNumber();
+
+  const handleOpenOrderClick = () => {
+    setisShowFloorPlan(false);
+    dispatch({ type: "change table number", payload: order.orderId });
+    changeTableNumber(order.tableNumber);
+  };
+
+  let borderColor = "3px solid red";
+
+  if (order.orderStatus === "time up") {
+    borderColor = "3px solid orange";
+  }
+
+  return (
+    <div className={styles["open-orders"]} onClick={handleOpenOrderClick} style={{ border: borderColor }}>
+      <div>{order.timeOrderPlaced!.toLocaleTimeString()}</div>
+
+      {!isShowStopWatch && <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={finishTime.current} orderID={order.orderId} />}
       {isShowStopWatch && <MemoizedTimer />}
 
       <div>Table : {order.tableNumber}</div>

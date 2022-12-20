@@ -1,19 +1,19 @@
 import { useContext } from "react";
 import useChangeTableNumber from "../Helper/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
-import  { menuContext } from "./MenuContext";
+import { menuContext } from "./MenuContext";
 import OpenOrders from "./OpenOrders";
 import TableDrawing from "./TableDrawing";
 
 export default function Floorplan() {
-
   const changeTableNumber = useChangeTableNumber();
 
-const {setisShowFloorPlan } = useContext(menuContext);
-
+  const { setisShowFloorPlan, dispatch } = useContext(menuContext);
 
   const handleTableClick = (table: string) => {
     setisShowFloorPlan((cur) => !cur);
+    dispatch({ type: "clear order" });
+
     changeTableNumber(table);
   };
 
