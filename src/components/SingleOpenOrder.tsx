@@ -10,7 +10,7 @@ function Stopwatch() {
   const { seconds, minutes } = useStopwatch({ autoStart: true });
 
   return (
-    <div>
+    <div className={styles["stopwatch"]}>
       {minutes}:{seconds}
     </div>
   );
@@ -46,12 +46,12 @@ function Timer({
   });
 
   return (
-    <div>
+    <div className={styles["timer"]}>
       {minutes} {seconds}{" "}
     </div>
   );
 }
-const MemoizedTimer = React.memo(Stopwatch);
+const MemoizedStopwatch = React.memo(Stopwatch);
 
 export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
   const [isShowStopWatch, setIsShowStopWatch] = useState(false);
@@ -76,16 +76,22 @@ export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
 
   return (
     <div className={styles["open-orders"]} onClick={handleOpenOrderClick} style={{ border: borderColor }}>
-      <div>{order.timeOrderPlaced!.toLocaleTimeString()}</div>
+      <div className={styles["time-order-placed"]}>{order.timeOrderPlaced!.toLocaleTimeString()}</div>
 
+      <div className={styles["table-number"]}>{order.tableNumber}</div>
       {!isShowStopWatch && <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={finishTime.current} orderID={order.orderId} />}
-      {isShowStopWatch && <MemoizedTimer />}
+      {isShowStopWatch && <MemoizedStopwatch />}
 
-      <div className={styles["table"]}>{order.tableNumber}</div>
       <div>
-        {order.orderItemDetails.map((item) => (
-          <div className={styles["items"]} key={item.itemId}>{item.name}</div>
-        ))}
+        {order.orderItemDetails.map((item) => {
+          if (item.station !== "bar") {
+            return (
+              <div className={styles["items"]} key={item.itemId}>
+                {item.name}
+              </div>
+            );
+          } else return <></>;
+        })}
       </div>
     </div>
   );

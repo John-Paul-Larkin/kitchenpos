@@ -46,7 +46,8 @@ interface MenuItem {
   price: number;
   itemId: string;
   ingredients?: Ingredients[];
-  isSentToKitchen?: boolean;
+  isSentToKitchen?: boolean; 
+  station:'bar' | 'salad' | 'fry' | 'grill' | 'expediter';
 }
 
 interface ReducerActionAdd {

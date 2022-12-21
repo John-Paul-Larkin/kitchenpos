@@ -1,9 +1,14 @@
 import styles from "../styles/MobileScreen.module.css";
+
 import ScreenSizeSelector from "./ScreenSizeSelector";
 import React, { useContext, useState } from "react";
-import MenuItemButton from "./MenuItemButton";
+import FoodMenuItemButton from "./FoodMenuItemButton";
+import DrinkMenuItemButton from "./DrinkMenuItemButton";
+
 import OrderScreen from "./OrderScreen";
-import initialMenuItemsList from "../Helper/InitialMenuItems";
+import { foodMenuItems } from "../Helper/FoodMenuItems";
+import { drinkMenuItems } from "../Helper/FoodMenuItems";
+
 import Floorplan from "./Floorplan";
 import { motion } from "framer-motion";
 import { menuContext } from "./MenuContext";
@@ -17,7 +22,7 @@ export default function MobileScreen() {
 
   const [screen, setScreen] = useState<Screens | null>(screens[0]);
 
-  const menuItems = initialMenuItemsList;
+  const [isShowFoodMenu, setIsShowFoodMenu] = useState(true);
 
   const { isShowFloorPlan } = useContext(menuContext);
 
@@ -35,18 +40,51 @@ export default function MobileScreen() {
 
           <OrderScreen />
 
-          <div className={styles["grid-wrapper"]}>
-            <div className={styles["button-grid"]}>
-              {menuItems &&
-                menuItems.map((item) => {
-                  return (
-                    <div key={item.itemId}>
-                      <MenuItemButton item={item} />
-                    </div>
-                  );
-                })}
+          {isShowFoodMenu && (
+            <div className={styles["grid-wrapper"]}>
+              <div className={styles["button-grid"]}>
+                <motion.div
+                  whileHover={{ scale: 0.9 }}
+                  whileTap={{ scale: 1.05 }}
+                  className={styles["button"]}
+                  onClick={() => setIsShowFoodMenu(false)}
+                >
+                  <div className={styles["text-container"]}>BAR MENU</div>
+                </motion.div>
+                {foodMenuItems &&
+                  foodMenuItems.map((item) => {
+                    return (
+                      <div key={item.itemId}>
+                        <FoodMenuItemButton item={item} />
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
-          </div>
+          )}
+
+          {!isShowFoodMenu && (
+            <div className={styles["grid-wrapper"]}>
+              <div className={styles["button-grid"]}>
+                <motion.div
+                  whileHover={{ scale: 0.9 }}
+                  whileTap={{ scale: 1.05 }}
+                  className={styles["button"]}
+                  onClick={() => setIsShowFoodMenu(true)}
+                >
+                  <div className={styles["text-container"]}>FOOD MENU</div>
+                </motion.div>
+                {drinkMenuItems &&
+                  drinkMenuItems.map((item) => {
+                    return (
+                      <div key={item.itemId}>
+                        <DrinkMenuItemButton item={item} />
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+          )}
         </motion.div>
       )}
 

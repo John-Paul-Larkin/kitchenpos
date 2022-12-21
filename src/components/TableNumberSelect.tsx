@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import useChangeTableNumber from "../Helper/useChangeTableNumber";
 import styles from "../styles/OrderScreen.module.css";
-import BasicModal from "./TransferModal";
+import TransferModal from "./TransferModal";
 import { menuContext } from "./MenuContext";
 
 export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder: () => void }) {
@@ -23,7 +23,7 @@ export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder
       setTableNumToChangeTo(e.target.value);
       handleOpenModal();
     } else {
-      // just change the table number 
+      // just change the table number
       dispatch({ type: "change table number", payload: e.target.value });
       dispatch({ type: "clear order" });
       changeTableNumber(e.target.value);
@@ -32,7 +32,7 @@ export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder
 
   return (
     <form>
-      <BasicModal
+      <TransferModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         handleSendOrder={handleSendOrder}
@@ -57,6 +57,10 @@ export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder
         <option value="12">12</option>
         <option value="13">13</option>
         <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
       </select>
     </form>
   );

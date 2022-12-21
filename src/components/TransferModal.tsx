@@ -17,7 +17,7 @@ const style = {
   borderRadius: "14px",
 };
 
-export default function BasicModal({
+export default function TransferModal({
   isModalOpen,
   setIsModalOpen,
   handleSendOrder,
@@ -54,8 +54,8 @@ export default function BasicModal({
 
           <div>There are items added to this order which have not been sent to the kitchen. </div>
           <br />
-          <div>Transfer them to the new table?</div>
-          <div>Or send them to the kitchen on this table?</div>
+          <div>Transfer items to table {tableNumToChangeTo}?</div>
+          <div>Or send them to the kitchen on table {orderDetails.tableNumber}?</div>
 
           {/* </Typography> */}
           <br />

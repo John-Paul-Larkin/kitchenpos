@@ -29,6 +29,28 @@
   cursor: pointer;
   width: 80px;
   height: 93%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.stopwatch {
+  border: 1px solid black;
+}
+
+.timer {
+  border: 1px solid black;
+}
+
+.time-order-placed {
+  width: 30px;
+  display: inline-block;
+}
+
+.table-number {
+  display: inline-block;
+  border: 1px solid black;
+  padding: 0.3em;
+  margin-left: 20px;
 }
 
 .floor-plan {
