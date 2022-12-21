@@ -6,7 +6,6 @@ import TableNumberSelect from "./TableNumberSelect";
 import Alterations from "./Alterations";
 import useSendOrder from "../Helper/useSendOrder";
 import DoneIcon from "@mui/icons-material/Done";
-import { Icon } from "@mui/material";
 
 export default function OrderDetails() {
   const { orderDetails } = useContext(menuContext);

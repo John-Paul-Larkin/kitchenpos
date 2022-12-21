@@ -1,13 +1,22 @@
 .open-orders-container {
-  background-color: antiquewhite;
   height: 30%;
+
+  border-top: 5px solid black;
+}
+.food-orders {
+  height: 50%;
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow-x: hidden;
+}
+
+.drinks-orders {
+  background-color: antiquewhite;
+  height: 50%;
   border-radius: 0 0 14px 14px;
   border-top: 5px solid black;
-  display: flex;
-  align-items:center;
-  justify-content: flex-end;
-  overflow-x:hidden;
-
 }
 
 .open-orders {
@@ -19,7 +28,7 @@
   background-color: aqua;
   cursor: pointer;
   width: 80px;
-  height:50%;
+  height: 93%;
 }
 
 .floor-plan {
@@ -129,5 +138,5 @@ span {
 }
 
 .items {
-  font-size: .8em;
+  font-size: 0.8em;
 }
