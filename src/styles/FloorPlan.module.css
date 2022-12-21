@@ -3,6 +3,11 @@
   height: 30%;
   border-radius: 0 0 14px 14px;
   border-top: 5px solid black;
+  display: flex;
+  align-items:center;
+  justify-content: flex-end;
+  overflow-x:hidden;
+
 }
 
 .open-orders {
@@ -13,6 +18,8 @@
   margin: 5px;
   background-color: aqua;
   cursor: pointer;
+  width: 80px;
+  height:50%;
 }
 
 .floor-plan {
@@ -81,75 +88,46 @@ span {
   z-index: 1;
 }
 
-.num-1 {
+.num-1,
+.num-4,
+.num-7,
+.num-9,
+.num-15,
+.num-16,
+.num-17,
+.num-18 {
   top: 28px;
   left: -8px;
 }
 
-.num-2 {
+.num-12,
+.num-3,
+.num-6,
+.num-10,
+.num-13,
+.num-14 {
   top: 27px;
-  left: -10px;
+  left: -12px;
 }
 
-.num-3 {
-  top: 25px;
-  left: -9px;
-}
-
-.num-4 {
-  top: 28px;
-  left: -5px;
-}
-
-.num-5 {
-  top: 73px;
-  left: 30px;
-  transform: rotate(270deg);
-}
-
-.num-6 {
-  top: 26px;
-  left: -10px;
-}
-
-.num-7 {
-  top: 27px;
-  left: -5px;
-}
-
+.num-11,
+.num-5,
 .num-8 {
   top: 72px;
   left: 30px;
   transform: rotate(270deg);
 }
 
-.num-9 {
-  top: 27px;
-  left: -4px;
-}
-
-.num-10 {
-  top: 25px;
-  left: -10px;
-}
-
-.num-11 {
-  top: 72px;
-  left: 30px;
-  transform: rotate(270deg);
-}
-
-.num-12 {
+.num-2 {
   top: 28px;
-  left: -4px;
+  left: -15px;
 }
 
-.num-13 {
-  top: 28px;
-  left: -5px;
+.num-bar {
+  top: 10px;
+  left: 35px;
 }
 
-.num-14 {
-  top: 28px;
-  left: -5px;
+.items {
+  font-size: .8em;
 }

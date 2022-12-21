@@ -44,8 +44,17 @@ export default function OrderItemOptions() {
       // if it has remove item from the array of open orders
       setOpenOrders((draft) => {
         let order = draft.find((order) => order.orderId === orderID)!;
-        order.orderItemDetails = order.orderItemDetails.filter((item) => item.itemId !== itemID);
-        return draft;
+
+        // if the item to be removed is the only item in the order
+        if (order.orderItemDetails.length === 1) {
+          // then remove the order completely
+          draft = draft.filter((order) => order.orderId !== orderID);
+          return draft;
+        } else {
+          // else just remove the item from the order
+          order.orderItemDetails = order.orderItemDetails.filter((item) => item.itemId !== itemID);
+          return draft;
+        }
       });
     }
 

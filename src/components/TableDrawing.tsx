@@ -71,6 +71,27 @@ export default function TableDrawing({
           </span>
         </div>
       )}
+
+      {numberOfseats === 7 && (
+        <span className={styles["bar"]} onClick={() => handleTableClick("bar")}>
+
+<span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
+
+
+
+          <svg height="320" width="200">
+            <g fill="none" stroke={color} strokeWidth="20">
+              <path strokeLinecap="round" d="M80 20 80 300" />
+              <circle cx="50" cy="50" r="5" stroke={color} strokeWidth="10" fill={color} />
+              <circle cx="50" cy="90" r="5" stroke={color} strokeWidth="10" fill={color} />
+              <circle cx="50" cy="130" r="5" stroke={color} strokeWidth="10" fill={color} />
+              <circle cx="50" cy="170" r="5" stroke={color} strokeWidth="10" fill={color} />
+              <circle cx="50" cy="210" r="5" stroke={color} strokeWidth="10" fill={color} />
+              <circle cx="50" cy="250" r="5" stroke={color} strokeWidth="10" fill={color} />
+            </g>
+          </svg>
+        </span>
+      )}
     </>
   );
 }

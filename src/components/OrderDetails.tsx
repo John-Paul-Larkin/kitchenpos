@@ -5,6 +5,8 @@ import styles from "../styles/OrderScreen.module.css";
 import TableNumberSelect from "./TableNumberSelect";
 import Alterations from "./Alterations";
 import useSendOrder from "../Helper/useSendOrder";
+import DoneIcon from "@mui/icons-material/Done";
+import { Icon } from "@mui/material";
 
 export default function OrderDetails() {
   const { orderDetails } = useContext(menuContext);
@@ -12,7 +14,6 @@ export default function OrderDetails() {
   const { setOpenOrders } = useContext(menuContext);
   const { selectedOrderItem, setSelectedOrderItem } = useContext(menuContext);
   const { setisShowFloorPlan } = useContext(menuContext);
-
 
   // calculates the total price of all items and returns as formatted string
   const calcTotal = (): string => {
@@ -41,7 +42,7 @@ export default function OrderDetails() {
       sendOrder(orderDetails);
 
       // Add the order to an array of open Orders
-      setOpenOrders((cur) => [...cur, orderDetails]);
+      setOpenOrders((cur) => [orderDetails, ...cur]);
       //dispatch reducer to clear order object
       dispatch({ type: "clear order" });
       setisShowFloorPlan(true);
@@ -53,13 +54,12 @@ export default function OrderDetails() {
   return (
     <div className={styles["order-items-screen-container"]}>
       <div className={styles["top"]}>
-        <TableNumberSelect handleSendOrder={handleSendOrder}/>
-  
+        <TableNumberSelect handleSendOrder={handleSendOrder} />
       </div>
       <div className={styles["middle"]}>
         <div className={styles["order-items-screen"]}>
           {orderDetails.orderItemDetails &&
-            orderDetails.orderItemDetails.map((orderItem) => (
+            orderDetails.orderItemDetails.map((orderItem, index) => (
               <motion.div
                 className={selectedOrderItem?.itemId === orderItem.itemId ? styles["selected"] : styles["order-items"]}
                 key={orderItem.itemId}
@@ -69,7 +69,11 @@ export default function OrderDetails() {
                 onClick={() => setSelectedOrderItem(orderItem)}
               >
                 <div className={styles["name-price"]}>
-                  <span className={styles["name"]}>{orderItem.name}</span>
+                  <span className={styles["name"]}>
+                    {orderItem.name}
+                    <span>{orderItem.isSentToKitchen && <DoneIcon fontSize="small" />}</span>
+                  </span>
+
                   <Alterations ingredients={orderItem.ingredients} />
                   <span className={styles["price-container"]}>
                     <span className={styles["price"]}>

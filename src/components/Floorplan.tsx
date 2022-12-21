@@ -34,21 +34,6 @@ export default function Floorplan() {
 
         <TableDrawing tableNumber={"7"} numberOfseats={4} handleTableClick={handleTableClick} />
 
-        {/* bar and stools */}
-
-        <span className={styles["bar"]} onClick={() => handleTableClick("bar")}>
-          <svg height="320" width="200">
-            <g fill="none" stroke="black" strokeWidth="20">
-              <path strokeLinecap="round" d="M80 20 80 300" />
-              <circle cx="50" cy="50" r="5" stroke="black" strokeWidth="10" fill="black" />
-              <circle cx="50" cy="90" r="5" stroke="black" strokeWidth="10" fill="black" />
-              <circle cx="50" cy="130" r="5" stroke="black" strokeWidth="10" fill="black" />
-              <circle cx="50" cy="170" r="5" stroke="black" strokeWidth="10" fill="black" />
-              <circle cx="50" cy="210" r="5" stroke="black" strokeWidth="10" fill="black" />
-              <circle cx="50" cy="250" r="5" stroke="black" strokeWidth="10" fill="black" />
-            </g>
-          </svg>
-        </span>
 
         <TableDrawing tableNumber={"8"} numberOfseats={6} handleTableClick={handleTableClick} />
 
@@ -58,11 +43,20 @@ export default function Floorplan() {
 
         <TableDrawing tableNumber={"11"} numberOfseats={6} handleTableClick={handleTableClick} />
 
-        <TableDrawing tableNumber={"12"} numberOfseats={4} handleTableClick={handleTableClick} />
+        <TableDrawing tableNumber={"bar"} numberOfseats={7} handleTableClick={handleTableClick} />
+        <TableDrawing tableNumber={"12"} numberOfseats={2} handleTableClick={handleTableClick} />
 
-        <TableDrawing tableNumber={"13"} numberOfseats={4} handleTableClick={handleTableClick} />
+        <TableDrawing tableNumber={"13"} numberOfseats={2} handleTableClick={handleTableClick} />
 
-        <TableDrawing tableNumber={"14"} numberOfseats={4} handleTableClick={handleTableClick} />
+        <TableDrawing tableNumber={"14"} numberOfseats={2} handleTableClick={handleTableClick} />
+
+        <TableDrawing tableNumber={"15"} numberOfseats={4} handleTableClick={handleTableClick} />
+
+        <TableDrawing tableNumber={"16"} numberOfseats={4} handleTableClick={handleTableClick} />
+
+        <TableDrawing tableNumber={"17"} numberOfseats={4} handleTableClick={handleTableClick} />
+
+        <TableDrawing tableNumber={"18"} numberOfseats={4} handleTableClick={handleTableClick} />
       </div>
 
       <OpenOrders />
