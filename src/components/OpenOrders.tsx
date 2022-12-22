@@ -11,16 +11,10 @@ export default function OpenOrders() {
       <div className={styles["food-orders"]}>
         {openOrders &&
           openOrders.map((order) => {
-            return (
-              <React.Fragment key={order.orderId}>
-                <SingleOpenOrder order={order} />
-              </React.Fragment>
-            );
+            return <SingleOpenOrder key={order.orderId} order={order} />;
           })}
       </div>
-      <div className={styles["drinks-orders"]}>
-
-      </div>
+      <div className={styles["drinks-orders"]}></div>
     </div>
   );
 }

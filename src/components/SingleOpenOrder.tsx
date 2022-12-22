@@ -51,12 +51,12 @@ function Timer({
     </div>
   );
 }
-const MemoizedStopwatch = React.memo(Stopwatch);
+// const MemoizedStopwatch = React.memo(Stopwatch);
 
 export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
   const [isShowStopWatch, setIsShowStopWatch] = useState(false);
 
-  const finishTime = useRef(add(order.timeOrderPlaced!, { seconds: 10 }));
+  const finishTime = useRef(add(order.timeOrderPlaced!, { seconds: 20 }));
 
   const { setisShowFloorPlan, dispatch } = useContext(menuContext);
 
@@ -80,7 +80,7 @@ export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
 
       <div className={styles["table-number"]}>{order.tableNumber}</div>
       {!isShowStopWatch && <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={finishTime.current} orderID={order.orderId} />}
-      {isShowStopWatch && <MemoizedStopwatch />}
+      {isShowStopWatch && <Stopwatch />}
 
       <div>
         {order.orderItemDetails.map((item) => {

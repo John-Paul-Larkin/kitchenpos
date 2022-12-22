@@ -34,7 +34,6 @@ export default function Floorplan() {
 
         <TableDrawing tableNumber={"7"} numberOfseats={4} handleTableClick={handleTableClick} />
 
-
         <TableDrawing tableNumber={"8"} numberOfseats={6} handleTableClick={handleTableClick} />
 
         <TableDrawing tableNumber={"9"} numberOfseats={4} handleTableClick={handleTableClick} />
