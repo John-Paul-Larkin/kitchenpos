@@ -26,9 +26,11 @@ export default function MobileScreen() {
 
   const { isShowFloorPlan } = useContext(menuContext);
 
+  console.log(isShowFloorPlan);
+
   return (
     <>
-      {!isShowFloorPlan && (
+      <div style={{ display: isShowFloorPlan ? "none" : "initial" }}>
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -86,9 +88,8 @@ export default function MobileScreen() {
             </div>
           )}
         </motion.div>
-      )}
-
-      {isShowFloorPlan && (
+      </div>
+      <div style={{ display: isShowFloorPlan ? "initial" : "none" }}>
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -98,7 +99,7 @@ export default function MobileScreen() {
         >
           <Floorplan />
         </motion.div>
-      )}
+      </div>
     </>
   );
 }

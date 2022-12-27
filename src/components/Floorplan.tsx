@@ -11,7 +11,7 @@ export default function Floorplan() {
   const { setisShowFloorPlan, dispatch } = useContext(menuContext);
 
   const handleTableClick = (table: string) => {
-    setisShowFloorPlan((cur) => !cur);
+    setisShowFloorPlan(false);
     dispatch({ type: "clear order" });
 
     changeTableNumber(table);
