@@ -70,7 +70,7 @@ export default function OrderDetails() {
                 <div className={styles["name-price"]}>
                   <span className={styles["name"]}>
                     {orderItem.name}
-                    <span>{orderItem.isSentToKitchen && <DoneIcon fontSize="small" />}</span>
+                    <span>{orderItem.isSentToKitchen && <DoneIcon className={styles["done-icon"]}/>}</span>
                   </span>
 
                   <Alterations ingredients={orderItem.ingredients} />

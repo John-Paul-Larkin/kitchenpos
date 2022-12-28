@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styles from "../styles/FloorPlan.module.css";
 import { menuContext } from "./MenuContext";
+import SingleDrinksOrder from "./SingleDrinksOrder";
 import SingleOpenOrder from "./SingleOpenOrder";
 
 export default function OpenOrders() {
@@ -11,10 +12,28 @@ export default function OpenOrders() {
       <div className={styles["food-orders"]}>
         {openOrders &&
           openOrders.map((order) => {
-            return <SingleOpenOrder key={order.orderId} order={order} />;
+            let orderContainsDrinks: boolean = false;
+            order.orderItemDetails.forEach((item) => {
+              if (item.station !== "bar") orderContainsDrinks = true;
+            });
+            if (orderContainsDrinks !== false) {
+              return <SingleOpenOrder key={order.orderId} order={order} />;
+            } else return null;
           })}
       </div>
-      <div className={styles["drinks-orders"]}></div>
+
+      <div className={styles["drinks-orders"]}>
+        {openOrders &&
+          openOrders.map((order) => {
+            let orderContainsDrinks: boolean = false;
+            order.orderItemDetails.forEach((item) => {
+              if (item.station === "bar") orderContainsDrinks = true;
+            });
+            if (orderContainsDrinks !== false) {
+              return <SingleDrinksOrder key={order.orderId} order={order} />;
+            } else return null;
+          })}
+      </div>
     </div>
   );
 }

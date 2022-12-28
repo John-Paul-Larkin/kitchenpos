@@ -138,3 +138,7 @@ span {
   padding:7px;
   border-radius: 14px 0 0 0;
 }
+
+.done-icon {
+transform: scale(.5);
+}

@@ -90,7 +90,7 @@ export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
                 {item.name}
               </div>
             );
-          } else return <></>;
+          } else return null;
         })}
       </div>
     </div>

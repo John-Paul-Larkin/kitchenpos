@@ -26,7 +26,6 @@ export default function MobileScreen() {
 
   const { isShowFloorPlan } = useContext(menuContext);
 
-  console.log(isShowFloorPlan);
 
   return (
     <>

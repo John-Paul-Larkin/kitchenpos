@@ -17,6 +17,9 @@
   height: 50%;
   border-radius: 0 0 14px 14px;
   border-top: 5px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .open-orders {
