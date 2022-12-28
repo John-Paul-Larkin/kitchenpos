@@ -1,8 +1,8 @@
 .open-orders-container {
   height: 30%;
-
   border-top: 5px solid black;
 }
+
 .food-orders {
   height: 50%;
   background-color: aqua;
@@ -20,9 +20,12 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  overflow-x: hidden;
+
 }
 
 .open-orders {
+
   font-size: 0.6em;
   border: 5px solid black;
   display: inline-block;
@@ -30,10 +33,9 @@
   margin: 5px;
   background-color: aqua;
   cursor: pointer;
-  width: 80px;
+  min-width: 80px;
   height: 93%;
   border-radius: 10px;
-  overflow: hidden;
 }
 
 .stopwatch {
