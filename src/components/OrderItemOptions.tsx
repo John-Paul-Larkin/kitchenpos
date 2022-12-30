@@ -74,24 +74,33 @@ export default function OrderItemOptions() {
   return (
     <>
       <div className={styles["order-item-details"]}>
-        OrderItemOptions
-        {selectedOrderItem && <h2>{selectedOrderItem.name}</h2>}
-        {selectedOrderItem?.ingredients &&
-          selectedOrderItem.ingredients.map((ingredient) => (
-            <div key={ingredient.ingredientId} style={ingredient.selected ? {} : { color: "white" }}>
-              {ingredient.ingredient}
-              <Switch size="small" checked={ingredient.selected} onClick={() => handleSwitchToggleIngredient(ingredient.ingredientId!)} />
+        <div className={styles["item-options"]}>Item options</div>
+        <div className={styles["item-wrapper"]}>
+          {selectedOrderItem && <h2>{selectedOrderItem.name}</h2>}
+          {selectedOrderItem?.ingredients &&
+            selectedOrderItem.ingredients.map((ingredient) => (
+              <div key={ingredient.ingredientId} style={ingredient.selected ? {} : { color: "white" }}>
+                {ingredient.ingredient}
+                <Switch size="small" checked={ingredient.selected} onClick={() => handleSwitchToggleIngredient(ingredient.ingredientId!)} />
+              </div>
+            ))}
+        </div>
+
+        <div className={styles["remove-button-wrapper"]}>
+          <span className={styles["spacer"]}></span>
+            <div className={styles["remove-button"]}>
+              {selectedOrderItem && (
+                <button
+                  onClick={() => {
+                    handleRemoveItem();
+                  }}
+                >
+                  Remove
+                </button>
+              )}
             </div>
-          ))}
-        {selectedOrderItem && (
-          <button
-            onClick={() => {
-              handleRemoveItem();
-            }}
-          >
-            Remove
-          </button>
-        )}
+          </div>
+        
       </div>
     </>
   );

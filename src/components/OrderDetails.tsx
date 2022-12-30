@@ -58,7 +58,7 @@ export default function OrderDetails() {
       <div className={styles["middle"]}>
         <div className={styles["order-items-screen"]}>
           {orderDetails.orderItemDetails &&
-            orderDetails.orderItemDetails.map((orderItem, index) => (
+            orderDetails.orderItemDetails.map((orderItem) => (
               <motion.div
                 className={selectedOrderItem?.itemId === orderItem.itemId ? styles["selected"] : styles["order-items"]}
                 key={orderItem.itemId}

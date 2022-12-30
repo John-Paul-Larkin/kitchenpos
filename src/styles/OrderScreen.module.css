@@ -1,3 +1,36 @@
+.order-item-details {
+  background-color: var(--one);
+  /* padding-left: 1em; */
+  width: 40%;
+  border-radius: 0 14px 0 0;
+  display:flex;
+  flex-direction: column;
+}
+
+.item-options {
+  border-bottom: 1px solid black;
+  background-color: antiquewhite;
+  padding: 7.5px;
+  border-radius: 0 14px 0 0;
+  overflow: hidden;
+
+}
+
+.remove-button{
+   padding:.5em .5em .3em .5em;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.remove-button-wrapper {
+display: flex;
+align-items: flex-end;
+
+}
+
+ 
 .order-screen {
   display: flex;
   height: calc(100% - 345px);
@@ -9,10 +42,15 @@
   /* overflow-y: scroll; */
   width: 60%;
   border-radius: 14px 0 0 0;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+
+.item-wrapper {
+   padding: .5em 1em 1em 1em;
+   flex-grow: 1;
 }
 
 .order-items-screen {
@@ -60,15 +98,6 @@ span {
   margin-left: 5px;
   font-size: 0.5em;
   text-align: center;
-}
-
-/* Left side of order screen */
-
-.order-item-details {
-  background-color: var(--one);
-  padding-left: 1em;
-  width: 40%;
-  border-radius: 0 14px 0 0;
 }
 
 .name-price {
@@ -135,10 +164,10 @@ span {
 .top {
   border-bottom: 1px solid black;
   background-color: antiquewhite;
-  padding:7px;
+  padding: 7px;
   border-radius: 14px 0 0 0;
 }
 
 .done-icon {
-transform: scale(.5);
+  transform: scale(0.5);
 }
