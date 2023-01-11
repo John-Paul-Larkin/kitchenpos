@@ -2,6 +2,7 @@ import { useContext } from "react";
 import styles from "../styles/OrderScreen.module.css";
 import { menuContext } from "./MenuContext";
 import { Switch } from "@mui/material";
+import SelectExtraIngredients from "./SelectExtraIngredients";
 
 export default function OrderItemOptions() {
   const { setSelectedOrderItem, orderDetails, selectedOrderItem, dispatch, setOpenOrders } = useContext(menuContext);
@@ -85,6 +86,7 @@ export default function OrderItemOptions() {
               </div>
             ))}
         </div>
+        <SelectExtraIngredients/>
 
         <div className={styles["remove-button-wrapper"]}>
           <span className={styles["spacer"]}></span>

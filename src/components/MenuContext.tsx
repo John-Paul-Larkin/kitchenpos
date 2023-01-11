@@ -10,8 +10,6 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const [openOrders, setOpenOrders] = useImmer([] as OrderDetails[]);
   const [isShowFloorPlan, setisShowFloorPlan] = useState(true);
 
-  
-
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
       case "add new item to order": {
@@ -92,6 +90,25 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         }
         return draft;
       }
+      case "Add extra ingredient": {
+        const ingredientoAdd: Ingredients = {
+          ingredient: action.payload,
+          selected: true,
+          ingredientId: uuid(),
+        };
+        const id = selectedOrderItem?.itemId;
+
+        draft.orderItemDetails.forEach((item) => {
+          if (item.itemId === id) {
+            item.ingredients?.push(ingredientoAdd);
+          }
+        });
+        if(selectedOrderItem !== null){
+        setSelectedOrderItem({ ...selectedOrderItem, ingredients: [...selectedOrderItem.ingredients!,ingredientoAdd ]});
+      }
+        return draft;
+      }
+
       default:
         return draft;
     }

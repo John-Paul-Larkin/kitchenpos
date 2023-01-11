@@ -38,7 +38,7 @@ export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder
         handleSendOrder={handleSendOrder}
         tableNumToChangeTo={tableNumToChangeTo}
       />
-      <label htmlFor="cars">
+      <label htmlFor="table-number">
         <div className={styles["table-number"]}>Table:{tableNumber}</div>
       </label>
       <select value={tableNumber} className={styles["table-select"]} onChange={(e) => handleSelectChange(e)}>

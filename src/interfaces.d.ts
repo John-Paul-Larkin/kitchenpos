@@ -7,7 +7,6 @@ interface Screens {
   label: string;
 }
 
-
 type Ingredient =
   | "White bread"
   | "Butter"
@@ -46,8 +45,8 @@ interface MenuItem {
   price: number;
   itemId: string;
   ingredients?: Ingredients[];
-  isSentToKitchen?: boolean; 
-  station:'bar' | 'salad' | 'fry' | 'grill' | 'expediter';
+  isSentToKitchen?: boolean;
+  station: "bar" | "salad" | "fry" | "grill" | "expediter";
 }
 
 interface ReducerActionAdd {
@@ -86,7 +85,11 @@ interface ReducerClearOrder {
 interface AddTransferedItems {
   type: "add transfered items";
   payload: MenuItem[];
+}
 
+interface AddExtraIngredient {
+  type: "Add extra ingredient";
+  payload: Ingredient;
 }
 
 type ReducerAction =
@@ -97,7 +100,8 @@ type ReducerAction =
   | ReducerAddOrderTime
   | ReducerClearOrder
   | ReducerAddOrdered
-  |  AddTransferedItems;
+  | AddTransferedItems
+  | AddExtraIngredient;
 
 interface ContextProvider {
   orderDetails: OrderDetails;
@@ -109,7 +113,7 @@ interface ContextProvider {
   openOrders: OrderDetails[];
   setOpenOrders: React.Dispatch<React.SetStateAction<OrderDetails[]>>;
   isShowFloorPlan: boolean;
-  setisShowFloorPlan:React.Dispatch<React.SetStateAction<boolean>>
+  setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface OrderDetails {
@@ -118,5 +122,5 @@ interface OrderDetails {
   timeOrderPlaced: Date | null;
   server?: string;
   orderItemDetails: MenuItem[];
-  orderStatus: 'time up' | 'ready';
+  orderStatus: "time up" | "ready";
 }

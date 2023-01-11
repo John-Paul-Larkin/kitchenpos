@@ -404,3 +404,31 @@ export const drinkMenuItems: MenuItem[] = [
     station: "bar",
   },
 ];
+
+export const ingredientsList:Ingredient[] = [
+  "White bread",
+  "Butter",
+  "Bacon",
+  "Lettuce",
+  "Tomato",
+  "Cheese",
+  "Onion",
+  "Chicken",
+  "Ham",
+  "Mayo",
+  "Pepper sauce",
+  "Onion rings",
+  "Ketchup",
+  "Fried onions",
+  "Parmesan",
+  "Croutons",
+  "Blue cheese dip",
+  "Side salad",
+  "Celery",
+  "Mushy peas",
+  "Lemon",
+  "Dill sauce",
+  "Pastry",
+  "Gravy",
+  "Mushrooms"
+] 
