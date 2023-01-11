@@ -94,6 +94,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         const ingredientoAdd: Ingredients = {
           ingredient: action.payload,
           selected: true,
+          added:true,
           ingredientId: uuid(),
         };
         const id = selectedOrderItem?.itemId;

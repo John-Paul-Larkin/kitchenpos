@@ -1,6 +1,8 @@
 import styles from "../styles/OrderScreen.module.css";
 
 export default function Alterations({ ingredients }: { ingredients: Ingredients[] | undefined }) {
+  console.log(ingredients);
+
   return (
     <span className={styles["order-alterations"]}>
       <div>
@@ -8,6 +10,8 @@ export default function Alterations({ ingredients }: { ingredients: Ingredients[
           ingredients.map((ingredient) => {
             if (!ingredient.selected) {
               return <div key={ingredient.ingredientId}>No {ingredient.ingredient}</div>;
+            } else if (ingredient.added) {
+              return <div key={ingredient.ingredientId}>Add {ingredient.ingredient}</div>;
             } else {
               return null;
             }

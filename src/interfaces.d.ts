@@ -37,6 +37,7 @@ type Ingredient =
 interface Ingredients {
   ingredient: Ingredient;
   selected: boolean;
+  added?:boolean;
   ingredientId?: string;
 }
 

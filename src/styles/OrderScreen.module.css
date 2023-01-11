@@ -116,7 +116,7 @@ span {
 }
 
 .order-alterations {
-  width: 50px;
+  /* width: 50px; */
   font-size: 0.6em;
   display: flex;
   flex-direction: row;
