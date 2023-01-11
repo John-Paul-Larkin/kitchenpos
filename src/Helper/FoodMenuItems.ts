@@ -1,3 +1,5 @@
+import { endAt } from "firebase/firestore";
+
 export const foodMenuItems: MenuItem[] = [
   {
     itemId: "1",
@@ -264,7 +266,7 @@ export const drinkMenuItems: MenuItem[] = [
 
   {
     itemId: "105",
-    name: "Americano",
+    name: "Ameri- cano",
     price: 2.9,
     ingredients: [],
     station: "bar",
@@ -278,7 +280,7 @@ export const drinkMenuItems: MenuItem[] = [
   },
   {
     itemId: "107",
-    name: "Cappachino",
+    name: "Cappa-chino",
     price: 3.4,
     ingredients: [],
     station: "bar",
@@ -432,3 +434,8 @@ export const ingredientsList:Ingredient[] = [
   "Gravy",
   "Mushrooms"
 ] 
+
+
+// issues bugs
+// conditional rendering of components with timers resetting
+// scroll overflow affectedd by flex end

@@ -15,7 +15,8 @@
   }
 }
 
-.grid-wrapper {
+.grid-wrapper-bar,
+.grid-wrapper-food {
   background: linear-gradient(to top, #6d695c, #bbae7e);
 
   border-top: 5px solid black;
@@ -64,5 +65,37 @@
   justify-content: center;
   height: 90%;
   text-align: center;
+}
+
+.grid-wrapper-food .button {
+  background-color: rgb(95, 114, 160);
+  background: linear-gradient(to top, rgb(18, 77, 81), rgb(95, 114, 160));
+}
+
+.button-food {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: cadetblue;
+  color: white;
+  font-size: 0.85em;
+  border-radius: 20px;
+  padding: 0.3em;
+  border: 2px solid black;
+  box-shadow: 2px 2px 7px black;
+  background: linear-gradient(to top, rgb(18, 77, 81), cadetblue);
+}
+.button-drink {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(95, 114, 160);
+  color: white;
+  font-size: 0.85em;
+  border-radius: 20px;
+  padding: 0.3em;
+  border: 2px solid black;
+  box-shadow: 2px 2px 7px black;
+  /* background: linear-gradient(to top, rgb(18, 77, 81), cadetblue); */
 }
 

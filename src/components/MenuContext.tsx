@@ -2,6 +2,8 @@ import { createContext, ReactNode, useState } from "react";
 import uuid from "react-uuid";
 import { useImmer, useImmerReducer } from "use-immer";
 
+import { auth } from "../Helper/firebaseconfig";
+
 export const menuContext = createContext({} as ContextProvider);
 
 export default function MenuContext({ children }: { children: ReactNode }) {
@@ -9,6 +11,10 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const [tableNumber, setTableNumber] = useState("1");
   const [openOrders, setOpenOrders] = useImmer([] as OrderDetails[]);
   const [isShowFloorPlan, setisShowFloorPlan] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(!!auth.currentUser);
+
+  console.log(loggedIn);
+  console.log(auth.currentUser)
 
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
@@ -94,7 +100,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         const ingredientoAdd: Ingredients = {
           ingredient: action.payload,
           selected: true,
-          added:true,
+          added: true,
           ingredientId: uuid(),
         };
         const id = selectedOrderItem?.itemId;
@@ -104,9 +110,9 @@ export default function MenuContext({ children }: { children: ReactNode }) {
             item.ingredients?.push(ingredientoAdd);
           }
         });
-        if(selectedOrderItem !== null){
-        setSelectedOrderItem({ ...selectedOrderItem, ingredients: [...selectedOrderItem.ingredients!,ingredientoAdd ]});
-      }
+        if (selectedOrderItem !== null) {
+          setSelectedOrderItem({ ...selectedOrderItem, ingredients: [...selectedOrderItem.ingredients!, ingredientoAdd] });
+        }
         return draft;
       }
 
@@ -130,6 +136,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
     setOpenOrders,
     isShowFloorPlan,
     setisShowFloorPlan,
+    loggedIn,
+    setLoggedIn,
   };
 
   return <menuContext.Provider value={contextValues}>{children}</menuContext.Provider>;

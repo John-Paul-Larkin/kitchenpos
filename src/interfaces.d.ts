@@ -115,6 +115,8 @@ interface ContextProvider {
   setOpenOrders: React.Dispatch<React.SetStateAction<OrderDetails[]>>;
   isShowFloorPlan: boolean;
   setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>>;
+  loggedIn: boolean;
+  setLoggedIn:  React.Dispatch<React.SetStateAction<boolean>> ;
 }
 
 interface OrderDetails {
