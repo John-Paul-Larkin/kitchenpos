@@ -1,7 +1,7 @@
 import styles from "../styles/MobileScreen.module.css";
 
 import ScreenSizeSelector from "./ScreenSizeSelector";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import FoodMenuItemButton from "./FoodMenuItemButton";
 import DrinkMenuItemButton from "./DrinkMenuItemButton";
 
@@ -14,7 +14,6 @@ import { motion } from "framer-motion";
 import { menuContext } from "./MenuContext";
 import useSignInAnon from "../Helper/useSignInAnon";
 import useSignInGoogle from "../Helper/useSignInGoogle";
-import { auth } from "../Helper/firebaseconfig";
 
 export default function MobileScreen() {
   const screens = [

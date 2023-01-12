@@ -6,6 +6,7 @@ import TableNumberSelect from "./TableNumberSelect";
 import Alterations from "./Alterations";
 import useSendOrder from "../Helper/useSendOrder";
 import DoneIcon from "@mui/icons-material/Done";
+import { auth } from "../Helper/firebaseconfig";
 
 export default function OrderDetails() {
   const { orderDetails } = useContext(menuContext);
@@ -13,6 +14,7 @@ export default function OrderDetails() {
   const { setOpenOrders } = useContext(menuContext);
   const { selectedOrderItem, setSelectedOrderItem } = useContext(menuContext);
   const { setisShowFloorPlan } = useContext(menuContext);
+  const { setIsLoggedIn } = useContext(menuContext);
 
   // calculates the total price of all items and returns as formatted string
   const calcTotal = (): string => {
@@ -53,6 +55,9 @@ export default function OrderDetails() {
   return (
     <div className={styles["order-items-screen-container"]}>
       <div className={styles["top"]}>
+        <div className={styles["server-name"]} onClick={() => setIsLoggedIn(false)}>
+          Server: {auth.currentUser?.displayName}
+        </div>
         <TableNumberSelect handleSendOrder={handleSendOrder} />
       </div>
       <div className={styles["middle"]}>
@@ -70,7 +75,7 @@ export default function OrderDetails() {
                 <div className={styles["name-price"]}>
                   <span className={styles["name"]}>
                     {orderItem.name}
-                    <span>{orderItem.isSentToKitchen && <DoneIcon className={styles["done-icon"]}/>}</span>
+                    <span>{orderItem.isSentToKitchen && <DoneIcon className={styles["done-icon"]} />}</span>
                   </span>
 
                   <Alterations ingredients={orderItem.ingredients} />
