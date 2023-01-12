@@ -1,6 +1,8 @@
-import { useContext } from "react";
+import { orderBy } from "firebase/firestore";
+import { useContext, useState } from "react";
 import styles from "../styles/FloorPlan.module.css";
 import { menuContext } from "./MenuContext";
+import SingleCompleteOrder from "./SingleCompleteOrder";
 
 export default function TableDrawing({
   tableNumber,
@@ -21,10 +23,19 @@ export default function TableDrawing({
     }
   });
 
+  const [isShowTableDetails, setIsShowTableDetails] = useState(false);
+
+  const checkIsTableOpen = () => {
+    const order = openOrders.find((order) => order.tableNumber === tableNumber);
+
+    if (order && order.orderItemDetails.length > 0) setIsShowTableDetails(true);
+  };
+
   return (
     <>
       {numberOfseats === 4 && (
-        <div className={styles["table-container"]}>
+        <div className={styles["table-container"]} onMouseEnter={() => checkIsTableOpen()} onMouseLeave={() => setIsShowTableDetails(false)}>
+          {isShowTableDetails && <SingleCompleteOrder tableNumber={tableNumber} />}
           <span className={styles[`table-${tableNumber}`]} onClick={() => handleTableClick(tableNumber)}>
             <span className={`${styles["table-num"]}  ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
             <svg width="70" height="90">
@@ -40,7 +51,9 @@ export default function TableDrawing({
       )}
 
       {numberOfseats === 2 && (
-        <div className={styles["table-container"]}>
+        <div className={styles["table-container"]} onMouseEnter={() => checkIsTableOpen()} onMouseLeave={() => setIsShowTableDetails(false)}>
+          {isShowTableDetails && <SingleCompleteOrder tableNumber={tableNumber} />}
+
           <span className={styles["table-" + tableNumber]} onClick={() => handleTableClick(tableNumber)}>
             <span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
             <svg width="50" height="90">
@@ -54,7 +67,8 @@ export default function TableDrawing({
       )}
 
       {numberOfseats === 6 && (
-        <div className={styles["table-container"]}>
+        <div className={styles["table-container"]} onMouseEnter={() => checkIsTableOpen()} onMouseLeave={() => setIsShowTableDetails(false)}>
+          {isShowTableDetails && <SingleCompleteOrder tableNumber={tableNumber} />}
           <span className={styles["table-" + tableNumber]} onClick={() => handleTableClick(tableNumber)}>
             <span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
             <svg width="90" height="90">
@@ -73,7 +87,14 @@ export default function TableDrawing({
       )}
 
       {numberOfseats === 7 && (
-        <span className={styles["bar"]} onClick={() => handleTableClick("bar")}>
+        <span
+          className={styles["bar"]}
+          onClick={() => handleTableClick("bar")}
+          onMouseEnter={() => checkIsTableOpen()}
+          onMouseLeave={() => setIsShowTableDetails(false)}
+        >
+          {isShowTableDetails && <SingleCompleteOrder tableNumber={tableNumber} />}
+
           <span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
 
           <svg height="320" width="200">

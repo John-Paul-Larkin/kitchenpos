@@ -1,4 +1,3 @@
-import { endAt } from "firebase/firestore";
 
 export const foodMenuItems: MenuItem[] = [
   {
@@ -266,7 +265,7 @@ export const drinkMenuItems: MenuItem[] = [
 
   {
     itemId: "105",
-    name: "Ameri- cano",
+    name: "Ameri cano",
     price: 2.9,
     ingredients: [],
     station: "bar",
@@ -280,7 +279,7 @@ export const drinkMenuItems: MenuItem[] = [
   },
   {
     itemId: "107",
-    name: "Cappa-chino",
+    name: "Cappa chino",
     price: 3.4,
     ingredients: [],
     station: "bar",

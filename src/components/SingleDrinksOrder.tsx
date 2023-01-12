@@ -15,7 +15,7 @@ function Stopwatch() {
   );
 }
 
-export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
+export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   const { setisShowFloorPlan, dispatch } = useContext(menuContext);
   const changeTableNumber = useChangeTableNumber();
 

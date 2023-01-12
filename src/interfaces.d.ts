@@ -41,14 +41,7 @@ interface Ingredients {
   ingredientId?: string;
 }
 
-interface MenuItem {
-  name: string;
-  price: number;
-  itemId: string;
-  ingredients?: Ingredients[];
-  isSentToKitchen?: boolean;
-  station: "bar" | "salad" | "fry" | "grill" | "expediter";
-}
+
 
 interface ReducerActionAdd {
   type: "add new item to order";
@@ -126,4 +119,13 @@ interface OrderDetails {
   server: string;
   orderItemDetails: MenuItem[];
   orderStatus: "time up" | "ready";
+}
+
+interface MenuItem {
+  name: string;
+  price: number;
+  itemId: string;
+  ingredients?: Ingredients[];
+  isSentToKitchen?: boolean;
+  station: "bar" | "salad" | "fry" | "grill" | "expediter";
 }

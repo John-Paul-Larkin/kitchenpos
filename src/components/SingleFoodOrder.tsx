@@ -54,7 +54,7 @@ function Timer({
 }
 // const MemoizedStopwatch = React.memo(Stopwatch);
 
-export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
+export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   const [isShowStopWatch, setIsShowStopWatch] = useState(false);
 
   const finishTime = useRef(add(order.timeOrderPlaced!, { seconds: 20 }));

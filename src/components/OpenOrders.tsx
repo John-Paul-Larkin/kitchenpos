@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styles from "../styles/FloorPlan.module.css";
 import { menuContext } from "./MenuContext";
 import SingleDrinksOrder from "./SingleDrinksOrder";
-import SingleOpenOrder from "./SingleOpenOrder";
+import SingleFoodOrder from "./SingleFoodOrder";
 
 export default function OpenOrders() {
   const { openOrders } = useContext(menuContext);
@@ -20,7 +20,7 @@ export default function OpenOrders() {
                 if (item.station !== "bar") orderContainsDrinks = true;
               });
               if (orderContainsDrinks !== false) {
-                return <SingleOpenOrder key={order.orderId} order={order} />;
+                return <SingleFoodOrder key={order.orderId} order={order} />;
               } else return null;
             })}
         </div>

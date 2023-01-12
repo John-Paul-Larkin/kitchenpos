@@ -54,8 +54,8 @@ export default function Floorplan() {
         <TableDrawing tableNumber={"16"} numberOfseats={4} handleTableClick={handleTableClick} />
 
         <TableDrawing tableNumber={"17"} numberOfseats={4} handleTableClick={handleTableClick} />
-
-        <TableDrawing tableNumber={"18"} numberOfseats={4} handleTableClick={handleTableClick} />
+{/* 
+        <TableDrawing tableNumber={"18"} numberOfseats={4} handleTableClick={handleTableClick} /> */}
       </div>
 
       <OpenOrders />

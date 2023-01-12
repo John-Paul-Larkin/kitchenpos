@@ -42,6 +42,7 @@
   align-items: center;
   /* justify-content: flex-end; */
   overflow-x: scroll;
+  overflow-y: hidden;
   flex-wrap: nowrap;
 }
 
@@ -59,6 +60,8 @@
   align-items: center;
   /* justify-content: flex-end; */
   overflow-x: scroll;
+  overflow-y: hidden;
+
   height: 113%;
 }
 
@@ -84,6 +87,22 @@
   cursor: pointer;
   min-width: 80px;
   height: 93%;
+  border-radius: 10px;
+  z-index: 99;
+}
+
+.open-orders-hover {
+  position: absolute;
+  top:70px;
+  font-size: 0.6em;
+  border: 5px solid black;
+  display: inline-block;
+  padding: 3px;
+  margin: 5px;
+  background-color: aqua;
+  cursor: pointer;
+  min-width: 80px;
+  min-height: 100px;
   border-radius: 10px;
   z-index: 99;
 }
@@ -134,7 +153,7 @@ span {
   grid-row-start: span 4;
   position: relative;
   left: -10px;
-  top:-40px
+  top: -40px;
 }
 
 .table-1,
