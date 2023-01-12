@@ -12,7 +12,9 @@ import { drinkMenuItems } from "../Helper/FoodMenuItems";
 import Floorplan from "./Floorplan";
 import { motion } from "framer-motion";
 import { menuContext } from "./MenuContext";
-
+import useSignInAnon from "../Helper/useSignInAnon";
+import useSignInGoogle from "../Helper/useSignInGoogle";
+import { auth } from "../Helper/firebaseconfig";
 
 export default function MobileScreen() {
   const screens = [
@@ -25,14 +27,26 @@ export default function MobileScreen() {
 
   const [isShowFoodMenu, setIsShowFoodMenu] = useState(true);
 
-  const { isShowFloorPlan, loggedIn, setLoggedIn } = useContext(menuContext);
+  const { isShowFloorPlan, isLoggedIn } = useContext(menuContext);
+
+  const signInAnon = useSignInAnon();
+
+  const signInGoogle = useSignInGoogle();
 
 
   return (
     <>
-      {!loggedIn && <div>not logged in</div>}
+      {!isLoggedIn && (
+        <>
+          <div>not logged in</div>
+          <div>
+            <button onClick={() => signInAnon()}>Sign in anonymously</button>
+            <button onClick={() => signInGoogle()}>Sign in with google</button>
+          </div>
+        </>
+      )}
 
-      {loggedIn && (
+      {isLoggedIn && (
         <>
           <div style={{ display: isShowFloorPlan ? "none" : "initial" }}>
             <motion.div

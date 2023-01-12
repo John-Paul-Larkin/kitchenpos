@@ -74,10 +74,7 @@ export default function TableDrawing({
 
       {numberOfseats === 7 && (
         <span className={styles["bar"]} onClick={() => handleTableClick("bar")}>
-
-<span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
-
-
+          <span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
 
           <svg height="320" width="200">
             <g fill="none" stroke={color} strokeWidth="20">

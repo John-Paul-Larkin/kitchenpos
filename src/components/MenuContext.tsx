@@ -11,10 +11,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const [tableNumber, setTableNumber] = useState("1");
   const [openOrders, setOpenOrders] = useImmer([] as OrderDetails[]);
   const [isShowFloorPlan, setisShowFloorPlan] = useState(true);
-  const [loggedIn, setLoggedIn] = useState(!!auth.currentUser);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!auth.currentUser);
 
-  console.log(loggedIn);
-  console.log(auth.currentUser)
 
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
@@ -57,10 +55,13 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         return draft;
       }
       case "add order/time- strip out sentToKitchen ": {
-        // adding id and time when order is sent through to firebase/kitchen
+        // adding id,server and time when order is sent through to firebase/kitchen
         draft.timeOrderPlaced = new Date();
         draft.orderId = uuid();
-        // Strip out the items which have already been sent on previous orders.
+        if(auth.currentUser && auth.currentUser.displayName !== null){
+           draft.server = auth.currentUser.displayName
+        }
+         // Strip out the items which have already been sent on previous orders.
         draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
         return draft;
       }
@@ -136,8 +137,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
     setOpenOrders,
     isShowFloorPlan,
     setisShowFloorPlan,
-    loggedIn,
-    setLoggedIn,
+    isLoggedIn,
+    setIsLoggedIn,
   };
 
   return <menuContext.Provider value={contextValues}>{children}</menuContext.Provider>;

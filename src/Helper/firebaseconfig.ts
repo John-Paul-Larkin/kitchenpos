@@ -30,3 +30,4 @@ const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
 export {provider, auth};
+

@@ -407,7 +407,7 @@ export const drinkMenuItems: MenuItem[] = [
   },
 ];
 
-export const ingredientsList:Ingredient[] = [
+export const ingredientsList: Ingredient[] = [
   "White bread",
   "Butter",
   "Bacon",
@@ -432,10 +432,10 @@ export const ingredientsList:Ingredient[] = [
   "Dill sauce",
   "Pastry",
   "Gravy",
-  "Mushrooms"
-] 
-
+  "Mushrooms",
+];
 
 // issues bugs
 // conditional rendering of components with timers resetting
 // scroll overflow affectedd by flex end
+// custom hooks

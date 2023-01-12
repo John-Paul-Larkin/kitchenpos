@@ -115,15 +115,15 @@ interface ContextProvider {
   setOpenOrders: React.Dispatch<React.SetStateAction<OrderDetails[]>>;
   isShowFloorPlan: boolean;
   setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>>;
-  loggedIn: boolean;
-  setLoggedIn:  React.Dispatch<React.SetStateAction<boolean>> ;
+  isLoggedIn: boolean;
+  setIsLoggedIn:  React.Dispatch<React.SetStateAction<boolean>> ;
 }
 
 interface OrderDetails {
   orderId: string;
   tableNumber: string;
   timeOrderPlaced: Date | null;
-  server?: string;
+  server: string;
   orderItemDetails: MenuItem[];
   orderStatus: "time up" | "ready";
 }

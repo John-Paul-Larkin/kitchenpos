@@ -1,4 +1,5 @@
 import { add } from "date-fns";
+import { motion } from "framer-motion";
 import React, { useContext } from "react";
 import { useRef, useState } from "react";
 import { useStopwatch, useTimer } from "react-timer-hook";
@@ -75,7 +76,13 @@ export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
   }
 
   return (
-    <div className={styles["open-orders"]} onClick={handleOpenOrderClick} style={{ border: borderColor }}>
+    <motion.div
+      whileHover={{ scale: 1.07 }}
+      whileTap={{ scale: 0.9 }}
+      className={styles["open-orders"]}
+      onClick={handleOpenOrderClick}
+      style={{ border: borderColor }}
+    >
       <div className={styles["time-order-placed"]}>{order.timeOrderPlaced!.toLocaleTimeString()}</div>
 
       <div className={styles["table-number"]}>{order.tableNumber}</div>
@@ -93,6 +100,6 @@ export default function SingleOpenOrder({ order }: { order: OrderDetails }) {
           } else return null;
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
