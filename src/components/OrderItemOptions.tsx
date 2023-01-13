@@ -5,27 +5,34 @@ import { Switch } from "@mui/material";
 import SelectExtraIngredients from "./SelectExtraIngredients";
 
 export default function OrderItemOptions() {
-  const { setSelectedOrderItem, orderDetails, selectedOrderItem, dispatch, setOpenOrders } = useContext(menuContext);
+  const { setSelectedOrderItem, orderDetails, selectedOrderItem, dispatch, openOrders, setOpenOrders } = useContext(menuContext);
 
   const handleSwitchToggleIngredient = (ingredientId: string) => {
     // find the menu item object which mathches the id of item we want to edit
     const indexOfItemToToggleIngredient = orderDetails.orderItemDetails.indexOf(
-      orderDetails.orderItemDetails.filter((item) => item.itemId === selectedOrderItem!.itemId)[0]
+      orderDetails.orderItemDetails.find((item) => item.itemId === selectedOrderItem!.itemId)!
     );
     // check if the item has already been sent to the kitchen
     if (orderDetails.orderItemDetails[indexOfItemToToggleIngredient].isSentToKitchen === true) {
       const itemID = orderDetails.orderItemDetails[indexOfItemToToggleIngredient].itemId;
-      const orderID = orderDetails.orderId;
-      //if it has locate the item and toggle the ingredient
-      setOpenOrders((draft) => {
-        const order = draft.find((order) => order.orderId === orderID)!;
-        let item = order.orderItemDetails.find((item) => item.itemId === itemID)!;
-        item.ingredients?.forEach((ingredient) => {
-          if (ingredient.ingredientId === ingredientId) {
-            ingredient.selected = !ingredient.selected;
-          }
-        });
-        return draft;
+
+      // if it has locate the item  within the list of open orders
+      // and toggle the ingrdient to not selected
+
+      setOpenOrders((curr) => {
+        curr.forEach((order) =>
+          order.orderItemDetails.forEach((item) => {
+            if (item.itemId === itemID) {
+              item.ingredients?.forEach((ingredient) => {
+                if (ingredient.ingredientId === ingredientId) {
+                  ingredient.selected = !ingredient.selected;
+                  console.log(ingredient);
+                }
+              });
+            }
+          })
+        );
+        return curr;
       });
     }
     // Then toggle the item on the current order
@@ -33,7 +40,7 @@ export default function OrderItemOptions() {
   };
 
   const handleRemoveItem = () => {
-    // find the menu item object which mathches the id of item to remove
+    // find the menu item object which matches the id of item to remove
     const indexOfItemToRemove = orderDetails.orderItemDetails.indexOf(
       orderDetails.orderItemDetails.filter((item) => item.itemId === selectedOrderItem!.itemId)[0]
     );
@@ -72,6 +79,8 @@ export default function OrderItemOptions() {
     }
   };
 
+  console.log(openOrders);
+
   return (
     <>
       <div className={styles["order-item-details"]}>
@@ -86,23 +95,22 @@ export default function OrderItemOptions() {
               </div>
             ))}
         </div>
-       {selectedOrderItem && <SelectExtraIngredients/>}
+        {selectedOrderItem && <SelectExtraIngredients />}
 
         <div className={styles["remove-button-wrapper"]}>
           <span className={styles["spacer"]}></span>
-            <div className={styles["remove-button"]}>
-              {selectedOrderItem && (
-                <button
-                  onClick={() => {
-                    handleRemoveItem();
-                  }}
-                >
-                  Remove
-                </button>
-              )}
-            </div>
+          <div className={styles["remove-button"]}>
+            {selectedOrderItem && (
+              <button
+                onClick={() => {
+                  handleRemoveItem();
+                }}
+              >
+                Remove
+              </button>
+            )}
           </div>
-        
+        </div>
       </div>
     </>
   );
