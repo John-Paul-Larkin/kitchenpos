@@ -113,7 +113,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         if (selectedOrderItem !== null) {
           setSelectedOrderItem({ ...selectedOrderItem, ingredients: [...selectedOrderItem.ingredients!, ingredientoAdd] });
         } else {
-              console.log('already sent')
+          console.log("already sent");
         }
         return draft;
       }

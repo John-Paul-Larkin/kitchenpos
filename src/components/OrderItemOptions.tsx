@@ -1,14 +1,14 @@
+import { Switch } from "@mui/material";
 import { useContext } from "react";
 import styles from "../styles/OrderScreen.module.css";
 import { menuContext } from "./MenuContext";
-import { Switch } from "@mui/material";
 import SelectExtraIngredients from "./SelectExtraIngredients";
 
 export default function OrderItemOptions() {
   const { setSelectedOrderItem, orderDetails, selectedOrderItem, dispatch, openOrders, setOpenOrders } = useContext(menuContext);
 
   const handleSwitchToggleIngredient = (ingredientId: string) => {
-    // find the menu item object which mathches the id of item we want to edit
+    // find the index of the item whose ingredient we want to toggle
     const indexOfItemToToggleIngredient = orderDetails.orderItemDetails.indexOf(
       orderDetails.orderItemDetails.find((item) => item.itemId === selectedOrderItem!.itemId)!
     );
@@ -19,20 +19,19 @@ export default function OrderItemOptions() {
       // if it has locate the item  within the list of open orders
       // and toggle the ingrdient to not selected
 
-      setOpenOrders((curr) => {
-        curr.forEach((order) =>
+      setOpenOrders((draft) => {
+        draft.forEach((order) =>
           order.orderItemDetails.forEach((item) => {
             if (item.itemId === itemID) {
               item.ingredients?.forEach((ingredient) => {
                 if (ingredient.ingredientId === ingredientId) {
                   ingredient.selected = !ingredient.selected;
-                  console.log(ingredient);
                 }
               });
             }
           })
         );
-        return curr;
+        return draft;
       });
     }
     // Then toggle the item on the current order
@@ -40,42 +39,47 @@ export default function OrderItemOptions() {
   };
 
   const handleRemoveItem = () => {
-    // find the menu item object which matches the id of item to remove
-    const indexOfItemToRemove = orderDetails.orderItemDetails.indexOf(
-      orderDetails.orderItemDetails.filter((item) => item.itemId === selectedOrderItem!.itemId)[0]
-    );
-
-    // check if the item has already been sent to the kitchen
-    if (orderDetails.orderItemDetails[indexOfItemToRemove].isSentToKitchen === true) {
-      const itemID = orderDetails.orderItemDetails[indexOfItemToRemove].itemId;
-      const orderID = orderDetails.orderId;
-      // if it has remove item from the array of open orders
+    if (selectedOrderItem?.isSentToKitchen === true) {
       setOpenOrders((draft) => {
-        let order = draft.find((order) => order.orderId === orderID)!;
+        let orderID: string;
+        // find the item in open orders and extract the order id
+        draft.forEach((order) => {
+          order.orderItemDetails.forEach((item) => {
+            if (item.itemId === selectedOrderItem.itemId) {
+              orderID = order.orderId;
+            }
+          });
+        });
 
-        // if the item to be removed is the only item in the order
-        if (order.orderItemDetails.length === 1) {
-          // then remove the order completely
-          draft = draft.filter((order) => order.orderId !== orderID);
-          return draft;
-        } else {
-          // else just remove the item from the order
-          order.orderItemDetails = order.orderItemDetails.filter((item) => item.itemId !== itemID);
-          return draft;
-        }
+        draft.forEach((order) => {
+          if (order.orderId === orderID) {
+            // if there is only one item in the order, then we should completely remove the order
+            if (order.orderItemDetails.length === 1) {
+              draft = draft.filter((order) => order.orderId !== orderID);
+            } else {
+              // else just remove the item from the order
+              console.log("selected1", selectedOrderItem.itemId);
+              order.orderItemDetails = order.orderItemDetails.filter((item) => {
+                return item.itemId !== selectedOrderItem.itemId;
+              });
+            }
+          }
+        });
+
+        return draft;
       });
     }
 
-    // remove the item - this time from the list of items in the current order.
+    // remove the item - this time from the list of items in the current order. ie visible on screen
     dispatch({ type: "remove item", payload: selectedOrderItem!.itemId });
-    if (orderDetails.orderItemDetails.length === 1 && indexOfItemToRemove === 0) {
+    if (orderDetails.orderItemDetails.length === 1) {
       // if the removed item was the last remaining in the array => set selected to null
       setSelectedOrderItem(null);
-    } else if (indexOfItemToRemove === 0) {
-      // if its not the last item, but it is the first in the array. note position 1 as orderdetails state has not updated yet.
-      setSelectedOrderItem(orderDetails.orderItemDetails[1]);
+      // } else if (indexOfItemToRemove === 0) {
+      //   // if its not the last item, but it is the first in the array. note position 1 as orderdetails state has not updated yet.
+      //   setSelectedOrderItem(orderDetails.orderItemDetails[1]);
     } else {
-      setSelectedOrderItem(orderDetails.orderItemDetails[indexOfItemToRemove - 1]);
+      setSelectedOrderItem(orderDetails.orderItemDetails[0]);
     }
   };
 
