@@ -25,7 +25,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
     changeTableNumber(order.tableNumber);
   };
 
-  let borderColor = "3px solid blue";
+  let borderColor = "3px solid red";
 
   if (order.orderStatus === "ready") {
     borderColor = "3px solid green";

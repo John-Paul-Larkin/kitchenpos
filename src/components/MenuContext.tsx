@@ -13,7 +13,6 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const [isShowFloorPlan, setisShowFloorPlan] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(!!auth.currentUser);
 
-
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
       case "add new item to order": {
@@ -58,10 +57,10 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         // adding id,server and time when order is sent through to firebase/kitchen
         draft.timeOrderPlaced = new Date();
         draft.orderId = uuid();
-        if(auth.currentUser && auth.currentUser.displayName !== null){
-           draft.server = auth.currentUser.displayName
+        if (auth.currentUser && auth.currentUser.displayName !== null) {
+          draft.server = auth.currentUser.displayName;
         }
-         // Strip out the items which have already been sent on previous orders.
+        // Strip out the items which have already been sent on previous orders.
         draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
         return draft;
       }
@@ -113,6 +112,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         });
         if (selectedOrderItem !== null) {
           setSelectedOrderItem({ ...selectedOrderItem, ingredients: [...selectedOrderItem.ingredients!, ingredientoAdd] });
+        } else {
+              console.log('already sent')
         }
         return draft;
       }

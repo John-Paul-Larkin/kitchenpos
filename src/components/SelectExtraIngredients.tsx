@@ -4,15 +4,15 @@ import styles from "../styles/OrderScreen.module.css";
 import { menuContext } from "./MenuContext";
 
 export default function SelectExtraIngredients() {
-  const [selectedItem, setselectedItem] = useState(ingredientsList[0]);
+  const [selectedIngredient, setselectedIngredient] = useState(ingredientsList[0]);
 
   const { dispatch } = useContext(menuContext);
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setselectedItem(e.target.value as Ingredient);
+    setselectedIngredient(e.target.value as Ingredient);
   };
 
   const handleAddIngredient = () => {
-    dispatch({ type: "Add extra ingredient", payload: selectedItem });
+    dispatch({ type: "Add extra ingredient", payload: selectedIngredient });
   };
 
   return (
@@ -21,7 +21,7 @@ export default function SelectExtraIngredients() {
         <label htmlFor="ingredient-select">
           <div>Add ingredient</div>
         </label>
-        <select value={selectedItem} className={styles["ingredient-select"]} onChange={(e) => handleSelectChange(e)}>
+        <select value={selectedIngredient} className={styles["ingredient-select"]} onChange={(e) => handleSelectChange(e)}>
           {ingredientsList.map((item) => {
             return (
               <option key={item} value={item}>

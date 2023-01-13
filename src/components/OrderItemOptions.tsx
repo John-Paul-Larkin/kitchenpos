@@ -86,7 +86,7 @@ export default function OrderItemOptions() {
               </div>
             ))}
         </div>
-        <SelectExtraIngredients/>
+       {selectedOrderItem && <SelectExtraIngredients/>}
 
         <div className={styles["remove-button-wrapper"]}>
           <span className={styles["spacer"]}></span>

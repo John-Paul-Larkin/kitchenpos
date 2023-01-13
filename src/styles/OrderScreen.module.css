@@ -52,6 +52,7 @@
 
 .order-items-screen {
   padding: 0.5em;
+ 
 }
 
 .order-items {
@@ -60,6 +61,7 @@
   margin: 0.2em;
   border: 1px solid white;
   cursor: pointer;
+  width:90%;
 }
 
 .selected {
@@ -69,7 +71,7 @@
   border: 1px solid black;
   border-right: none;
   cursor: pointer;
-  width: 110%;
+  width: 100%;
   position: relative;
   left: -11px;
   min-height: 1.2em;
@@ -110,6 +112,7 @@ span {
 
 .price {
   width: 30px;
+  margin-right: 10px;
 }
 
 .order-alterations {
@@ -140,6 +143,13 @@ span {
 
 .middle {
   flex-grow: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width:110%;
+  /* position: relative; */
+  /* z-index: -1; */
+
+
 }
 
 .buttons {

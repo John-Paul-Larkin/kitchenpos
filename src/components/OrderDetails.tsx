@@ -92,17 +92,20 @@ export default function OrderDetails() {
             ))}
         </div>
       </div>
-      <div className={styles["total-amount"]}>
-        <div>Total:</div>
-        <div className={styles["amount"]}>
-          {orderDetails.orderItemDetails && calcTotal()}
-          {!orderDetails.orderItemDetails && "€0.00"}
+      <div className={styles["bottom"]}>
+        <div className={styles["total-amount"]}>
+          <div>Total:</div>
+          <div className={styles["amount"]}>
+            {orderDetails.orderItemDetails && calcTotal()}
+            {!orderDetails.orderItemDetails && "€0.00"}
+          </div>
         </div>
-      </div>
-      <div className={styles["buttons"]}>
-        <button onClick={() => setisShowFloorPlan(true)}>FLoor plan</button>
-        <button>Message</button>
-        <button onClick={() => handleSendOrder()}>Send</button>
+
+        <div className={styles["buttons"]}>
+          <button onClick={() => setisShowFloorPlan(true)}>FLoor plan</button>
+          <button>Message</button>
+          <button onClick={() => handleSendOrder()}>Send</button>
+        </div>
       </div>
     </div>
   );
