@@ -83,13 +83,13 @@ export default function OrderItemOptions() {
           {selectedOrderItem && <h2>{selectedOrderItem.name}</h2>}
           {selectedOrderItem?.ingredients &&
             selectedOrderItem.ingredients.map((ingredient) => (
-              <div key={ingredient.ingredientId} style={ingredient.selected ? {} : { color: "white" }}>
+              <div key={ingredient.ingredientId} style={ingredient.added?{ color: "yellow" }: ingredient.selected ? {} : { color: "white" }}>
                 {ingredient.ingredient}
                 <Switch size="small" checked={ingredient.selected} onClick={() => handleSwitchToggleIngredient(ingredient.ingredientId!)} />
               </div>
             ))}
+          {(selectedOrderItem && selectedOrderItem?.station !== "bar") && <SelectExtraIngredients />}
         </div>
-        {selectedOrderItem && <SelectExtraIngredients />}
 
         <div className={styles["remove-button-wrapper"]}>
           <span className={styles["spacer"]}></span>
@@ -100,7 +100,7 @@ export default function OrderItemOptions() {
                   handleRemoveItem();
                 }}
               >
-                Remove
+                Remove item
               </button>
             )}
           </div>

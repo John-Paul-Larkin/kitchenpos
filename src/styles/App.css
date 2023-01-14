@@ -37,3 +37,10 @@ picture {
   --three: #e3caa5;
   --four: #fffbe9;
 }
+
+button {
+  background-color: var(--four);
+  border-radius: 5px;
+  border: 1px solid black;
+    margin-right:3px ;
+  }

@@ -1,4 +1,4 @@
-import "./App.css";
+import "./styles/App.css";
 import MenuContext from "./components/MenuContext";
 import MobileScreen from "./components/MobileScreen";
 

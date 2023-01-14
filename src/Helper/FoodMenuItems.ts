@@ -407,16 +407,16 @@ export const drinkMenuItems: MenuItem[] = [
 ];
 
 export const ingredientsList: Ingredient[] = [
-  "White bread",
   "Butter",
-  "Bacon",
+  "Mayo",
+  "White bread",
   "Lettuce",
   "Tomato",
   "Cheese",
   "Onion",
+  "Bacon",
   "Chicken",
   "Ham",
-  "Mayo",
   "Pepper sauce",
   "Onion rings",
   "Ketchup",
