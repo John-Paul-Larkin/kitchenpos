@@ -7,6 +7,7 @@ export default function SelectExtraIngredients() {
   const [selectedIngredient, setselectedIngredient] = useState(ingredientsList[0]);
 
   const { dispatch } = useContext(menuContext);
+  
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setselectedIngredient(e.target.value as Ingredient);
   };

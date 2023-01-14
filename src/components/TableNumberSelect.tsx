@@ -5,7 +5,7 @@ import TransferModal from "./TransferModal";
 import { menuContext } from "./MenuContext";
 
 export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder: () => void }) {
-  const { tableNumber } = useContext(menuContext);
+  const { selectedTableNumber } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
   const { orderDetails } = useContext(menuContext);
 
@@ -40,9 +40,9 @@ export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder
           tableNumToChangeTo={tableNumToChangeTo}
         />
         <label htmlFor="table-number">
-          <div className={styles["table-number"]}>Table:{tableNumber}</div>
+          <div className={styles["table-number"]}>Table:{selectedTableNumber}</div>
         </label>
-        <select value={tableNumber} className={styles["table-select"]} onChange={(e) => handleSelectChange(e)}>
+        <select value={selectedTableNumber} className={styles["table-select"]} onChange={(e) => handleSelectChange(e)}>
           <option value="Bar">Bar</option>
           <option value="1">1</option>
           <option value="2">2</option>

@@ -58,7 +58,6 @@ export default function OrderItemOptions() {
               draft = draft.filter((order) => order.orderId !== orderID);
             } else {
               // else just remove the item from the order
-              console.log("selected1", selectedOrderItem.itemId);
               order.orderItemDetails = order.orderItemDetails.filter((item) => {
                 return item.itemId !== selectedOrderItem.itemId;
               });
@@ -72,18 +71,9 @@ export default function OrderItemOptions() {
 
     // remove the item - this time from the list of items in the current order. ie visible on screen
     dispatch({ type: "remove item", payload: selectedOrderItem!.itemId });
-    if (orderDetails.orderItemDetails.length === 1) {
-      // if the removed item was the last remaining in the array => set selected to null
-      setSelectedOrderItem(null);
-      // } else if (indexOfItemToRemove === 0) {
-      //   // if its not the last item, but it is the first in the array. note position 1 as orderdetails state has not updated yet.
-      //   setSelectedOrderItem(orderDetails.orderItemDetails[1]);
-    } else {
-      setSelectedOrderItem(orderDetails.orderItemDetails[0]);
-    }
-  };
 
-  console.log(openOrders);
+    setSelectedOrderItem(null);
+  };
 
   return (
     <>

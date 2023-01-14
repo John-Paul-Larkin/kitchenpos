@@ -37,11 +37,9 @@ type Ingredient =
 interface Ingredients {
   ingredient: Ingredient;
   selected: boolean;
-  added?:boolean;
+  added?: boolean;
   ingredientId?: string;
 }
-
-
 
 interface ReducerActionAdd {
   type: "add new item to order";
@@ -102,14 +100,14 @@ interface ContextProvider {
   dispatch: React.Dispatch<ReducerAction>;
   selectedOrderItem: MenuItem | null;
   setSelectedOrderItem: React.Dispatch<React.SetStateAction<MenuItem | null>>;
-  tableNumber: string;
-  setTableNumber: React.Dispatch<React.SetStateAction<string>>;
+  selectedTableNumber: string;
+  setSelectedTableNumber: React.Dispatch<React.SetStateAction<string>>;
   openOrders: OrderDetails[];
   setOpenOrders: React.Dispatch<React.SetStateAction<OrderDetails[]>>;
   isShowFloorPlan: boolean;
   setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>>;
   isLoggedIn: boolean;
-  setIsLoggedIn:  React.Dispatch<React.SetStateAction<boolean>> ;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface OrderDetails {

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { menuContext } from "../components/MenuContext";
 
 export default function useChangeTableNumber() {
-  const { openOrders, dispatch, setTableNumber } = useContext(menuContext);
+  const { openOrders, dispatch, setSelectedTableNumber } = useContext(menuContext);
 
   function changeTableNumber(table: string) {
     //check if there are any orders already on the table
@@ -19,11 +19,10 @@ export default function useChangeTableNumber() {
         return { ...item, isSentToKitchen: true };
       });
 
-
       dispatch({ type: "add already ordered items", payload: oldOrderItems });
     }
- 
-    setTableNumber(table);
+
+    setSelectedTableNumber(table);
     dispatch({ type: "change table number", payload: table });
   }
 

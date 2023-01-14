@@ -1,18 +1,18 @@
 import { createContext, ReactNode, useState } from "react";
 import uuid from "react-uuid";
 import { useImmer, useImmerReducer } from "use-immer";
-
 import { auth } from "../Helper/firebaseconfig";
-
-export const menuContext = createContext({} as ContextProvider);
 
 export default function MenuContext({ children }: { children: ReactNode }) {
   const [selectedOrderItem, setSelectedOrderItem] = useState<MenuItem | null>(null);
-  const [tableNumber, setTableNumber] = useState("1");
+  const [selectedTableNumber, setSelectedTableNumber] = useState("1");
   const [openOrders, setOpenOrders] = useImmer([] as OrderDetails[]);
   const [isShowFloorPlan, setisShowFloorPlan] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(!!auth.currentUser);
 
+  // The reducer orderDetails contains the information about the currently selected table.
+  // An order is allocated an id when an it is sent to the kitchen
+  // A single table can have multiple orders open at the same time
   const reducer = (draft: OrderDetails, action: ReducerAction): OrderDetails | undefined => {
     switch (action.type) {
       case "add new item to order": {
@@ -50,7 +50,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
       }
       case "change table number": {
         draft.tableNumber = action.payload;
-        setTableNumber(action.payload);
+        setSelectedTableNumber(action.payload);
         return draft;
       }
       case "add order/time- strip out sentToKitchen ": {
@@ -97,12 +97,16 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         return draft;
       }
       case "Add extra ingredient": {
+
         const ingredientoAdd: Ingredients = {
           ingredient: action.payload,
           selected: true,
           added: true,
           ingredientId: uuid(),
         };
+
+
+
         const id = selectedOrderItem?.itemId;
 
         draft.orderItemDetails.forEach((item) => {
@@ -112,19 +116,17 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         });
         if (selectedOrderItem !== null) {
           setSelectedOrderItem({ ...selectedOrderItem, ingredients: [...selectedOrderItem.ingredients!, ingredientoAdd] });
-        } else {
-          console.log("already sent");
         }
         return draft;
       }
 
-      default:
+      default:{
         return draft;
+      }
     }
   };
 
   const initialOrderDetails = {} as OrderDetails;
-
   const [orderDetails, dispatch] = useImmerReducer(reducer, initialOrderDetails);
 
   const contextValues = {
@@ -132,8 +134,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
     dispatch,
     selectedOrderItem,
     setSelectedOrderItem,
-    tableNumber,
-    setTableNumber,
+    selectedTableNumber,
+    setSelectedTableNumber,
     openOrders,
     setOpenOrders,
     isShowFloorPlan,
@@ -144,3 +146,5 @@ export default function MenuContext({ children }: { children: ReactNode }) {
 
   return <menuContext.Provider value={contextValues}>{children}</menuContext.Provider>;
 }
+
+export const menuContext = createContext({} as ContextProvider);
