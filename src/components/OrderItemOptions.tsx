@@ -5,7 +5,7 @@ import { menuContext } from "./MenuContext";
 import SelectExtraIngredients from "./SelectExtraIngredients";
 
 export default function OrderItemOptions() {
-  const { setSelectedOrderItem, orderDetails, selectedOrderItem, dispatch, openOrders, setOpenOrders } = useContext(menuContext);
+  const { setSelectedOrderItem, orderDetails, selectedOrderItem, dispatch, setOpenOrders } = useContext(menuContext);
 
   const handleSwitchToggleIngredient = (ingredientId: string) => {
     // find the index of the item whose ingredient we want to toggle

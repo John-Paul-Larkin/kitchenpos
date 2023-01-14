@@ -97,7 +97,6 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         return draft;
       }
       case "Add extra ingredient": {
-
         const ingredientoAdd: Ingredients = {
           ingredient: action.payload,
           selected: true,
@@ -105,22 +104,37 @@ export default function MenuContext({ children }: { children: ReactNode }) {
           ingredientId: uuid(),
         };
 
+        const itemID = selectedOrderItem?.itemId;
 
+        if (selectedOrderItem?.isSentToKitchen === true) {
+          // if the item is already sent
 
-        const id = selectedOrderItem?.itemId;
+          setOpenOrders((draft) => {
+            draft.forEach((order) =>
+              order.orderItemDetails.forEach((item) => {
+                if (item.itemId === itemID) {
+                  item.ingredients?.push(ingredientoAdd);
+                }
+              })
+            );
+            return draft;
+          });
+        }
 
+        // Add item to the current order details
         draft.orderItemDetails.forEach((item) => {
-          if (item.itemId === id) {
+          if (item.itemId === itemID) {
             item.ingredients?.push(ingredientoAdd);
           }
         });
+
         if (selectedOrderItem !== null) {
           setSelectedOrderItem({ ...selectedOrderItem, ingredients: [...selectedOrderItem.ingredients!, ingredientoAdd] });
         }
         return draft;
       }
 
-      default:{
+      default: {
         return draft;
       }
     }
