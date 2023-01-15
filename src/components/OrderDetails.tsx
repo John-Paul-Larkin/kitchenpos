@@ -48,6 +48,7 @@ export default function OrderDetails() {
       dispatch({ type: "clear order" });
       setSelectedOrderItem(null);
       setisShowFloorPlan(true);
+      
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
