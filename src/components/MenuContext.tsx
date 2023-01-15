@@ -30,8 +30,10 @@ export default function MenuContext({ children }: { children: ReactNode }) {
           //otherwise spread the old items before adding
           draft.orderItemDetails = [...draft.orderItemDetails, item];
         }
-        // selected order item will have options displayed on the left of the screen
+        // selected order item will have options displayed on the right of the screen
+
         setSelectedOrderItem(item);
+
         return draft;
       }
       case "add already ordered items": {
@@ -50,7 +52,6 @@ export default function MenuContext({ children }: { children: ReactNode }) {
       }
       case "change table number": {
         draft.tableNumber = action.payload;
-        setSelectedTableNumber(action.payload);
         return draft;
       }
       case "add order/time- strip out sentToKitchen ": {
@@ -69,8 +70,6 @@ export default function MenuContext({ children }: { children: ReactNode }) {
         draft.orderItemDetails = [];
         draft.server = "";
         draft.timeOrderPlaced = null;
-        setSelectedOrderItem(null);
-
         return draft;
       }
       case "toggleIngredient": {

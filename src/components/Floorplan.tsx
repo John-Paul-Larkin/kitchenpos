@@ -8,11 +8,12 @@ import TableDrawing from "./TableDrawing";
 export default function Floorplan() {
   const changeTableNumber = useChangeTableNumber();
 
-  const { setisShowFloorPlan, dispatch } = useContext(menuContext);
+  const { setisShowFloorPlan, dispatch, setSelectedOrderItem } = useContext(menuContext);
 
   const handleTableClick = (table: string) => {
     setisShowFloorPlan(false);
     dispatch({ type: "clear order" });
+    setSelectedOrderItem(null);
 
     changeTableNumber(table);
   };

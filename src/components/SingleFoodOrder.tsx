@@ -1,7 +1,6 @@
 import { add } from "date-fns";
 import { motion } from "framer-motion";
-import React, { useContext } from "react";
-import { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useStopwatch, useTimer } from "react-timer-hook";
 import useChangeTableNumber from "../Helper/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
@@ -59,7 +58,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
 
   const finishTime = useRef(add(order.timeOrderPlaced!, { seconds: 20 }));
 
-  const { setisShowFloorPlan, dispatch } = useContext(menuContext);
+  const { setisShowFloorPlan, dispatch, setSelectedTableNumber } = useContext(menuContext);
 
   const changeTableNumber = useChangeTableNumber();
 
@@ -67,6 +66,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
     setisShowFloorPlan(false);
     dispatch({ type: "change table number", payload: order.orderId });
     changeTableNumber(order.tableNumber);
+    setSelectedTableNumber(order.tableNumber);
   };
 
   let borderColor = "3px solid red";

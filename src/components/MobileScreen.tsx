@@ -1,19 +1,17 @@
 import styles from "../styles/MobileScreen.module.css";
 
-import ScreenSizeSelector from "./ScreenSizeSelector";
 import { useContext, useState } from "react";
-import FoodMenuItemButton from "./FoodMenuItemButton";
-import DrinkMenuItemButton from "./DrinkMenuItemButton";
+import MenuItemButton from "./MenuItemButton";
+import ScreenSizeSelector from "./ScreenSizeSelector";
 
+import { drinkMenuItems, foodMenuItems } from "../Helper/FoodMenuItems";
 import OrderScreen from "./OrderScreen";
-import { foodMenuItems } from "../Helper/FoodMenuItems";
-import { drinkMenuItems } from "../Helper/FoodMenuItems";
 
-import Floorplan from "./Floorplan";
 import { motion } from "framer-motion";
-import { menuContext } from "./MenuContext";
 import useSignInAnon from "../Helper/useSignInAnon";
 import useSignInGoogle from "../Helper/useSignInGoogle";
+import Floorplan from "./Floorplan";
+import { menuContext } from "./MenuContext";
 
 export default function MobileScreen() {
   const screens = [
@@ -31,7 +29,6 @@ export default function MobileScreen() {
   const signInAnon = useSignInAnon();
 
   const signInGoogle = useSignInGoogle();
-
 
   return (
     <>
@@ -74,7 +71,7 @@ export default function MobileScreen() {
                       foodMenuItems.map((item) => {
                         return (
                           <div key={item.itemId}>
-                            <FoodMenuItemButton item={item} />
+                            <MenuItemButton item={item} />
                           </div>
                         );
                       })}
@@ -97,7 +94,7 @@ export default function MobileScreen() {
                       drinkMenuItems.map((item) => {
                         return (
                           <div key={item.itemId}>
-                            <DrinkMenuItemButton item={item} />
+                            <MenuItemButton item={item} />
                           </div>
                         );
                       })}

@@ -30,13 +30,14 @@ export default function TransferModal({
 }) {
   const handleCloseModal = () => setIsModalOpen(false);
 
-  const { orderDetails } = useContext(menuContext);
+  const { orderDetails, setSelectedOrderItem } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
   const changeTableNumber = useChangeTableNumber();
 
   const handleTransferItems = () => {
     const itemsToTranfer = orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
     dispatch({ type: "clear order" });
+    setSelectedOrderItem(null);
     changeTableNumber(tableNumToChangeTo!);
     dispatch({ type: "add transfered items", payload: itemsToTranfer });
 

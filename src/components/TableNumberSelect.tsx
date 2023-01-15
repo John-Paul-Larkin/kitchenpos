@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
 import useChangeTableNumber from "../Helper/useChangeTableNumber";
 import styles from "../styles/OrderScreen.module.css";
-import TransferModal from "./TransferModal";
 import { menuContext } from "./MenuContext";
+import TransferModal from "./TransferModal";
 
 export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder: () => void }) {
   const { selectedTableNumber } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
-  const { orderDetails } = useContext(menuContext);
+  const { orderDetails, setSelectedTableNumber,setSelectedOrderItem } = useContext(menuContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
@@ -26,7 +26,9 @@ export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder
       // just change the table number
       dispatch({ type: "change table number", payload: e.target.value });
       dispatch({ type: "clear order" });
+      setSelectedOrderItem(null);
       changeTableNumber(e.target.value);
+      setSelectedTableNumber(e.target.value);
     }
   };
 

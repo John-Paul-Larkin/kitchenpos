@@ -75,6 +75,10 @@ export default function OrderItemOptions() {
     setSelectedOrderItem(null);
   };
 
+  selectedOrderItem?.ingredients?.forEach((element) => {
+    console.log(element.ingredientId);
+  });
+
   return (
     <>
       <div className={styles["order-item-details"]}>
@@ -83,12 +87,12 @@ export default function OrderItemOptions() {
           {selectedOrderItem && <h2>{selectedOrderItem.name}</h2>}
           {selectedOrderItem?.ingredients &&
             selectedOrderItem.ingredients.map((ingredient) => (
-              <div key={ingredient.ingredientId} style={ingredient.added?{ color: "yellow" }: ingredient.selected ? {} : { color: "white" }}>
+              <div key={ingredient.ingredientId} style={ingredient.added ? { color: "yellow" } : ingredient.selected ? {} : { color: "white" }}>
                 {ingredient.ingredient}
                 <Switch size="small" checked={ingredient.selected} onClick={() => handleSwitchToggleIngredient(ingredient.ingredientId!)} />
               </div>
             ))}
-          {(selectedOrderItem && selectedOrderItem?.station !== "bar") && <SelectExtraIngredients />}
+          {selectedOrderItem && selectedOrderItem?.station !== "bar" && <SelectExtraIngredients />}
         </div>
 
         <div className={styles["remove-button-wrapper"]}>

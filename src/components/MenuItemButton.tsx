@@ -1,14 +1,14 @@
-import styles from "../styles/MobileScreen.module.css";
-
-import { menuContext } from "./MenuContext";
 import React, { useContext } from "react";
+import styles from "../styles/MobileScreen.module.css";
+import { menuContext } from "./MenuContext";
+
 import { motion } from "framer-motion";
 
-export default function DrinkMenuItemButton({ item }: { item: MenuItem }) {
+export default function MenuItemButton({ item }: { item: MenuItem }) {
   const { dispatch } = useContext(menuContext);
 
   const handleMenuButtonClick = (item: MenuItem) => {
-    dispatch({ type: "add new item to order", payload: item });
+    dispatch({ type: "add new item to order", payload: item })
   };
 
   return (

@@ -16,13 +16,14 @@ function Stopwatch() {
 }
 
 export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
-  const { setisShowFloorPlan, dispatch } = useContext(menuContext);
+  const { setisShowFloorPlan, dispatch, setSelectedTableNumber } = useContext(menuContext);
   const changeTableNumber = useChangeTableNumber();
 
   const handleOpenOrderClick = () => {
     setisShowFloorPlan(false);
     dispatch({ type: "change table number", payload: order.orderId });
     changeTableNumber(order.tableNumber);
+    setSelectedTableNumber(order.tableNumber);
   };
 
   let borderColor = "3px solid red";

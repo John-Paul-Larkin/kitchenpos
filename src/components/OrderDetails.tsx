@@ -1,12 +1,12 @@
+import DoneIcon from "@mui/icons-material/Done";
 import { motion } from "framer-motion";
 import { useContext, useEffect } from "react";
-import { menuContext } from "./MenuContext";
-import styles from "../styles/OrderScreen.module.css";
-import TableNumberSelect from "./TableNumberSelect";
-import Alterations from "./Alterations";
-import useSendOrder from "../Helper/useSendOrder";
-import DoneIcon from "@mui/icons-material/Done";
 import { auth } from "../Helper/firebaseconfig";
+import useSendOrder from "../Helper/useSendOrder";
+import styles from "../styles/OrderScreen.module.css";
+import Alterations from "./Alterations";
+import { menuContext } from "./MenuContext";
+import TableNumberSelect from "./TableNumberSelect";
 
 export default function OrderDetails() {
   const { orderDetails } = useContext(menuContext);
@@ -46,11 +46,14 @@ export default function OrderDetails() {
       setOpenOrders((cur) => [orderDetails, ...cur]);
       //dispatch reducer to clear order object
       dispatch({ type: "clear order" });
+      setSelectedOrderItem(null);
       setisShowFloorPlan(true);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderDetails.timeOrderPlaced]);
+
+  console.log(selectedOrderItem);
 
   return (
     <div className={styles["order-items-screen-container"]}>
