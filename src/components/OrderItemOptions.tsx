@@ -1,7 +1,7 @@
 import { Switch } from "@mui/material";
 import { useContext } from "react";
+import { menuContext } from "../Context/MenuContext";
 import styles from "../styles/OrderScreen.module.css";
-import { menuContext } from "./MenuContext";
 import SelectExtraIngredients from "./SelectExtraIngredients";
 
 export default function OrderItemOptions() {

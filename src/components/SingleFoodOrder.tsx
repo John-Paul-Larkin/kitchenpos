@@ -2,9 +2,9 @@ import { add } from "date-fns";
 import { motion } from "framer-motion";
 import React, { useContext, useRef, useState } from "react";
 import { useStopwatch, useTimer } from "react-timer-hook";
-import useChangeTableNumber from "../Helper/useChangeTableNumber";
+import { menuContext } from "../Context/MenuContext";
+import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
-import { menuContext } from "./MenuContext";
 
 function Stopwatch() {
   const { seconds, minutes } = useStopwatch({ autoStart: true });

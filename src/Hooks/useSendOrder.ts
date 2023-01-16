@@ -1,6 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
 
-import db from "./firebaseconfig";
+import db from "../Firebase/firebaseconfig";
 
 export default function useSendOrder() {
   const sendOrder = async (orderDetails: OrderDetails) => {
@@ -13,7 +13,3 @@ export default function useSendOrder() {
 
   return sendOrder;
 }
-
-
-
-

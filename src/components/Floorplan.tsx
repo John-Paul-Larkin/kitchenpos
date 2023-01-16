@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import useChangeTableNumber from "../Helper/useChangeTableNumber";
+import { menuContext } from "../Context/MenuContext";
+import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
-import { menuContext } from "./MenuContext";
 import OpenOrders from "./OpenOrders";
 import TableDrawing from "./TableDrawing";
 
@@ -55,7 +55,7 @@ export default function Floorplan() {
         <TableDrawing tableNumber={"16"} numberOfseats={4} handleTableClick={handleTableClick} />
 
         <TableDrawing tableNumber={"17"} numberOfseats={4} handleTableClick={handleTableClick} />
-{/* 
+        {/* 
         <TableDrawing tableNumber={"18"} numberOfseats={4} handleTableClick={handleTableClick} /> */}
       </div>
 

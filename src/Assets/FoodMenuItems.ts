@@ -1,4 +1,3 @@
-
 export const foodMenuItems: MenuItem[] = [
   {
     itemId: "1",
@@ -129,7 +128,7 @@ export const foodMenuItems: MenuItem[] = [
   {
     itemId: "11",
     name: "Vol Au Vont",
-    station: "expediter",
+    station: "expeditor",
     price: 11.5,
     ingredients: [
       { ingredient: "Pastry", selected: true },
@@ -163,7 +162,7 @@ export const foodMenuItems: MenuItem[] = [
   {
     itemId: "15",
     name: "Soup",
-    station: "expediter",
+    station: "expeditor",
     price: 4.95,
     ingredients: [],
   },
@@ -171,7 +170,7 @@ export const foodMenuItems: MenuItem[] = [
     itemId: "16",
     name: "extra 16",
     price: 0,
-    station: "expediter",
+    station: "expeditor",
 
     ingredients: [],
   },
@@ -179,56 +178,56 @@ export const foodMenuItems: MenuItem[] = [
     itemId: "17",
     name: "extra 17",
     price: 0,
-    station: "expediter",
+    station: "expeditor",
     ingredients: [],
   },
   {
     itemId: "18",
     name: "extra 18",
     price: 0,
-    station: "expediter",
+    station: "expeditor",
     ingredients: [],
   },
   {
     itemId: "19",
     name: "extra 19",
     price: 0,
-    station: "expediter",
+    station: "expeditor",
     ingredients: [],
   },
   {
     itemId: "20",
     name: "extra 20",
     price: 0,
-    station: "expediter",
+    station: "expeditor",
     ingredients: [],
   },
   {
     itemId: "21",
     name: "extra 21",
     price: 0,
-    station: "expediter",
+    station: "expeditor",
     ingredients: [],
   },
   {
     itemId: "22",
     name: "extra 22",
     price: 0,
-    station: "expediter",
+    station: "expeditor",
     ingredients: [],
   },
   {
     itemId: "23",
     name: "extra 23",
     price: 0,
-    station: "expediter",
+    station: "expeditor",
     ingredients: [],
   },
   {
     itemId: "24",
     name: "extra 24",
     price: 0,
-    station: "expediter",
+    station: "expeditor",
     ingredients: [],
   },
 ];

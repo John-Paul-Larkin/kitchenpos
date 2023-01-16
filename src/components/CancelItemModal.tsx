@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-
+import { useContext } from "react";
+import { menuContext } from "../Context/MenuContext";
 
 const style = {
   position: "absolute" as "absolute",
@@ -15,28 +16,18 @@ const style = {
   borderRadius: "14px",
 };
 
-export default function CancelItemModal({
-  isModalOpen,
-  setIsModalOpen,
+export default function CancelItemModal() {
+  const { isShowCancelModal, setIsShowCancelModal } = useContext(menuContext);
 
-}: {
-
-  isModalOpen: boolean;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-
-}) {
-  const handleCloseModal = () => setIsModalOpen(false);
-
-
+  const handleCloseModal = () => setIsShowCancelModal(false);
 
   return (
     <div>
-      <Modal open={isModalOpen} onClose={handleCloseModal}>
+      <Modal open={isShowCancelModal} onClose={handleCloseModal}>
         <Box sx={style}>
           <div>This item has already been sent to the kitchen</div>
           <div>Would you still like to cancel it?</div>
 
-          {/* </Typography> */}
           <br />
           <button onClick={() => handleCloseModal()}>Cancel</button>
           <button onClick={() => {}}>Send</button>

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { ingredientsList } from "../Helper/FoodMenuItems";
+import { ingredientsList } from "../Assets/FoodMenuItems";
+import { menuContext } from "../Context/MenuContext";
 import styles from "../styles/OrderScreen.module.css";
-import { menuContext } from "./MenuContext";
 
 export default function SelectExtraIngredients() {
   // const [selectedIngredient, setselectedIngredient] = useState(ingredientsList[0]);

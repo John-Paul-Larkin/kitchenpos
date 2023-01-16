@@ -1,6 +1,6 @@
-import "./styles/App.css";
-import MenuContext from "./components/MenuContext";
 import MobileScreen from "./components/MobileScreen";
+import MenuContext from "./Context/MenuContext";
+import "./styles/App.css";
 
 function App() {
   return (

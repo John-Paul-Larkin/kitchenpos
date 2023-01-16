@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { menuContext } from "../components/MenuContext";
 import { signInAnonymously, updateProfile } from "firebase/auth";
-import { auth } from "./firebaseconfig";
+import { useContext } from "react";
+import { menuContext } from "../Context/MenuContext";
+import { auth } from "../Firebase/firebaseconfig";
 
 export default function useSignInAnon() {
   const { setIsLoggedIn } = useContext(menuContext);

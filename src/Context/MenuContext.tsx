@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 import uuid from "react-uuid";
 import { useImmer, useImmerReducer } from "use-immer";
-import { auth } from "../Helper/firebaseconfig";
+import { auth } from "../Firebase/firebaseconfig";
 
 export default function MenuContext({ children }: { children: ReactNode }) {
   const [selectedOrderItem, setSelectedOrderItem] = useState<MenuItem | null>(null);
@@ -9,6 +9,7 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const [openOrders, setOpenOrders] = useImmer([] as OrderDetails[]);
   const [isShowFloorPlan, setisShowFloorPlan] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(!!auth.currentUser);
+  const [isShowCancelModal, setIsShowCancelModal] = useState(false);
 
   // The reducer orderDetails contains the information about the currently selected table.
   // An order is allocated an id when an it is sent to the kitchen
@@ -155,6 +156,8 @@ export default function MenuContext({ children }: { children: ReactNode }) {
     setisShowFloorPlan,
     isLoggedIn,
     setIsLoggedIn,
+    isShowCancelModal,
+    setIsShowCancelModal,
   };
 
   return <menuContext.Provider value={contextValues}>{children}</menuContext.Provider>;

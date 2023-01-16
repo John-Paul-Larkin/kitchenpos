@@ -1,9 +1,7 @@
-
-
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-import db from "./firebaseconfig";
+import db from "../Firebase/firebaseconfig";
 
 export function useGetMenuItems() {
   const [data, setData] = useState([] as MenuItem[]);
@@ -31,7 +29,6 @@ export function useGetMenuItems() {
     };
     get();
   }, []);
-
 
   return { menuItems: data, loading, error };
 }

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { menuContext } from "../components/MenuContext";
+import { menuContext } from "../Context/MenuContext";
 
 export default function useChangeTableNumber() {
   const { openOrders, dispatch, setSelectedTableNumber } = useContext(menuContext);

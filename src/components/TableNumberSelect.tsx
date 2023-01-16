@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
-import useChangeTableNumber from "../Helper/useChangeTableNumber";
+import { menuContext } from "../Context/MenuContext";
+import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/OrderScreen.module.css";
-import { menuContext } from "./MenuContext";
 import TransferModal from "./TransferModal";
 
 export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder: () => void }) {
   const { selectedTableNumber } = useContext(menuContext);
   const { dispatch } = useContext(menuContext);
-  const { orderDetails, setSelectedTableNumber,setSelectedOrderItem } = useContext(menuContext);
+  const { orderDetails, setSelectedTableNumber, setSelectedOrderItem } = useContext(menuContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);

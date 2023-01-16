@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
+import { menuContext } from "../Context/MenuContext";
 import styles from "../styles/FloorPlan.module.css";
-import { menuContext } from "./MenuContext";
 
 export default function SingleCompleteOrder({ tableNumber }: { tableNumber: string }) {
   const { openOrders } = useContext(menuContext);

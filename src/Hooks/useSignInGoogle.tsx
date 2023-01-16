@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { menuContext } from "../components/MenuContext";
-import { auth, provider } from "./firebaseconfig";
 import { signInWithPopup } from "firebase/auth";
+import { useContext } from "react";
+import { menuContext } from "../Context/MenuContext";
+import { auth, provider } from "../Firebase/firebaseconfig";
 
 export default function useSignInGoogle() {
   const { setIsLoggedIn } = useContext(menuContext);

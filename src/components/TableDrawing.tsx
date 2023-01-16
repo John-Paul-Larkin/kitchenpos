@@ -1,7 +1,7 @@
 import { orderBy } from "firebase/firestore";
 import { useContext, useState } from "react";
+import { menuContext } from "../Context/MenuContext";
 import styles from "../styles/FloorPlan.module.css";
-import { menuContext } from "./MenuContext";
 import SingleCompleteOrder from "./SingleCompleteOrder";
 
 export default function TableDrawing({

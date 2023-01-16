@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
+import { menuContext } from "../Context/MenuContext";
 import styles from "../styles/FloorPlan.module.css";
-import { menuContext } from "./MenuContext";
 import SingleDrinksOrder from "./SingleDrinksOrder";
 import SingleFoodOrder from "./SingleFoodOrder";
 

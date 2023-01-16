@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { useContext } from "react";
-import { menuContext } from "./MenuContext";
-import useChangeTableNumber from "../Helper/useChangeTableNumber";
+import { menuContext } from "../Context/MenuContext";
+import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 
 const style = {
   position: "absolute" as "absolute",

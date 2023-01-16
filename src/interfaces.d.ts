@@ -1,4 +1,4 @@
-// Mobile screens
+
 interface Screens {
   value: {
     width: number;
@@ -108,6 +108,8 @@ interface ContextProvider {
   setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>>;
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  isShowCancelModal: boolean;
+  setIsShowCancelModal:Dispatch<SetStateAction<boolean>>;
 }
 
 interface OrderDetails {
@@ -119,11 +121,14 @@ interface OrderDetails {
   orderStatus: "time up" | "ready";
 }
 
+type Station =  "bar" | "salad" | "fry" | "grill" | "expeditor";
+
+
 interface MenuItem {
   name: string;
   price: number;
   itemId: string;
   ingredients?: Ingredients[];
   isSentToKitchen?: boolean;
-  station: "bar" | "salad" | "fry" | "grill" | "expediter";
+  station: Station;
 }

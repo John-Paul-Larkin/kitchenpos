@@ -1,11 +1,11 @@
 import DoneIcon from "@mui/icons-material/Done";
 import { motion } from "framer-motion";
 import { useContext, useEffect } from "react";
-import { auth } from "../Helper/firebaseconfig";
-import useSendOrder from "../Helper/useSendOrder";
+import { menuContext } from "../Context/MenuContext";
+import { auth } from "../Firebase/firebaseconfig";
+import useSendOrder from "../Hooks/useSendOrder";
 import styles from "../styles/OrderScreen.module.css";
 import Alterations from "./Alterations";
-import { menuContext } from "./MenuContext";
 import TableNumberSelect from "./TableNumberSelect";
 
 export default function OrderDetails() {
@@ -48,7 +48,6 @@ export default function OrderDetails() {
       dispatch({ type: "clear order" });
       setSelectedOrderItem(null);
       setisShowFloorPlan(true);
-      
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

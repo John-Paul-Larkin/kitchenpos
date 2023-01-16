@@ -4,14 +4,14 @@ import { useContext, useState } from "react";
 import MenuItemButton from "./MenuItemButton";
 import ScreenSizeSelector from "./ScreenSizeSelector";
 
-import { drinkMenuItems, foodMenuItems } from "../Helper/FoodMenuItems";
+import { drinkMenuItems, foodMenuItems } from "../Assets/FoodMenuItems";
 import OrderScreen from "./OrderScreen";
 
 import { motion } from "framer-motion";
-import useSignInAnon from "../Helper/useSignInAnon";
-import useSignInGoogle from "../Helper/useSignInGoogle";
+import { menuContext } from "../Context/MenuContext";
+import useSignInAnon from "../Hooks/useSignInAnon";
+import useSignInGoogle from "../Hooks/useSignInGoogle";
 import Floorplan from "./Floorplan";
-import { menuContext } from "./MenuContext";
 
 export default function MobileScreen() {
   const screens = [
