@@ -75,9 +75,6 @@ export default function OrderItemOptions() {
     setSelectedOrderItem(null);
   };
 
-  selectedOrderItem?.ingredients?.forEach((element) => {
-    console.log(element.ingredientId);
-  });
 
   return (
     <>
