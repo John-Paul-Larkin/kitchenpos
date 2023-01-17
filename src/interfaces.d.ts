@@ -1,10 +1,27 @@
+interface OrderDetails {
+  orderId: string;
+  tableNumber: string;
+  timeOrderPlaced: Date | null;
+  server: string;
+  orderItemDetails: MenuItem[];
+  orderStatus: "pending" | "time up" | "ready";
+}
 
-interface Screens {
-  value: {
-    width: number;
-    height: number;
-  };
-  label: string;
+type Station = "bar" | "salad" | "fry" | "grill" | "expeditor";
+
+interface MenuItem {
+  name: string;
+  price: number;
+  itemId: string;
+  ingredients?: Ingredients[];
+  isSentToKitchen?: boolean;
+  station: Station;
+}
+interface Ingredients {
+  ingredient: Ingredient;
+  selected: boolean;
+  added?: boolean;
+  ingredientId?: string;
 }
 
 type Ingredient =
@@ -34,12 +51,8 @@ type Ingredient =
   | "Gravy"
   | "Mushrooms";
 
-interface Ingredients {
-  ingredient: Ingredient;
-  selected: boolean;
-  added?: boolean;
-  ingredientId?: string;
-}
+//
+// Reducers/context -  front end only
 
 interface ReducerActionAdd {
   type: "add new item to order";
@@ -109,26 +122,13 @@ interface ContextProvider {
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   isShowCancelModal: boolean;
-  setIsShowCancelModal:Dispatch<SetStateAction<boolean>>;
+  setIsShowCancelModal: Dispatch<SetStateAction<boolean>>;
 }
 
-interface OrderDetails {
-  orderId: string;
-  tableNumber: string;
-  timeOrderPlaced: Date | null;
-  server: string;
-  orderItemDetails: MenuItem[];
-  orderStatus: "time up" | "ready";
-}
-
-type Station =  "bar" | "salad" | "fry" | "grill" | "expeditor";
-
-
-interface MenuItem {
-  name: string;
-  price: number;
-  itemId: string;
-  ingredients?: Ingredients[];
-  isSentToKitchen?: boolean;
-  station: Station;
+interface Screens {
+  value: {
+    width: number;
+    height: number;
+  };
+  label: string;
 }

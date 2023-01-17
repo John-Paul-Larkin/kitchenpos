@@ -58,10 +58,12 @@ export default function MenuContext({ children }: { children: ReactNode }) {
       case "add order/time- strip out sentToKitchen ": {
         // adding id,server and time when order is sent through to firebase/kitchen
         draft.timeOrderPlaced = new Date();
+        draft.orderStatus = 'pending';
         draft.orderId = uuid();
         if (auth.currentUser && auth.currentUser.displayName !== null) {
           draft.server = auth.currentUser.displayName;
         }
+        
         // Strip out the items which have already been sent on previous orders.
         draft.orderItemDetails = draft.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
         return draft;
