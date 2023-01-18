@@ -2,7 +2,9 @@ import { add } from "date-fns";
 import { motion } from "framer-motion";
 import React, { useContext, useRef, useState } from "react";
 import { useStopwatch, useTimer } from "react-timer-hook";
+import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
+import { changeTableNumberReducer } from "../features/orderDetailsSlice";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
 
@@ -51,20 +53,22 @@ function Timer({
     </div>
   );
 }
-// const MemoizedStopwatch = React.memo(Stopwatch);
 
 export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   const [isShowStopWatch, setIsShowStopWatch] = useState(false);
 
+  const dispatch = useAppDispatch();
+
   const finishTime = useRef(add(order.timeOrderPlaced!, { seconds: 20 }));
 
-  const { setisShowFloorPlan, dispatch, setSelectedTableNumber } = useContext(menuContext);
+  const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
 
   const changeTableNumber = useChangeTableNumber();
 
   const handleOpenOrderClick = () => {
     setisShowFloorPlan(false);
-    dispatch({ type: "change table number", payload: order.orderId });
+    // dispatch({ type: "change table number", payload: order.orderId });
+    dispatch(changeTableNumberReducer(order.orderId));
     changeTableNumber(order.tableNumber);
     setSelectedTableNumber(order.tableNumber);
   };

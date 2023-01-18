@@ -1,8 +1,12 @@
 import { useContext } from "react";
+import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
+import { addAlreadyOrderedItems, changeTableNumberReducer } from "../features/orderDetailsSlice";
 
 export default function useChangeTableNumber() {
-  const { openOrders, dispatch, setSelectedTableNumber } = useContext(menuContext);
+  const { openOrders, setSelectedTableNumber } = useContext(menuContext);
+
+  const dispatch = useAppDispatch();
 
   function changeTableNumber(table: string) {
     //check if there are any orders already on the table
@@ -19,11 +23,14 @@ export default function useChangeTableNumber() {
         return { ...item, isSentToKitchen: true };
       });
 
-      dispatch({ type: "add already ordered items", payload: oldOrderItems });
+      // dispatch({ type: "add already ordered items", payload: oldOrderItems });
+      dispatch(addAlreadyOrderedItems(oldOrderItems));
     }
 
     setSelectedTableNumber(table);
-    dispatch({ type: "change table number", payload: table });
+    // dispatch({ type: "change table number", payload: table });
+
+    dispatch(changeTableNumberReducer(table));
   }
 
   return changeTableNumber;

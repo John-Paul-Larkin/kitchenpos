@@ -1,13 +1,18 @@
 import { useContext, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
+import { changeTableNumberReducer, clearOrder } from "../features/orderDetailsSlice";
+import { setSelectedItemToEmpty } from "../features/selectedOrderItemSlice";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/OrderScreen.module.css";
 import TransferModal from "./TransferModal";
 
 export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder: () => void }) {
   const { selectedTableNumber } = useContext(menuContext);
-  const { dispatch } = useContext(menuContext);
-  const { orderDetails, setSelectedTableNumber, setSelectedOrderItem } = useContext(menuContext);
+  const dispatch = useAppDispatch();
+  const orderDetails = useAppSelector((state) => state.orderDetails);
+
+  const { setSelectedTableNumber } = useContext(menuContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
@@ -24,9 +29,12 @@ export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder
       handleOpenModal();
     } else {
       // just change the table number
-      dispatch({ type: "change table number", payload: e.target.value });
-      dispatch({ type: "clear order" });
-      setSelectedOrderItem(null);
+      // dispatch({ type: "change table number", payload: e.target.value });
+      dispatch(changeTableNumberReducer(e.target.value));
+      // dispatch({ type: "clear order" });
+      dispatch(clearOrder());
+      // setSelectedOrderItem(null);
+      dispatch(setSelectedItemToEmpty());
       changeTableNumber(e.target.value);
       setSelectedTableNumber(e.target.value);
     }

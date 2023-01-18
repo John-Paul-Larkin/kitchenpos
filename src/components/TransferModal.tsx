@@ -1,8 +1,11 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { useContext } from "react";
-import { menuContext } from "../Context/MenuContext";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
+
+import { addTransferedItems, clearOrder } from "../features/orderDetailsSlice";
+
+import { setSelectedItemToEmpty } from "../features/selectedOrderItemSlice";
 
 const style = {
   position: "absolute" as "absolute",
@@ -30,17 +33,22 @@ export default function TransferModal({
 }) {
   const handleCloseModal = () => setIsModalOpen(false);
 
-  const { orderDetails, setSelectedOrderItem } = useContext(menuContext);
-  const { dispatch } = useContext(menuContext);
+  const dispatch = useAppDispatch();
+
+  const orderDetails = useAppSelector((state) => state.orderDetails);
+
   const changeTableNumber = useChangeTableNumber();
 
   const handleTransferItems = () => {
     const itemsToTranfer = orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
-    dispatch({ type: "clear order" });
-    setSelectedOrderItem(null);
-    changeTableNumber(tableNumToChangeTo!);
-    dispatch({ type: "add transfered items", payload: itemsToTranfer });
+    // dispatch({ type: "clear order" });
+    dispatch(clearOrder());
+    // setSelectedOrderItem(null);
+    dispatch(setSelectedItemToEmpty());
 
+    changeTableNumber(tableNumToChangeTo!);
+    // dispatch({ type: "add transfered items", payload: itemsToTranfer });
+    dispatch(addTransferedItems(itemsToTranfer));
     setIsModalOpen(false);
   };
 

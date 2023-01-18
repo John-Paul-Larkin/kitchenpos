@@ -1,19 +1,29 @@
 import { useContext } from "react";
+import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
+import { clearOrder } from "../features/orderDetailsSlice";
+import { setSelectedItemToEmpty } from "../features/selectedOrderItemSlice";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
 import OpenOrders from "./OpenOrders";
 import TableDrawing from "./TableDrawing";
 
 export default function Floorplan() {
+  const dispatch = useAppDispatch();
+
   const changeTableNumber = useChangeTableNumber();
 
-  const { setisShowFloorPlan, dispatch, setSelectedOrderItem } = useContext(menuContext);
+  const { setisShowFloorPlan } = useContext(menuContext);
 
   const handleTableClick = (table: string) => {
     setisShowFloorPlan(false);
-    dispatch({ type: "clear order" });
-    setSelectedOrderItem(null);
+    // dispatch({ type: "clear order" });
+
+    dispatch(clearOrder());
+
+    // setSelectedOrderItem(null);
+
+    dispatch(setSelectedItemToEmpty());
 
     changeTableNumber(table);
   };

@@ -1,11 +1,20 @@
 import { Switch } from "@mui/material";
 import { useContext } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
 import styles from "../styles/OrderScreen.module.css";
 import SelectExtraIngredients from "./SelectExtraIngredients";
+import { setSelectedItemToEmpty } from "../features/selectedOrderItemSlice"; 
+
+import { removeItem, toggleIngredient } from "../features/orderDetailsSlice";
 
 export default function OrderItemOptions() {
-  const { setSelectedOrderItem, orderDetails, selectedOrderItem, dispatch, setOpenOrders } = useContext(menuContext);
+  const { setOpenOrders } = useContext(menuContext);
+
+  const orderDetails = useAppSelector((state) => state.orderDetails);
+  const selectedOrderItem = useAppSelector((state) => state.selectedOrderItem);
+
+  const dispatch = useAppDispatch();
 
   const handleSwitchToggleIngredient = (ingredientId: string) => {
     // find the index of the item whose ingredient we want to toggle
@@ -35,7 +44,8 @@ export default function OrderItemOptions() {
       });
     }
     // Then toggle the item on the current order
-    dispatch({ type: "toggleIngredient", payload: ingredientId });
+    // dispatch({ type: "toggleIngredient", payload: ingredientId });
+    dispatch(toggleIngredient(ingredientId));
   };
 
   const handleRemoveItem = () => {
@@ -70,11 +80,13 @@ export default function OrderItemOptions() {
     }
 
     // remove the item - this time from the list of items in the current order. ie visible on screen
-    dispatch({ type: "remove item", payload: selectedOrderItem!.itemId });
-
-    setSelectedOrderItem(null);
+    // dispatch({ type: "remove item", payload: selectedOrderItem!.itemId });
+    if (selectedOrderItem !== null) {
+      dispatch(removeItem(selectedOrderItem.itemId));
+    }
+    // setSelectedOrderItem(null);
+    dispatch(setSelectedItemToEmpty())
   };
-
 
   return (
     <>

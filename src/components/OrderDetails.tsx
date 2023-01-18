@@ -8,11 +8,23 @@ import styles from "../styles/OrderScreen.module.css";
 import Alterations from "./Alterations";
 import TableNumberSelect from "./TableNumberSelect";
 
+import { useAppSelector } from "../app/hooks";
+import { setSelectedItemToEmpty, setSelectedOrderItem } from "../features/selectedOrderItemSlice";
+
+import { useAppDispatch } from "../app/hooks";
+import { addOrderAndTimeStripOutSentToKitchen, clearOrder } from "../features/orderDetailsSlice";
+
 export default function OrderDetails() {
-  const { orderDetails } = useContext(menuContext);
-  const { dispatch } = useContext(menuContext);
+  const dispatch = useAppDispatch();
+  const orderDetails = useAppSelector((state) => state.orderDetails);
+
+  const selectedOrderItem = useAppSelector((state) => state.selectedOrderItem);
+
+  console.log("soo", selectedOrderItem);
+  console.log('orde',  orderDetails ); 
+
+  // const { dispatch } = useContext(menuContext);
   const { setOpenOrders } = useContext(menuContext);
-  const { selectedOrderItem, setSelectedOrderItem } = useContext(menuContext);
   const { setisShowFloorPlan } = useContext(menuContext);
   const { setIsLoggedIn } = useContext(menuContext);
 
@@ -33,7 +45,8 @@ export default function OrderDetails() {
   const handleSendOrder = () => {
     // Only send through the order if at least one new item has been added
     if (orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true).length > 0) {
-      dispatch({ type: "add order/time- strip out sentToKitchen " });
+      // dispatch({ type: "add order/time- strip out sentToKitchen " });
+      dispatch(addOrderAndTimeStripOutSentToKitchen());
     }
   };
 
@@ -45,15 +58,16 @@ export default function OrderDetails() {
       // Add the order to an array of open Orders
       setOpenOrders((cur) => [orderDetails, ...cur]);
       //dispatch reducer to clear order object
-      dispatch({ type: "clear order" });
-      setSelectedOrderItem(null);
+      // dispatch({ type: "clear order" });
+      dispatch(clearOrder());
+      // setSelectedOrderItem(null);
+      dispatch(setSelectedItemToEmpty());
+
       setisShowFloorPlan(true);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderDetails.timeOrderPlaced]);
-
-  console.log(selectedOrderItem);
 
   return (
     <div className={styles["order-items-screen-container"]}>
@@ -68,12 +82,12 @@ export default function OrderDetails() {
           {orderDetails.orderItemDetails &&
             orderDetails.orderItemDetails.map((orderItem) => (
               <motion.div
-                className={selectedOrderItem?.itemId === orderItem.itemId ? styles["selected"] : styles["order-items"]}
+                className={selectedOrderItem.itemId === orderItem.itemId ? styles["selected"] : styles["order-items"]}
                 key={orderItem.itemId}
                 initial={{ y: 300, opacity: 1, scaleY: 1.5 }}
                 animate={{ y: 0, opacity: 1, scaleY: 1 }}
                 transition={{ ease: "easeInOut" }}
-                onClick={() => setSelectedOrderItem(orderItem)}
+                onClick={() => dispatch(setSelectedOrderItem(orderItem))}
               >
                 <div className={styles["name-price"]}>
                   <span className={styles["name"]}>
