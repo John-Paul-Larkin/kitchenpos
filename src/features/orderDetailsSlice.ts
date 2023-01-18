@@ -54,7 +54,7 @@ const orderDetailsSlice = createSlice({
       state.timeOrderPlaced = null;
     },
 
-    toggleIngredient: (state, action: PayloadAction<string>) => {
+    toggleIngredientOnOrderDetails: (state, action: PayloadAction<string>) => {
       //iterate through the items in the order, on finding the specified option, negate it.
       state.orderItemDetails.forEach((item) =>
         item.ingredients?.forEach((ingredient) => {
@@ -63,21 +63,9 @@ const orderDetailsSlice = createSlice({
           }
         })
       );
-
-      // Update the selected order item - ie the item ingredients details screen
-
-      //  if (selectedOrderItem && selectedOrderItem.ingredients) {
-      //    const updatedIngredients = selectedOrderItem.ingredients.map((ingredient) => {
-      //      if (ingredient.ingredientId === action.payload) {
-      //        return { ...ingredient, selected: !ingredient.selected };
-      //      }
-      //      return ingredient;
-      //    });
-      //    setSelectedOrderItem({ ...selectedOrderItem, ingredients: updatedIngredients });
-      //  }
     },
 
-    addExtraIngredient: (state, action: PayloadAction<Ingredient>) => {
+    addExtraIngredientOnOrderDetails: (state, action: PayloadAction<Ingredient>) => {
       //   const ingredientoAdd: Ingredients = {
       //     ingredient: action.payload,
       //     selected: true,
@@ -121,6 +109,6 @@ export const {
   changeTableNumberReducer,
   addOrderAndTimeStripOutSentToKitchen,
   clearOrder,
-  toggleIngredient,
-  addExtraIngredient,
+  toggleIngredientOnOrderDetails,
+  addExtraIngredientOnOrderDetails,
 } = orderDetailsSlice.actions;

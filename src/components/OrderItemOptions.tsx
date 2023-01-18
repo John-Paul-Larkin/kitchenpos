@@ -2,11 +2,11 @@ import { Switch } from "@mui/material";
 import { useContext } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
+import { setSelectedItemToEmpty, toggleIngredientOnSelectedItem } from "../features/selectedOrderItemSlice";
 import styles from "../styles/OrderScreen.module.css";
 import SelectExtraIngredients from "./SelectExtraIngredients";
-import { setSelectedItemToEmpty } from "../features/selectedOrderItemSlice"; 
 
-import { removeItem, toggleIngredient } from "../features/orderDetailsSlice";
+import { removeItem, toggleIngredientOnOrderDetails } from "../features/orderDetailsSlice";
 
 export default function OrderItemOptions() {
   const { setOpenOrders } = useContext(menuContext);
@@ -26,7 +26,7 @@ export default function OrderItemOptions() {
       const itemID = orderDetails.orderItemDetails[indexOfItemToToggleIngredient].itemId;
 
       // if it has locate the item  within the list of open orders
-      // and toggle the ingrdient to not selected
+      // and toggle the ingredient to not selected
 
       setOpenOrders((draft) => {
         draft.forEach((order) =>
@@ -45,7 +45,9 @@ export default function OrderItemOptions() {
     }
     // Then toggle the item on the current order
     // dispatch({ type: "toggleIngredient", payload: ingredientId });
-    dispatch(toggleIngredient(ingredientId));
+    dispatch(toggleIngredientOnOrderDetails(ingredientId));
+
+    dispatch(toggleIngredientOnSelectedItem(ingredientId));
   };
 
   const handleRemoveItem = () => {
@@ -85,7 +87,7 @@ export default function OrderItemOptions() {
       dispatch(removeItem(selectedOrderItem.itemId));
     }
     // setSelectedOrderItem(null);
-    dispatch(setSelectedItemToEmpty())
+    dispatch(setSelectedItemToEmpty());
   };
 
   return (

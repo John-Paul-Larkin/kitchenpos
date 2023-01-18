@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch } from "../app/hooks";
 import { ingredientsList } from "../Assets/FoodMenuItems";
-import { addExtraIngredient } from "../features/orderDetailsSlice";
+import { addExtraIngredientOnOrderDetails } from "../features/orderDetailsSlice";
 import styles from "../styles/OrderScreen.module.css";
 
 export default function SelectExtraIngredients() {
@@ -13,7 +13,7 @@ export default function SelectExtraIngredients() {
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     // dispatch({ type: "Add extra ingredient", payload: e.target.value as Ingredient });
 
-    dispatch(addExtraIngredient(e.target.value as Ingredient));
+    dispatch(addExtraIngredientOnOrderDetails(e.target.value as Ingredient));
 
     setShowIngredientDropdown(false);
   };
