@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { menuContext } from "../Context/MenuContext";
+
 import styles from "../styles/FloorPlan.module.css";
 import SingleDrinksOrder from "./SingleDrinksOrder";
 import SingleFoodOrder from "./SingleFoodOrder";
+import { useAppSelector } from "../app/hooks";
 
-export default function OpenOrders() {
-  const { openOrders } = useContext(menuContext);
+export default function OpenOrdersList() {
+  const openOrders = useAppSelector(state => state.openOrders)
 
   return (
     <div className={styles["open-orders-container"]}>

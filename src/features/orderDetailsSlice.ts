@@ -6,6 +6,11 @@ import { auth } from "../Firebase/firebaseconfig";
 // An order is allocated an id when an it is sent to the kitchen
 // A single table can have multiple orders open at the same time
 
+interface AddExtra {
+  ingredientToAdd: Ingredients;
+  itemID: String;
+}
+
 const initialState = {} as OrderDetails;
 
 const orderDetailsSlice = createSlice({
@@ -65,36 +70,32 @@ const orderDetailsSlice = createSlice({
       );
     },
 
-    addExtraIngredientOnOrderDetails: (state, action: PayloadAction<Ingredient>) => {
-      //   const ingredientoAdd: Ingredients = {
-      //     ingredient: action.payload,
-      //     selected: true,
-      //     added: true,
-      //     ingredientId: uuid(),
-      //   };
-      //   const itemID = selectedOrderItem?.itemId;
-      //   if (selectedOrderItem?.isSentToKitchen === true) {
-      //     // if the item is already sent
-      //     setOpenOrders((draft) => {
-      //       draft.forEach((order) =>
-      //         order.orderItemDetails.forEach((item) => {
-      //           if (item.itemId === itemID) {
-      //             item.ingredients?.push(ingredientoAdd);
-      //           }
-      //         })
-      //       );
-      //       return draft;
-      //     });
-      //   }
-      //   // Add item to the current order details
-      //   state.orderItemDetails.forEach((item) => {
-      //     if (item.itemId === itemID) {
-      //       item.ingredients?.push(ingredientoAdd);
-      //     }
-      //   });
+    addExtraIngredientOnOrderDetails: (state, action: PayloadAction<AddExtra>) => {
+      // Add item to the current order details
+      state.orderItemDetails.forEach((item) => {
+        if (item.itemId === action.payload.itemID) {
+          item.ingredients?.push(action.payload.ingredientToAdd);
+        }
+      });
+
       //   if (selectedOrderItem !== null) {
       //     setSelectedOrderItem({ ...selectedOrderItem, ingredients: [...selectedOrderItem.ingredients!, ingredientoAdd] });
       //   }
+
+      // const itemID = selectedOrderItem?.itemId;
+      // if (selectedOrderItem?.isSentToKitchen === true) {
+      //   // if the item is already sent
+      //   setOpenOrders((draft) => {
+      //     draft.forEach((order) =>
+      //       order.orderItemDetails.forEach((item) => {
+      //         if (item.itemId === itemID) {
+      //           item.ingredients?.push(ingredientoAdd);
+      //         }
+      //       })
+      //     );
+      //     return draft;
+      //   });
+      // }
     },
   },
 });

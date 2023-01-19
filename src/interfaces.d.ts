@@ -54,8 +54,7 @@ type Ingredient =
 interface ContextProvider {
   selectedTableNumber: string;
   setSelectedTableNumber: React.Dispatch<React.SetStateAction<string>>;
-  openOrders: OrderDetails[];
-  setOpenOrders: React.Dispatch<React.SetStateAction<OrderDetails[]>>;
+
   isShowFloorPlan: boolean;
   setisShowFloorPlan: React.Dispatch<React.SetStateAction<boolean>>;
   isLoggedIn: boolean;

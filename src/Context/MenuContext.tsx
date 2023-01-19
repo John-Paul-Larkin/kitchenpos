@@ -6,7 +6,6 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const [selectedTableNumber, setSelectedTableNumber] = useState("1");
 
 
-  const [openOrders, setOpenOrders] = useImmer([] as OrderDetails[]);
 
 
   
@@ -18,8 +17,6 @@ export default function MenuContext({ children }: { children: ReactNode }) {
   const contextValues = {
     selectedTableNumber,
     setSelectedTableNumber,
-    openOrders,
-    setOpenOrders,
     isShowFloorPlan,
     setisShowFloorPlan,
     isLoggedIn,

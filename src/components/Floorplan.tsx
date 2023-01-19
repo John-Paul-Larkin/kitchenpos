@@ -5,7 +5,7 @@ import { clearOrder } from "../features/orderDetailsSlice";
 import { setSelectedItemToEmpty } from "../features/selectedOrderItemSlice";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
-import OpenOrders from "./OpenOrders";
+import OpenOrdersList from "./OpenOrdersList";
 import TableDrawing from "./TableDrawing";
 
 export default function Floorplan() {
@@ -69,7 +69,7 @@ export default function Floorplan() {
         <TableDrawing tableNumber={"18"} numberOfseats={4} handleTableClick={handleTableClick} /> */}
       </div>
 
-      <OpenOrders />
+      <OpenOrdersList />
     </>
   );
 }

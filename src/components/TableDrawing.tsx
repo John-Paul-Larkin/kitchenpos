@@ -1,8 +1,8 @@
-
-import { useContext, useState } from "react";
-import { menuContext } from "../Context/MenuContext";
 import styles from "../styles/FloorPlan.module.css";
 import SingleCompleteOrder from "./SingleCompleteOrder";
+
+import { useAppSelector } from "../app/hooks";
+import { useState } from "react";
 
 export default function TableDrawing({
   tableNumber,
@@ -13,7 +13,7 @@ export default function TableDrawing({
   numberOfseats: number;
   handleTableClick: (table: string) => void;
 }) {
-  const { openOrders } = useContext(menuContext);
+  const openOrders = useAppSelector((state) => state.openOrders);
 
   let color = "black";
 

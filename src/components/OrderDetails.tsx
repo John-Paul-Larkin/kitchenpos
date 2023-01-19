@@ -10,7 +10,7 @@ import TableNumberSelect from "./TableNumberSelect";
 
 import { useAppSelector } from "../app/hooks";
 import { setSelectedItemToEmpty, setSelectedOrderItem } from "../features/selectedOrderItemSlice";
-
+import { addOrderToOpenOrders } from "../features/openOrdersSlice";
 import { useAppDispatch } from "../app/hooks";
 import { addOrderAndTimeStripOutSentToKitchen, clearOrder } from "../features/orderDetailsSlice";
 
@@ -24,7 +24,7 @@ export default function OrderDetails() {
   console.log('orde',  orderDetails ); 
 
   // const { dispatch } = useContext(menuContext);
-  const { setOpenOrders } = useContext(menuContext);
+
   const { setisShowFloorPlan } = useContext(menuContext);
   const { setIsLoggedIn } = useContext(menuContext);
 
@@ -56,7 +56,8 @@ export default function OrderDetails() {
       sendOrder(orderDetails);
 
       // Add the order to an array of open Orders
-      setOpenOrders((cur) => [orderDetails, ...cur]);
+      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! setOpenOrders((cur) => [orderDetails, ...cur]);
+      dispatch(addOrderToOpenOrders(orderDetails))
       //dispatch reducer to clear order object
       // dispatch({ type: "clear order" });
       dispatch(clearOrder());

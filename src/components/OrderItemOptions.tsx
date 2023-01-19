@@ -1,22 +1,19 @@
 import { Switch } from "@mui/material";
-import { useContext } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { menuContext } from "../Context/MenuContext";
 import { setSelectedItemToEmpty, toggleIngredientOnSelectedItem } from "../features/selectedOrderItemSlice";
 import styles from "../styles/OrderScreen.module.css";
 import SelectExtraIngredients from "./SelectExtraIngredients";
 
+import { removeItemOpenOrders, toggeIngredientOpenOrders } from "../features/openOrdersSlice";
 import { removeItem, toggleIngredientOnOrderDetails } from "../features/orderDetailsSlice";
 
 export default function OrderItemOptions() {
-  const { setOpenOrders } = useContext(menuContext);
-
   const orderDetails = useAppSelector((state) => state.orderDetails);
   const selectedOrderItem = useAppSelector((state) => state.selectedOrderItem);
 
   const dispatch = useAppDispatch();
 
-  const handleSwitchToggleIngredient = (ingredientId: string) => {
+  const handleSwitchToggleIngredient = (ingredientID: string) => {
     // find the index of the item whose ingredient we want to toggle
     const indexOfItemToToggleIngredient = orderDetails.orderItemDetails.indexOf(
       orderDetails.orderItemDetails.find((item) => item.itemId === selectedOrderItem!.itemId)!
@@ -27,58 +24,18 @@ export default function OrderItemOptions() {
 
       // if it has locate the item  within the list of open orders
       // and toggle the ingredient to not selected
-
-      setOpenOrders((draft) => {
-        draft.forEach((order) =>
-          order.orderItemDetails.forEach((item) => {
-            if (item.itemId === itemID) {
-              item.ingredients?.forEach((ingredient) => {
-                if (ingredient.ingredientId === ingredientId) {
-                  ingredient.selected = !ingredient.selected;
-                }
-              });
-            }
-          })
-        );
-        return draft;
-      });
+      dispatch(toggeIngredientOpenOrders({ itemID, ingredientID }));
     }
     // Then toggle the item on the current order
     // dispatch({ type: "toggleIngredient", payload: ingredientId });
-    dispatch(toggleIngredientOnOrderDetails(ingredientId));
+    dispatch(toggleIngredientOnOrderDetails(ingredientID));
 
-    dispatch(toggleIngredientOnSelectedItem(ingredientId));
+    dispatch(toggleIngredientOnSelectedItem(ingredientID));
   };
 
   const handleRemoveItem = () => {
     if (selectedOrderItem?.isSentToKitchen === true) {
-      setOpenOrders((draft) => {
-        let orderID: string;
-        // find the item in open orders and extract the order id
-        draft.forEach((order) => {
-          order.orderItemDetails.forEach((item) => {
-            if (item.itemId === selectedOrderItem.itemId) {
-              orderID = order.orderId;
-            }
-          });
-        });
-
-        draft.forEach((order) => {
-          if (order.orderId === orderID) {
-            // if there is only one item in the order, then we should completely remove the order
-            if (order.orderItemDetails.length === 1) {
-              draft = draft.filter((order) => order.orderId !== orderID);
-            } else {
-              // else just remove the item from the order
-              order.orderItemDetails = order.orderItemDetails.filter((item) => {
-                return item.itemId !== selectedOrderItem.itemId;
-              });
-            }
-          }
-        });
-
-        return draft;
-      });
+      dispatch(removeItemOpenOrders(selectedOrderItem.itemId));
     }
 
     // remove the item - this time from the list of items in the current order. ie visible on screen

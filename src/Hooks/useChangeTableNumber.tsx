@@ -1,10 +1,12 @@
 import { useContext } from "react";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
 import { addAlreadyOrderedItems, changeTableNumberReducer } from "../features/orderDetailsSlice";
 
 export default function useChangeTableNumber() {
-  const { openOrders, setSelectedTableNumber } = useContext(menuContext);
+  const { setSelectedTableNumber } = useContext(menuContext);
+
+  const  openOrders = useAppSelector(state=>state.openOrders);
 
   const dispatch = useAppDispatch();
 

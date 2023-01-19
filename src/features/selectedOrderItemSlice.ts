@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {} as MenuItem;
 
+
+
 const selectedOrderItemSlice = createSlice({
   name: "selectedOrderItem",
   initialState,
@@ -31,9 +33,15 @@ const selectedOrderItemSlice = createSlice({
       //    setSelectedOrderItem({ ...selectedOrderItem, ingredients: updatedIngredients });
       //  }
     },
+    addExtraIngredientOnSelectedItem: (state, action: PayloadAction<Ingredients>) => {
+    
+      state.ingredients?.push(action.payload)
+    }
+    
   },
+
 });
 
 export default selectedOrderItemSlice.reducer;
 
-export const { setSelectedItemToEmpty, setSelectedOrderItem, toggleIngredientOnSelectedItem } = selectedOrderItemSlice.actions;
+export const { addExtraIngredientOnSelectedItem, setSelectedItemToEmpty, setSelectedOrderItem, toggleIngredientOnSelectedItem } = selectedOrderItemSlice.actions;

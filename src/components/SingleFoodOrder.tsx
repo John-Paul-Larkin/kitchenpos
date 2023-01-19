@@ -4,6 +4,7 @@ import React, { useContext, useRef, useState } from "react";
 import { useStopwatch, useTimer } from "react-timer-hook";
 import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
+import { changeOrderStatus } from "../features/openOrdersSlice";
 import { changeTableNumberReducer } from "../features/orderDetailsSlice";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
@@ -27,22 +28,12 @@ function Timer({
   finishTime: Date;
   orderID: String;
 }) {
-  const { setOpenOrders } = useContext(menuContext);
+  const dispatch = useAppDispatch();
 
   const { seconds, minutes } = useTimer({
     expiryTimestamp: finishTime,
     onExpire: () => {
-      setOpenOrders((cur) =>
-        // once the timer runs out
-        // change the status of the table and color will change to orange
-        cur.map((order) => {
-          if (order.orderId === orderID) {
-            return { ...order, orderStatus: "time up" };
-          } else {
-            return order;
-          }
-        })
-      );
+      dispatch(changeOrderStatus(orderID));
       setIsShowStopWatch(true);
     },
   });
