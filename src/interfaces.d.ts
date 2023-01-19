@@ -1,7 +1,7 @@
 interface OrderDetails {
   orderId: string;
   tableNumber: string;
-  timeOrderPlaced: Date | null;
+  timeOrderPlaced: number | null;
   server: string;
   orderItemDetails: MenuItem[];
   orderStatus: "pending" | "time up" | "ready";

@@ -17,7 +17,7 @@ const orderDetailsSlice = createSlice({
   name: "orderDetails",
   initialState,
   reducers: {
-    addNewItemToOrder: (state, action: PayloadAction<MenuItem>) => {
+    addNewItemToOrderDetails: (state, action: PayloadAction<MenuItem>) => {
       if (Object.keys(state).length === 0 || state.orderItemDetails === undefined) {
         // If this is the first item to be added to the order, just add to the array
         state.orderItemDetails = [action.payload];
@@ -26,23 +26,25 @@ const orderDetailsSlice = createSlice({
         state.orderItemDetails = [...state.orderItemDetails, action.payload];
       }
     },
-    addAlreadyOrderedItems: (state, action: PayloadAction<MenuItem[]>) => {
+    addPreviouslySentItemsToOrderDetails: (state, action: PayloadAction<MenuItem[]>) => {
       // adds any items which are already open on a table
       // when user opens that table again
       state.orderItemDetails = action.payload;
     },
-    addTransferedItems: (state, action: PayloadAction<MenuItem[]>) => {
+    addTransferedItemsToOrderDetails: (state, action: PayloadAction<MenuItem[]>) => {
       state.orderItemDetails = [...state.orderItemDetails, ...action.payload];
     },
-    removeItem: (state, action: PayloadAction<string>) => {
+    removeItemFromOrderDetails: (state, action: PayloadAction<string>) => {
       state.orderItemDetails = state.orderItemDetails.filter((item) => item.itemId !== action.payload);
     },
-    changeTableNumberReducer: (state, action: PayloadAction<string>) => {
+    changeTableNumberOrderDetails: (state, action: PayloadAction<string>) => {
       state.tableNumber = action.payload;
     },
-    addOrderAndTimeStripOutSentToKitchen: (state) => {
+    addOrderTimeStripOutSentItemsOrderDetails: (state) => {
       // adding id,server and time when order is sent through to firebase/kitchen
-      state.timeOrderPlaced = new Date();
+      const timeNow = Date.now();
+
+      state.timeOrderPlaced = timeNow;
       state.orderStatus = "pending";
       state.orderId = uuid();
       if (auth.currentUser && auth.currentUser.displayName !== null) {
@@ -52,7 +54,7 @@ const orderDetailsSlice = createSlice({
       // Strip out the items which have already been sent on previous orders.
       state.orderItemDetails = state.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
     },
-    clearOrder: (state) => {
+    clearOrderDetails: (state) => {
       state.tableNumber = "";
       state.orderItemDetails = [];
       state.server = "";
@@ -71,31 +73,11 @@ const orderDetailsSlice = createSlice({
     },
 
     addExtraIngredientOnOrderDetails: (state, action: PayloadAction<AddExtra>) => {
-      // Add item to the current order details
       state.orderItemDetails.forEach((item) => {
         if (item.itemId === action.payload.itemID) {
           item.ingredients?.push(action.payload.ingredientToAdd);
         }
       });
-
-      //   if (selectedOrderItem !== null) {
-      //     setSelectedOrderItem({ ...selectedOrderItem, ingredients: [...selectedOrderItem.ingredients!, ingredientoAdd] });
-      //   }
-
-      // const itemID = selectedOrderItem?.itemId;
-      // if (selectedOrderItem?.isSentToKitchen === true) {
-      //   // if the item is already sent
-      //   setOpenOrders((draft) => {
-      //     draft.forEach((order) =>
-      //       order.orderItemDetails.forEach((item) => {
-      //         if (item.itemId === itemID) {
-      //           item.ingredients?.push(ingredientoAdd);
-      //         }
-      //       })
-      //     );
-      //     return draft;
-      //   });
-      // }
     },
   },
 });
@@ -103,13 +85,13 @@ const orderDetailsSlice = createSlice({
 export default orderDetailsSlice.reducer;
 
 export const {
-  addNewItemToOrder,
-  addAlreadyOrderedItems,
-  addTransferedItems,
-  removeItem,
-  changeTableNumberReducer,
-  addOrderAndTimeStripOutSentToKitchen,
-  clearOrder,
+  addNewItemToOrderDetails,
+  addPreviouslySentItemsToOrderDetails,
+  addTransferedItemsToOrderDetails,
+  removeItemFromOrderDetails,
+  changeTableNumberOrderDetails,
+  addOrderTimeStripOutSentItemsOrderDetails,
+  clearOrderDetails,
   toggleIngredientOnOrderDetails,
   addExtraIngredientOnOrderDetails,
 } = orderDetailsSlice.actions;

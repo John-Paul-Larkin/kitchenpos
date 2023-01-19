@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React, { useContext } from "react";
 import { useStopwatch } from "react-timer-hook";
 import { menuContext } from "../Context/MenuContext";
-import { changeTableNumberReducer } from "../features/orderDetailsSlice";
+import { changeTableNumberOrderDetails } from "../features/orderDetailsSlice";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
 
@@ -25,8 +25,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
 
   const handleOpenOrderClick = () => {
     setisShowFloorPlan(false);
-    // dispatch({ type: "change table number", payload: order.orderId });
-    dispatch(changeTableNumberReducer(order.orderId));
+    dispatch(changeTableNumberOrderDetails(order.orderId));
     changeTableNumber(order.tableNumber);
     setSelectedTableNumber(order.tableNumber);
   };
@@ -37,6 +36,8 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
     borderColor = "3px solid green";
   }
 
+  const orderTimeDisplay = new Date(order.timeOrderPlaced!).toLocaleTimeString();
+
   return (
     <motion.div
       whileHover={{ scale: 1.07 }}
@@ -45,7 +46,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
       onClick={handleOpenOrderClick}
       style={{ border: borderColor }}
     >
-      <div className={styles["time-order-placed"]}>{order.timeOrderPlaced!.toLocaleTimeString()}</div>
+      <div className={styles["time-order-placed"]}>{orderTimeDisplay}</div>
 
       <div className={styles["table-number"]}>{order.tableNumber}</div>
       <Stopwatch />

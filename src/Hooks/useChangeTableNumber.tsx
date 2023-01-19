@@ -1,19 +1,19 @@
 import { useContext } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
-import { addAlreadyOrderedItems, changeTableNumberReducer } from "../features/orderDetailsSlice";
+import { addPreviouslySentItemsToOrderDetails, changeTableNumberOrderDetails } from "../features/orderDetailsSlice";
 
 export default function useChangeTableNumber() {
   const { setSelectedTableNumber } = useContext(menuContext);
 
-  const  openOrders = useAppSelector(state=>state.openOrders);
+  const openOrders = useAppSelector((state) => state.openOrders);
 
   const dispatch = useAppDispatch();
 
   function changeTableNumber(table: string) {
-    //check if there are any orders already on the table
+    //check if there are any sent items already on the table
     const ordersAlreadyOnTable = openOrders.filter((orders) => orders.tableNumber === table);
-    //if there are orders
+    //if there are sent items
     if (ordersAlreadyOnTable.length > 0) {
       let oldOrderItems = [] as MenuItem[];
       //take the items from those orders and put them in a new array
@@ -25,14 +25,12 @@ export default function useChangeTableNumber() {
         return { ...item, isSentToKitchen: true };
       });
 
-      // dispatch({ type: "add already ordered items", payload: oldOrderItems });
-      dispatch(addAlreadyOrderedItems(oldOrderItems));
+      dispatch(addPreviouslySentItemsToOrderDetails(oldOrderItems));
     }
 
     setSelectedTableNumber(table);
-    // dispatch({ type: "change table number", payload: table });
 
-    dispatch(changeTableNumberReducer(table));
+    dispatch(changeTableNumberOrderDetails(table));
   }
 
   return changeTableNumber;

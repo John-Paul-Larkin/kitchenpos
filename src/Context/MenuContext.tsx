@@ -1,14 +1,9 @@
 import { createContext, ReactNode, useState } from "react";
-import { useImmer } from "use-immer";
 import { auth } from "../Firebase/firebaseconfig";
 
 export default function MenuContext({ children }: { children: ReactNode }) {
   const [selectedTableNumber, setSelectedTableNumber] = useState("1");
 
-
-
-
-  
   const [isLoggedIn, setIsLoggedIn] = useState(!!auth.currentUser);
 
   const [isShowFloorPlan, setisShowFloorPlan] = useState(true);

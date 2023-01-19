@@ -2,20 +2,19 @@ import { useState } from "react";
 import uuid from "react-uuid";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { ingredientsList } from "../Assets/FoodMenuItems";
+import { addExtraIngredientToOpenOrders } from "../features/openOrdersSlice";
 import { addExtraIngredientOnOrderDetails } from "../features/orderDetailsSlice";
 import { addExtraIngredientOnSelectedItem } from "../features/selectedOrderItemSlice";
 import styles from "../styles/OrderScreen.module.css";
 
 export default function SelectExtraIngredients() {
-  // const [selectedIngredient, setselectedIngredient] = useState(ingredientsList[0]);
+  // const [selectedIngredient, setselectedIngredient] = useState(ingredientsList[0]);????????????????????????????
   const dispatch = useAppDispatch();
   const selectedOrderItem = useAppSelector((state) => state.selectedOrderItem);
 
   const [showIngredientDropdown, setShowIngredientDropdown] = useState(false);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // dispatch({ type: "Add extra ingredient", payload: e.target.value as Ingredient });
-
     const ingredientToAdd: Ingredients = {
       ingredient: e.target.value as Ingredient,
       selected: true,
@@ -23,40 +22,47 @@ export default function SelectExtraIngredients() {
       ingredientId: uuid(),
     };
     const itemID = selectedOrderItem.itemId;
-    dispatch(addExtraIngredientOnOrderDetails({ ingredientToAdd, itemID }));
 
+    dispatch(addExtraIngredientOnOrderDetails({ ingredientToAdd, itemID }));
     dispatch(addExtraIngredientOnSelectedItem(ingredientToAdd));
+
+    if (selectedOrderItem.isSentToKitchen === true) {
+      dispatch(addExtraIngredientToOpenOrders({ ingredientToAdd, itemID }));
+    }
 
     setShowIngredientDropdown(false);
   };
 
   const handleAddIngredient = () => {
-    // dispatch({ type: "Add extra ingredient", payload: selectedIngredient });
     setShowIngredientDropdown(true);
   };
 
   return (
     <>
-      {!showIngredientDropdown && <button onClick={handleAddIngredient}>Add extra</button>}
+      {selectedOrderItem.itemId && (
+        <>
+          {!showIngredientDropdown && <button onClick={handleAddIngredient}>Add extra</button>}
 
-      {showIngredientDropdown && (
-        <div>
-          <form>
-            <label htmlFor="ingredient-select"></label>
-            <select className={styles["ingredient-select"]} onChange={(e) => handleSelectChange(e)}>
-              <option value="" disabled selected>
-                Select extra
-              </option>
-              {ingredientsList.map((item) => {
-                return (
-                  <option key={item} value={item}>
-                    {item}
+          {showIngredientDropdown && (
+            <div>
+              <form>
+                <label htmlFor="ingredient-select"></label>
+                <select className={styles["ingredient-select"]} onChange={(e) => handleSelectChange(e)}>
+                  <option value="" disabled selected>
+                    Select extra
                   </option>
-                );
-              })}
-            </select>
-          </form>
-        </div>
+                  {ingredientsList.map((item) => {
+                    return (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    );
+                  })}
+                </select>
+              </form>
+            </div>
+          )}
+        </>
       )}
     </>
   );

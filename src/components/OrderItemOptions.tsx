@@ -4,8 +4,8 @@ import { setSelectedItemToEmpty, toggleIngredientOnSelectedItem } from "../featu
 import styles from "../styles/OrderScreen.module.css";
 import SelectExtraIngredients from "./SelectExtraIngredients";
 
-import { removeItemOpenOrders, toggeIngredientOpenOrders } from "../features/openOrdersSlice";
-import { removeItem, toggleIngredientOnOrderDetails } from "../features/orderDetailsSlice";
+import { removeItemFromOpenOrders, toggeIngredientOpenOrders } from "../features/openOrdersSlice";
+import { removeItemFromOrderDetails, toggleIngredientOnOrderDetails } from "../features/orderDetailsSlice";
 
 export default function OrderItemOptions() {
   const orderDetails = useAppSelector((state) => state.orderDetails);
@@ -27,23 +27,20 @@ export default function OrderItemOptions() {
       dispatch(toggeIngredientOpenOrders({ itemID, ingredientID }));
     }
     // Then toggle the item on the current order
-    // dispatch({ type: "toggleIngredient", payload: ingredientId });
     dispatch(toggleIngredientOnOrderDetails(ingredientID));
 
     dispatch(toggleIngredientOnSelectedItem(ingredientID));
   };
 
-  const handleRemoveItem = () => {
+  const handleremoveItemFromOrderDetails = () => {
     if (selectedOrderItem?.isSentToKitchen === true) {
-      dispatch(removeItemOpenOrders(selectedOrderItem.itemId));
+      dispatch(removeItemFromOpenOrders(selectedOrderItem.itemId));
     }
 
     // remove the item - this time from the list of items in the current order. ie visible on screen
-    // dispatch({ type: "remove item", payload: selectedOrderItem!.itemId });
     if (selectedOrderItem !== null) {
-      dispatch(removeItem(selectedOrderItem.itemId));
+      dispatch(removeItemFromOrderDetails(selectedOrderItem.itemId));
     }
-    // setSelectedOrderItem(null);
     dispatch(setSelectedItemToEmpty());
   };
 
@@ -69,7 +66,7 @@ export default function OrderItemOptions() {
             {selectedOrderItem && (
               <button
                 onClick={() => {
-                  handleRemoveItem();
+                  handleremoveItemFromOrderDetails();
                 }}
               >
                 Remove item

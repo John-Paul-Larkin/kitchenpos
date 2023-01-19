@@ -3,7 +3,7 @@ import Modal from "@mui/material/Modal";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 
-import { addTransferedItems, clearOrder } from "../features/orderDetailsSlice";
+import { addTransferedItemsToOrderDetails, clearOrderDetails } from "../features/orderDetailsSlice";
 
 import { setSelectedItemToEmpty } from "../features/selectedOrderItemSlice";
 
@@ -41,14 +41,11 @@ export default function TransferModal({
 
   const handleTransferItems = () => {
     const itemsToTranfer = orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
-    // dispatch({ type: "clear order" });
-    dispatch(clearOrder());
-    // setSelectedOrderItem(null);
+    dispatch(clearOrderDetails());
     dispatch(setSelectedItemToEmpty());
 
     changeTableNumber(tableNumToChangeTo!);
-    // dispatch({ type: "add transfered items", payload: itemsToTranfer });
-    dispatch(addTransferedItems(itemsToTranfer));
+    dispatch(addTransferedItemsToOrderDetails(itemsToTranfer));
     setIsModalOpen(false);
   };
 

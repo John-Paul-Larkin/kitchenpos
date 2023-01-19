@@ -1,11 +1,12 @@
-
+import { useAppSelector } from "../app/hooks";
 import styles from "../styles/FloorPlan.module.css";
 import SingleDrinksOrder from "./SingleDrinksOrder";
 import SingleFoodOrder from "./SingleFoodOrder";
-import { useAppSelector } from "../app/hooks";
 
 export default function OpenOrdersList() {
-  const openOrders = useAppSelector(state => state.openOrders)
+  const openOrders = useAppSelector((state) => state.openOrders);
+
+
 
   return (
     <div className={styles["open-orders-container"]}>
@@ -19,6 +20,7 @@ export default function OpenOrdersList() {
               order.orderItemDetails.forEach((item) => {
                 if (item.station !== "bar") orderContainsDrinks = true;
               });
+
               if (orderContainsDrinks !== false) {
                 return <SingleFoodOrder key={order.orderId} order={order} />;
               } else return null;
@@ -44,3 +46,4 @@ export default function OpenOrdersList() {
     </div>
   );
 }
+

@@ -1,5 +1,4 @@
-export {}
-
+export {};
 
 // import { createContext, ReactNode, useState } from "react";
 // import uuid from "react-uuid";
@@ -206,7 +205,7 @@ export {}
 //   type: "clear order";
 // }
 
-// interface AddTransferedItems {
+// interface addTransferedItemsToOrderDetails {
 //   type: "add transfered items";
 //   payload: MenuItem[];
 // }
@@ -224,5 +223,5 @@ export {}
 //   | ReducerAddOrderTime
 //   | ReducerClearOrder
 //   | ReducerAddOrdered
-//   | AddTransferedItems
+//   | addTransferedItemsToOrderDetails
 //   | AddExtraIngredient;

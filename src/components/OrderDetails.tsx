@@ -8,22 +8,20 @@ import styles from "../styles/OrderScreen.module.css";
 import Alterations from "./Alterations";
 import TableNumberSelect from "./TableNumberSelect";
 
-import { useAppSelector } from "../app/hooks";
-import { setSelectedItemToEmpty, setSelectedOrderItem } from "../features/selectedOrderItemSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { addOrderToOpenOrders } from "../features/openOrdersSlice";
-import { useAppDispatch } from "../app/hooks";
-import { addOrderAndTimeStripOutSentToKitchen, clearOrder } from "../features/orderDetailsSlice";
+import { addOrderTimeStripOutSentItemsOrderDetails, clearOrderDetails } from "../features/orderDetailsSlice";
+import { setSelectedItemToEmpty, setSelectedOrderItem } from "../features/selectedOrderItemSlice";
 
 export default function OrderDetails() {
   const dispatch = useAppDispatch();
   const orderDetails = useAppSelector((state) => state.orderDetails);
+  const openOrders = useAppSelector((state) => state.openOrders);
+
+  // console.log("OD-", orderDetails);
+  // console.log("OP-", openOrders);
 
   const selectedOrderItem = useAppSelector((state) => state.selectedOrderItem);
-
-  console.log("soo", selectedOrderItem);
-  console.log('orde',  orderDetails ); 
-
-  // const { dispatch } = useContext(menuContext);
 
   const { setisShowFloorPlan } = useContext(menuContext);
   const { setIsLoggedIn } = useContext(menuContext);
@@ -46,25 +44,23 @@ export default function OrderDetails() {
     // Only send through the order if at least one new item has been added
     if (orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true).length > 0) {
       // dispatch({ type: "add order/time- strip out sentToKitchen " });
-      dispatch(addOrderAndTimeStripOutSentToKitchen());
+      dispatch(addOrderTimeStripOutSentItemsOrderDetails());
     }
+ 
+    setisShowFloorPlan(true);
   };
 
   useEffect(() => {
     if (orderDetails.timeOrderPlaced) {
+      //
       // Send the order to firebase
       sendOrder(orderDetails);
 
       // Add the order to an array of open Orders
-      //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! setOpenOrders((cur) => [orderDetails, ...cur]);
-      dispatch(addOrderToOpenOrders(orderDetails))
+      dispatch(addOrderToOpenOrders(orderDetails));
       //dispatch reducer to clear order object
-      // dispatch({ type: "clear order" });
-      dispatch(clearOrder());
-      // setSelectedOrderItem(null);
+      dispatch(clearOrderDetails());
       dispatch(setSelectedItemToEmpty());
-
-      setisShowFloorPlan(true);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,7 +116,15 @@ export default function OrderDetails() {
         </div>
 
         <div className={styles["buttons"]}>
-          <button onClick={() => setisShowFloorPlan(true)}>FLoor plan</button>
+          <button
+            onClick={() => {
+              dispatch(setSelectedItemToEmpty());
+              dispatch(clearOrderDetails());
+              setisShowFloorPlan(true);
+            }}
+          >
+            Floor plan
+          </button>
           <button>Message</button>
           <button onClick={() => handleSendOrder()}>Send</button>
         </div>

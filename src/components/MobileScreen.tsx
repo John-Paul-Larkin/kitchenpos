@@ -27,7 +27,6 @@ export default function MobileScreen() {
   const { isShowFloorPlan, isLoggedIn } = useContext(menuContext);
 
   const signInAnon = useSignInAnon();
-
   const signInGoogle = useSignInGoogle();
 
   return (

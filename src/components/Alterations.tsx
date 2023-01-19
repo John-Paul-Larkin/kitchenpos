@@ -2,7 +2,7 @@ import styles from "../styles/OrderScreen.module.css";
 
 // Component Displays a list beside the item name.
 // List contains default ingredients which have been deselected or..
-// extra ingredients which have been added
+// extra(non default) ingredients which have been added
 
 export default function Alterations({ ingredients }: { ingredients: Ingredients[] | undefined }) {
   return (
