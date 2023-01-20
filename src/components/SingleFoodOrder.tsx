@@ -52,7 +52,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
 
   const orderTime = new Date(order.timeOrderPlaced!);
 
-  const finishTime = useRef(add(orderTime, { seconds: 20 }));
+  const finishTime = useRef(add(orderTime, { seconds: 600 }));
 
   const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
 

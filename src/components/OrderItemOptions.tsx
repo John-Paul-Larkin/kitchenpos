@@ -68,7 +68,7 @@ export default function OrderItemOptions() {
         <div className={styles["remove-button-wrapper"]}>
           <span className={styles["spacer"]}></span>
           <div className={styles["remove-button"]}>
-            {selectedOrderItem && (
+            {selectedOrderItem.itemId && (
               <button
                 onClick={() => {
                   handleremoveItemFromOrderDetails();

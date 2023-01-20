@@ -1,15 +1,8 @@
 import DoneIcon from "@mui/icons-material/Done";
 import { motion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { menuContext } from "../Context/MenuContext";
-import { auth } from "../Firebase/firebaseconfig";
-import useSendOrder from "../Hooks/useSendOrder";
-import styles from "../styles/OrderScreen.module.css";
-import Alterations from "./Alterations";
-import TableNumberSelect from "./TableNumberSelect";
-
-import { truncate } from "fs";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { menuContext } from "../Context/MenuContext";
 import {
   addExtraIngredientToOpenOrders,
   addOrderToOpenOrders,
@@ -19,31 +12,49 @@ import {
 import { addOrderTimeStripOutSentItemsOrderDetails, clearOrderDetails } from "../features/orderDetailsSlice";
 import { setSelectedItemToEmpty, setSelectedOrderItem } from "../features/selectedOrderItemSlice";
 import { clearEdits } from "../features/unsentOrderEditsSlice";
-
+import { auth } from "../Firebase/firebaseconfig";
+import useSendOrder from "../Hooks/useSendOrder";
+import styles from "../styles/OrderScreen.module.css";
+import Alterations from "./Alterations";
+import TableNumberSelect from "./TableNumberSelect";
 export default function OrderDetails() {
-  const dispatch = useAppDispatch();
-  const orderDetails = useAppSelector((state) => state.orderDetails);
-
   const [isAnyEdits, setIsAnyEdits] = useState(false);
 
-  const edits = useAppSelector((state) => state.unsentOrderEdits);
+  const { setisShowFloorPlan } = useContext(menuContext);
+  const { setIsLoggedIn } = useContext(menuContext);
+
+  const dispatch = useAppDispatch();
+  const orderDetails = useAppSelector((state) => state.orderDetails);
+  const selectedOrderItem = useAppSelector((state) => state.selectedOrderItem);
+  const unsentOrderEdits = useAppSelector((state) => state.unsentOrderEdits);
   // const openOrders = useAppSelector((state) => state.openOrders);
   // console.log("OD-", orderDetails);
   // console.log("OP-", openOrders);
-  // console.log("Ed-", edits);
+  // console.log("Ed-", unsentOrderEdits);
 
   useEffect(() => {
-    if (edits.length > 0) {
+    if (orderDetails.timeOrderPlaced) {
+      //
+      // Send the order to firebase
+      sendOrder(orderDetails);
+
+      // Add the order to an array of open Orders
+      dispatch(addOrderToOpenOrders(orderDetails));
+      //dispatch reducer to clear order object
+      dispatch(clearOrderDetails());
+      dispatch(setSelectedItemToEmpty());
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderDetails.timeOrderPlaced]);
+
+  useEffect(() => {
+    if (unsentOrderEdits.length > 0) {
       setIsAnyEdits(true);
     } else {
       setIsAnyEdits(false);
     }
-  }, [edits]);
-
-  const selectedOrderItem = useAppSelector((state) => state.selectedOrderItem);
-
-  const { setisShowFloorPlan } = useContext(menuContext);
-  const { setIsLoggedIn } = useContext(menuContext);
+  }, [unsentOrderEdits]);
 
   // calculates the total price of all items and returns as formatted string
   const calcTotal = (): string => {
@@ -70,7 +81,7 @@ export default function OrderDetails() {
   };
 
   const handleSaveEdits = () => {
-    edits.forEach((edit) => {
+    unsentOrderEdits.forEach((edit) => {
       if (edit.editType === "toggleIngredientOpenOrders") {
         dispatch(toggeIngredientOpenOrders({ itemID: edit.itemID, ingredientID: edit.ingredientID }));
       } else if (edit.editType === "addExtraIngredientToOpenOrders") {
@@ -80,19 +91,20 @@ export default function OrderDetails() {
       }
     });
 
-    let anyNewItems: boolean = false;
+    let anyNewItemsAddedSinceEdit: boolean = false;
     orderDetails.orderItemDetails.forEach((item) => {
       if (item.isSentToKitchen !== true) {
-        anyNewItems = true;
+        anyNewItemsAddedSinceEdit = true;
       }
     });
 
     // Weird bug here. TS wont allow anyNewitems === true
-    // will allow the double negative
-    // casting anyNewsItems as boolean fixes is????
-    if ((anyNewItems as boolean) === false) {
+    // but will allow the double negative !== false
+    // casting anyNewsItems as boolean fixes it????
+    if ((anyNewItemsAddedSinceEdit as boolean) === false) {
       setisShowFloorPlan(true);
     }
+    // otherwise dont show floor plan as user still needs to send through the new items
     dispatch(clearEdits());
   };
 
@@ -108,22 +120,6 @@ export default function OrderDetails() {
     dispatch(clearOrderDetails());
     setisShowFloorPlan(true);
   };
-
-  useEffect(() => {
-    if (orderDetails.timeOrderPlaced) {
-      //
-      // Send the order to firebase
-      sendOrder(orderDetails);
-
-      // Add the order to an array of open Orders
-      dispatch(addOrderToOpenOrders(orderDetails));
-      //dispatch reducer to clear order object
-      dispatch(clearOrderDetails());
-      dispatch(setSelectedItemToEmpty());
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [orderDetails.timeOrderPlaced]);
 
   return (
     <div className={styles["order-items-screen-container"]}>

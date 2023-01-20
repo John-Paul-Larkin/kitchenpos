@@ -27,8 +27,6 @@ export default function SelectExtraIngredients() {
     dispatch(addExtraIngredientOnSelectedItem(ingredientToAdd));
 
     if (selectedOrderItem.isSentToKitchen === true) {
-      // dispatch(addExtraIngredientToOpenOrders({ ingredientToAdd, itemID }));
-
       dispatch(addNewEdit({ ingredientToAdd, itemID, editType: "addExtraIngredientToOpenOrders" }));
     }
 
@@ -49,8 +47,8 @@ export default function SelectExtraIngredients() {
             <div>
               <form>
                 <label htmlFor="ingredient-select"></label>
-                <select className={styles["ingredient-select"]} onChange={(e) => handleSelectChange(e)}>
-                  <option value="" disabled selected>
+                <select className={styles["ingredient-select"]} defaultValue={""} onChange={(e) => handleSelectChange(e)}>
+                  <option value="" disabled>
                     Select extra
                   </option>
                   {ingredientsList.map((item) => {

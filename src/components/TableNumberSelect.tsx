@@ -11,6 +11,7 @@ export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder
   const { selectedTableNumber } = useContext(menuContext);
   const dispatch = useAppDispatch();
   const orderDetails = useAppSelector((state) => state.orderDetails);
+  const unsentOrderEdits = useAppSelector((state) => state.unsentOrderEdits);
 
   const { setSelectedTableNumber } = useContext(menuContext);
 
@@ -49,7 +50,12 @@ export default function TableNumberSelect({ handleSendOrder }: { handleSendOrder
         <label htmlFor="table-number">
           <div className={styles["table-number"]}>Table:{selectedTableNumber}</div>
         </label>
-        <select value={selectedTableNumber} className={styles["table-select"]} onChange={(e) => handleSelectChange(e)}>
+        <select
+          disabled={unsentOrderEdits.length > 0 ? true : false}
+          value={selectedTableNumber}
+          className={styles["table-select"]}
+          onChange={(e) => handleSelectChange(e)}
+        >
           <option value="Bar">Bar</option>
           <option value="1">1</option>
           <option value="2">2</option>

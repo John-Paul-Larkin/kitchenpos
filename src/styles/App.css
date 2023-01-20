@@ -43,4 +43,5 @@ button {
   border-radius: 5px;
   border: 1px solid black;
     margin-right:3px ;
+    cursor: pointer;
   }
