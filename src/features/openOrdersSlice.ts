@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = [] as OrderDetails[];
 
-
 const openOrdersSlice = createSlice({
   name: "openOrders",
   initialState,
@@ -10,7 +9,7 @@ const openOrdersSlice = createSlice({
     addOrderToOpenOrders: (state, action: PayloadAction<OrderDetails>) => {
       return (state = [...state, action.payload]);
     },
-    toggeIngredientOpenOrders: (state, action: PayloadAction<ToggleEdit>) => {
+    toggeIngredientOpenOrders: (state, action: PayloadAction<Toggle>) => {
       state.forEach((order) =>
         order.orderItemDetails.forEach((item) => {
           if (item.itemId === action.payload.itemID) {
@@ -50,7 +49,7 @@ const openOrdersSlice = createSlice({
 
       return state;
     },
-    addExtraIngredientToOpenOrders: (state, action: PayloadAction<AddExtraEdit>) => {
+    addExtraIngredientToOpenOrders: (state, action: PayloadAction<AddExtra>) => {
       let orderID: string;
 
       //first iterate through the open orders to find the order containing the item to add ingredient to

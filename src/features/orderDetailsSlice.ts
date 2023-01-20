@@ -6,8 +6,6 @@ import { auth } from "../Firebase/firebaseconfig";
 // An order is allocated an id when an it is sent to the kitchen
 // A single table can have multiple orders open at the same time
 
-
-
 const initialState = {} as OrderDetails;
 
 const orderDetailsSlice = createSlice({
@@ -69,7 +67,7 @@ const orderDetailsSlice = createSlice({
       );
     },
 
-    addExtraIngredientOnOrderDetails: (state, action: PayloadAction<AddExtraEdit>) => {
+    addExtraIngredientOnOrderDetails: (state, action: PayloadAction<AddExtra>) => {
       state.orderItemDetails.forEach((item) => {
         if (item.itemId === action.payload.itemID) {
           item.ingredients?.push(action.payload.ingredientToAdd);

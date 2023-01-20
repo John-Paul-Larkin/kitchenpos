@@ -4,8 +4,8 @@ import { setSelectedItemToEmpty, toggleIngredientOnSelectedItem } from "../featu
 import styles from "../styles/OrderScreen.module.css";
 import SelectExtraIngredients from "./SelectExtraIngredients";
 
-import { removeItemFromOpenOrders, toggeIngredientOpenOrders } from "../features/openOrdersSlice";
 import { removeItemFromOrderDetails, toggleIngredientOnOrderDetails } from "../features/orderDetailsSlice";
+import { addNewEdit } from "../features/unsentOrderEditsSlice";
 
 export default function OrderItemOptions() {
   const orderDetails = useAppSelector((state) => state.orderDetails);
@@ -24,7 +24,10 @@ export default function OrderItemOptions() {
 
       // if it has locate the item  within the list of open orders
       // and toggle the ingredient to not selected
-      dispatch(toggeIngredientOpenOrders({ itemID, ingredientID }));
+
+      // dispatch(toggeIngredientOpenOrders({ itemID, ingredientID }));
+
+      dispatch(addNewEdit({ itemID:itemID, ingredientID:ingredientID, editType: "toggleIngredientOpenOrders" }));
     }
     // Then toggle the item on the current order
     dispatch(toggleIngredientOnOrderDetails(ingredientID));
@@ -34,7 +37,9 @@ export default function OrderItemOptions() {
 
   const handleremoveItemFromOrderDetails = () => {
     if (selectedOrderItem?.isSentToKitchen === true) {
-      dispatch(removeItemFromOpenOrders(selectedOrderItem.itemId));
+      // dispatch(removeItemFromOpenOrders(selectedOrderItem.itemId));
+
+      dispatch(addNewEdit({ input: selectedOrderItem.itemId, editType: "removeItemFromOpenOrders" }));
     }
 
     // remove the item - this time from the list of items in the current order. ie visible on screen

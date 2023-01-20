@@ -67,21 +67,24 @@ interface ContextProvider {
 
 // Edit/reducer Types
 
-type Edits = string | AddExtraEdit | ToggleEdit;
+type Edits = RemoveEdit | AddExtraEdit | ToggleEdit;
 
 interface AddExtraEdit {
   ingredientToAdd: Ingredients;
   itemID: string;
+  editType: 'addExtraIngredientToOpenOrders';
 }
 
 interface ToggleEdit {
   itemID: string;
   ingredientID: string;
+  editType: 'toggleIngredientOpenOrders';
 }
 
-
-
-
+interface RemoveEdit {
+  input: string;
+  editType: 'removeItemFromOpenOrders'; 
+}
 
 interface Screens {
   value: {
@@ -89,4 +92,14 @@ interface Screens {
     height: number;
   };
   label: string;
+}
+
+interface Toggle {
+  itemID: string;
+  ingredientID: string;
+}
+
+interface AddExtra {
+  ingredientToAdd: Ingredients;
+  itemID: string;
 }

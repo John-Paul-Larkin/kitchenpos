@@ -2,9 +2,9 @@ import { useState } from "react";
 import uuid from "react-uuid";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { ingredientsList } from "../Assets/FoodMenuItems";
-import { addExtraIngredientToOpenOrders } from "../features/openOrdersSlice";
 import { addExtraIngredientOnOrderDetails } from "../features/orderDetailsSlice";
 import { addExtraIngredientOnSelectedItem } from "../features/selectedOrderItemSlice";
+import { addNewEdit } from "../features/unsentOrderEditsSlice";
 import styles from "../styles/OrderScreen.module.css";
 
 export default function SelectExtraIngredients() {
@@ -27,7 +27,9 @@ export default function SelectExtraIngredients() {
     dispatch(addExtraIngredientOnSelectedItem(ingredientToAdd));
 
     if (selectedOrderItem.isSentToKitchen === true) {
-      dispatch(addExtraIngredientToOpenOrders({ ingredientToAdd, itemID }));
+      // dispatch(addExtraIngredientToOpenOrders({ ingredientToAdd, itemID }));
+
+      dispatch(addNewEdit({ ingredientToAdd, itemID, editType: "addExtraIngredientToOpenOrders" }));
     }
 
     setShowIngredientDropdown(false);

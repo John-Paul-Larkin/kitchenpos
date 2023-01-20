@@ -1,6 +1,6 @@
 import DoneIcon from "@mui/icons-material/Done";
 import { motion } from "framer-motion";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { menuContext } from "../Context/MenuContext";
 import { auth } from "../Firebase/firebaseconfig";
 import useSendOrder from "../Hooks/useSendOrder";
@@ -8,18 +8,37 @@ import styles from "../styles/OrderScreen.module.css";
 import Alterations from "./Alterations";
 import TableNumberSelect from "./TableNumberSelect";
 
+import { truncate } from "fs";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { addOrderToOpenOrders } from "../features/openOrdersSlice";
+import {
+  addExtraIngredientToOpenOrders,
+  addOrderToOpenOrders,
+  removeItemFromOpenOrders,
+  toggeIngredientOpenOrders,
+} from "../features/openOrdersSlice";
 import { addOrderTimeStripOutSentItemsOrderDetails, clearOrderDetails } from "../features/orderDetailsSlice";
 import { setSelectedItemToEmpty, setSelectedOrderItem } from "../features/selectedOrderItemSlice";
+import { clearEdits } from "../features/unsentOrderEditsSlice";
 
 export default function OrderDetails() {
   const dispatch = useAppDispatch();
   const orderDetails = useAppSelector((state) => state.orderDetails);
-  const openOrders = useAppSelector((state) => state.openOrders);
 
+  const [isAnyEdits, setIsAnyEdits] = useState(false);
+
+  const edits = useAppSelector((state) => state.unsentOrderEdits);
+  // const openOrders = useAppSelector((state) => state.openOrders);
   // console.log("OD-", orderDetails);
   // console.log("OP-", openOrders);
+  // console.log("Ed-", edits);
+
+  useEffect(() => {
+    if (edits.length > 0) {
+      setIsAnyEdits(true);
+    } else {
+      setIsAnyEdits(false);
+    }
+  }, [edits]);
 
   const selectedOrderItem = useAppSelector((state) => state.selectedOrderItem);
 
@@ -46,7 +65,47 @@ export default function OrderDetails() {
       // dispatch({ type: "add order/time- strip out sentToKitchen " });
       dispatch(addOrderTimeStripOutSentItemsOrderDetails());
     }
- 
+
+    setisShowFloorPlan(true);
+  };
+
+  const handleSaveEdits = () => {
+    edits.forEach((edit) => {
+      if (edit.editType === "toggleIngredientOpenOrders") {
+        dispatch(toggeIngredientOpenOrders({ itemID: edit.itemID, ingredientID: edit.ingredientID }));
+      } else if (edit.editType === "addExtraIngredientToOpenOrders") {
+        dispatch(addExtraIngredientToOpenOrders({ ingredientToAdd: edit.ingredientToAdd, itemID: edit.itemID }));
+      } else if (edit.editType === "removeItemFromOpenOrders") {
+        dispatch(removeItemFromOpenOrders(edit.input));
+      }
+    });
+
+    let anyNewItems: boolean = false;
+    orderDetails.orderItemDetails.forEach((item) => {
+      if (item.isSentToKitchen !== true) {
+        anyNewItems = true;
+      }
+    });
+
+    // Weird bug here. TS wont allow anyNewitems === true
+    // will allow the double negative
+    // casting anyNewsItems as boolean fixes is????
+    if ((anyNewItems as boolean) === false) {
+      setisShowFloorPlan(true);
+    }
+    dispatch(clearEdits());
+  };
+
+  const handleCancelEdits = () => {
+    dispatch(clearEdits());
+    dispatch(setSelectedItemToEmpty());
+    dispatch(clearOrderDetails());
+    setisShowFloorPlan(true);
+  };
+
+  const handleFloorPlan = () => {
+    dispatch(setSelectedItemToEmpty());
+    dispatch(clearOrderDetails());
     setisShowFloorPlan(true);
   };
 
@@ -116,17 +175,11 @@ export default function OrderDetails() {
         </div>
 
         <div className={styles["buttons"]}>
-          <button
-            onClick={() => {
-              dispatch(setSelectedItemToEmpty());
-              dispatch(clearOrderDetails());
-              setisShowFloorPlan(true);
-            }}
-          >
-            Floor plan
-          </button>
-          <button>Message</button>
-          <button onClick={() => handleSendOrder()}>Send</button>
+          {!isAnyEdits && <button onClick={() => handleFloorPlan()}>Floor plan</button>}
+          {isAnyEdits && <button onClick={() => handleCancelEdits()}>Cancel Edits</button>}
+
+          {!isAnyEdits && <button onClick={() => handleSendOrder()}>Send</button>}
+          {isAnyEdits && <button onClick={() => handleSaveEdits()}>Save Edits</button>}
         </div>
       </div>
     </div>
