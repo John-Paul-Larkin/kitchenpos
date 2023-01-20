@@ -51,6 +51,8 @@ type Ingredient =
   | "Gravy"
   | "Mushrooms";
 
+// Context API types
+
 interface ContextProvider {
   selectedTableNumber: string;
   setSelectedTableNumber: React.Dispatch<React.SetStateAction<string>>;
@@ -62,6 +64,24 @@ interface ContextProvider {
   isShowCancelModal: boolean;
   setIsShowCancelModal: Dispatch<SetStateAction<boolean>>;
 }
+
+// Edit/reducer Types
+
+type Edits = string | AddExtraEdit | ToggleEdit;
+
+interface AddExtraEdit {
+  ingredientToAdd: Ingredients;
+  itemID: string;
+}
+
+interface ToggleEdit {
+  itemID: string;
+  ingredientID: string;
+}
+
+
+
+
 
 interface Screens {
   value: {

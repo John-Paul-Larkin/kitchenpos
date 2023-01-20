@@ -26,7 +26,7 @@ function Timer({
 }: {
   setIsShowStopWatch: React.Dispatch<React.SetStateAction<boolean>>;
   finishTime: Date;
-  orderID: String;
+  orderID: string;
 }) {
   const dispatch = useAppDispatch();
 

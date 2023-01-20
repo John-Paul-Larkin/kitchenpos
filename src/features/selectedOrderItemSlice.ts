@@ -15,7 +15,7 @@ const selectedOrderItemSlice = createSlice({
       state = {} as MenuItem;
       return state;
     },
-    toggleIngredientOnSelectedItem: (state, action: PayloadAction<String>) => {
+    toggleIngredientOnSelectedItem: (state, action: PayloadAction<string>) => {
       state.ingredients?.forEach((ingredient) => {
         if (ingredient.ingredientId === action.payload) {
           ingredient.selected = !ingredient.selected;

@@ -2,15 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = [] as OrderDetails[];
 
-interface Toggle {
-  itemID: string;
-  ingredientID: string;
-}
-
-interface AddExtra {
-  ingredientToAdd: Ingredients;
-  itemID: String;
-}
 
 const openOrdersSlice = createSlice({
   name: "openOrders",
@@ -19,7 +10,7 @@ const openOrdersSlice = createSlice({
     addOrderToOpenOrders: (state, action: PayloadAction<OrderDetails>) => {
       return (state = [...state, action.payload]);
     },
-    toggeIngredientOpenOrders: (state, action: PayloadAction<Toggle>) => {
+    toggeIngredientOpenOrders: (state, action: PayloadAction<ToggleEdit>) => {
       state.forEach((order) =>
         order.orderItemDetails.forEach((item) => {
           if (item.itemId === action.payload.itemID) {
@@ -59,36 +50,25 @@ const openOrdersSlice = createSlice({
 
       return state;
     },
+    addExtraIngredientToOpenOrders: (state, action: PayloadAction<AddExtraEdit>) => {
+      let orderID: string;
 
-    addExtraIngredientToOpenOrders: (state, action: PayloadAction<AddExtra>) => {
-      // const itemToAddTo = state
-      //   .find((order) => order.orderId === action.payload.orderID)
-      //   ?.orderItemDetails.find((item) => item.itemId === action.payload.itemID);
-      // if (itemToAddTo?.ingredients) {
-      //   itemToAddTo.ingredients = [...itemToAddTo.ingredients, action.payload.ingredientToAdd];
-      // }
-      // state
-      //   .find((order) => order.orderId === action.payload.orderID)
-      //   ?.orderItemDetails.find((item) => item.itemId === action.payload.itemID)
-      //   ?.ingredients?.push(action.payload.ingredientToAdd);
-      // console.log("here");
-      // state.forEach((order) => {
-      //   if (order.orderId === action.payload.orderID) {
-      //     console.log(order.orderItemDetails);
-      //     order.orderItemDetails.forEach((item) => {
-      //       console.log(item.name);
-      //       if (item.itemId === action.payload.itemID) {
-      //         if (item.ingredients) {
-      //           console.log(item.ingredients);
-      //           item.ingredients = [...item.ingredients, action.payload.ingredientToAdd];
-      //         }
-      //       }
-      //     });
-      //   }
-      // });
+      //first iterate through the open orders to find the order containing the item to add ingredient to
+
+      state.forEach((order) => {
+        order.orderItemDetails.forEach((item) => {
+          if (item.itemId === action.payload.itemID) {
+            orderID = order.orderId;
+          }
+        });
+      });
+
+      const itemToAddTo = state.find((order) => order.orderId === orderID)?.orderItemDetails.find((item) => item.itemId === action.payload.itemID);
+      if (itemToAddTo?.ingredients) {
+        itemToAddTo.ingredients = [...itemToAddTo.ingredients, action.payload.ingredientToAdd];
+      }
     },
-
-    changeOrderStatus: (state, action: PayloadAction<String>) => {
+    changeOrderStatus: (state, action: PayloadAction<string>) => {
       state.map((order) => {
         if (order.orderId === action.payload) {
           return { ...order, orderStatus: "time up" };
