@@ -29,6 +29,7 @@ export default function MobileScreen() {
   const signInAnon = useSignInAnon();
   const signInGoogle = useSignInGoogle();
 
+
   return (
     <>
       {!isLoggedIn && (

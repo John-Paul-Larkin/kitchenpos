@@ -17,6 +17,7 @@ import useSendOrder from "../Hooks/useSendOrder";
 import styles from "../styles/OrderScreen.module.css";
 import Alterations from "./Alterations";
 import TableNumberSelect from "./TableNumberSelect";
+
 export default function OrderDetails() {
   const [isAnyEdits, setIsAnyEdits] = useState(false);
 
