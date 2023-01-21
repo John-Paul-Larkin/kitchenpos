@@ -21,13 +21,12 @@ export default function OrderItemOptions() {
     // check if the item has already been sent to the kitchen
     if (orderDetails.orderItemDetails[indexOfItemToToggleIngredient].isSentToKitchen === true) {
       const itemID = orderDetails.orderItemDetails[indexOfItemToToggleIngredient].itemId;
-
+      const orderID = orderDetails.orderId;
       // if it has locate the item  within the list of open orders
       // and toggle the ingredient to not selected
 
-      // dispatch(toggeIngredientOpenOrders({ itemID, ingredientID }));
 
-      dispatch(addNewEdit({ itemID:itemID, ingredientID:ingredientID, editType: "toggleIngredientOpenOrders" }));
+      dispatch(addNewEdit({ orderID:orderID, itemID: itemID, ingredientID: ingredientID, editType: "toggleIngredientOpenOrders" }));
     }
     // Then toggle the item on the current order
     dispatch(toggleIngredientOnOrderDetails(ingredientID));
@@ -39,7 +38,7 @@ export default function OrderItemOptions() {
     if (selectedOrderItem?.isSentToKitchen === true) {
       // dispatch(removeItemFromOpenOrders(selectedOrderItem.itemId));
 
-      dispatch(addNewEdit({ input: selectedOrderItem.itemId, editType: "removeItemFromOpenOrders" }));
+      dispatch(addNewEdit({ orderID:orderDetails.orderId ,itemID:selectedOrderItem.itemId , editType: "removeItemFromOpenOrders" }));
     }
 
     // remove the item - this time from the list of items in the current order. ie visible on screen

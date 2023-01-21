@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { addExtraIngredientToOpenOrders, removeItemFromOpenOrders, toggeIngredientOpenOrders } from "../features/openOrdersSlice";
+import { addExtraIngredientToOpenOrders, removeItemFromOpenOrders, toggleIngredientOpenOrders } from "../features/openOrdersSlice";
 import { setSelectedItemToEmpty } from "../features/selectedOrderItemSlice";
 
 import { menuContext } from "../Context/MenuContext";
@@ -8,14 +8,17 @@ import { clearEdits } from "../features/unsentOrderEditsSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { clearOrderDetails } from "../features/orderDetailsSlice";
 
+import useFirestore from "../Hooks/useFirestore";
 import styles from "../styles/OrderScreen.module.css";
 
 export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { isAnyEdits: boolean; handleSendOrder: () => void }) {
   const dispatch = useAppDispatch();
   const orderDetails = useAppSelector((state) => state.orderDetails);
   const unsentOrderEdits = useAppSelector((state) => state.unsentOrderEdits);
+  const openOrders = useAppSelector((state) => state.openOrders);
 
   const { setisShowFloorPlan } = useContext(menuContext);
+  const sendFirestore = useFirestore();
 
   // calculates the total price of all items and returns as formatted string
   const calcTotal = (): string => {
@@ -31,12 +34,21 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
 
   const handleSaveEdits = () => {
     unsentOrderEdits.forEach((edit) => {
-      if (edit.editType === "toggleIngredientOpenOrders") {
-        dispatch(toggeIngredientOpenOrders({ itemID: edit.itemID, ingredientID: edit.ingredientID }));
+      const editType = edit.editType;
+      const orderID = edit.orderID;
+      const itemID = edit.itemID;
+
+      if (editType === "toggleIngredientOpenOrders") {
+        dispatch(toggleIngredientOpenOrders({ orderID, itemID, ingredientID: edit.ingredientID }));
+        console.log("bd", openOrders);
+
+        sendFirestore({ orderID, itemID, ingredientID: edit.ingredientID, type: "toggle" });
       } else if (edit.editType === "addExtraIngredientToOpenOrders") {
-        dispatch(addExtraIngredientToOpenOrders({ ingredientToAdd: edit.ingredientToAdd, itemID: edit.itemID }));
+        dispatch(addExtraIngredientToOpenOrders({ orderID, itemID, ingredientToAdd: edit.ingredientToAdd }));
+        // sendFirestore()
       } else if (edit.editType === "removeItemFromOpenOrders") {
-        dispatch(removeItemFromOpenOrders(edit.input));
+        dispatch(removeItemFromOpenOrders({ itemID, orderID }));
+        // sendFirestore()
       }
     });
 
@@ -69,6 +81,8 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
     dispatch(clearOrderDetails());
     setisShowFloorPlan(true);
   };
+
+  console.log("odb", openOrders);
 
   return (
     <div className={styles["bottom"]}>

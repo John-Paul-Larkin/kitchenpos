@@ -71,19 +71,22 @@ type Edits = RemoveEdit | AddExtraEdit | ToggleEdit;
 
 interface AddExtraEdit {
   ingredientToAdd: Ingredients;
+  orderID: string;
   itemID: string;
-  editType: 'addExtraIngredientToOpenOrders';
+  editType: "addExtraIngredientToOpenOrders";
 }
 
 interface ToggleEdit {
+  orderID: string;
   itemID: string;
   ingredientID: string;
-  editType: 'toggleIngredientOpenOrders';
+  editType: "toggleIngredientOpenOrders";
 }
 
 interface RemoveEdit {
-  input: string;
-  editType: 'removeItemFromOpenOrders'; 
+  orderID: string;
+  itemID: string;
+  editType: "removeItemFromOpenOrders";
 }
 
 interface Screens {
@@ -97,9 +100,16 @@ interface Screens {
 interface Toggle {
   itemID: string;
   ingredientID: string;
+  orderID: string;
 }
 
 interface AddExtra {
   ingredientToAdd: Ingredients;
+  itemID: string;
+  orderID: string;
+}
+
+interface Remove {
+  orderID: string;
   itemID: string;
 }

@@ -11,6 +11,7 @@ export default function SelectExtraIngredients() {
   // const [selectedIngredient, setselectedIngredient] = useState(ingredientsList[0]);????????????????????????????
   const dispatch = useAppDispatch();
   const selectedOrderItem = useAppSelector((state) => state.selectedOrderItem);
+  const orderDetails = useAppSelector((state) => state.orderDetails);
 
   const [showIngredientDropdown, setShowIngredientDropdown] = useState(false);
 
@@ -22,12 +23,13 @@ export default function SelectExtraIngredients() {
       ingredientId: uuid(),
     };
     const itemID = selectedOrderItem.itemId;
+    const orderID = orderDetails.orderId;
 
-    dispatch(addExtraIngredientOnOrderDetails({ ingredientToAdd, itemID }));
+    dispatch(addExtraIngredientOnOrderDetails({ ingredientToAdd, itemID, orderID }));
     dispatch(addExtraIngredientOnSelectedItem(ingredientToAdd));
 
     if (selectedOrderItem.isSentToKitchen === true) {
-      dispatch(addNewEdit({ ingredientToAdd, itemID, editType: "addExtraIngredientToOpenOrders" }));
+      dispatch(addNewEdit({ orderID, ingredientToAdd, itemID, editType: "addExtraIngredientToOpenOrders" }));
     }
 
     setShowIngredientDropdown(false);

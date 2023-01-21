@@ -7,64 +7,36 @@ const openOrdersSlice = createSlice({
   initialState,
   reducers: {
     addOrderToOpenOrders: (state, action: PayloadAction<OrderDetails>) => {
-      return (state = [...state, action.payload]);
-    },
-    toggeIngredientOpenOrders: (state, action: PayloadAction<Toggle>) => {
-      state.forEach((order) =>
-        order.orderItemDetails.forEach((item) => {
-          if (item.itemId === action.payload.itemID) {
-            item.ingredients?.forEach((ingredient) => {
-              if (ingredient.ingredientId === action.payload.ingredientID) {
-                ingredient.selected = !ingredient.selected;
-              }
-            });
-          }
-        })
-      );
-    },
-    removeItemFromOpenOrders: (state, action: PayloadAction<string>) => {
-      let orderID: string;
-      // find the item in open orders and extract the order id
-      state.forEach((order) => {
-        order.orderItemDetails.forEach((item) => {
-          if (item.itemId === action.payload) {
-            orderID = order.orderId;
-          }
-        });
-      });
+      // return (state = [...state, action.payload]);
 
-      state.forEach((order) => {
-        if (order.orderId === orderID) {
-          // if there is only one item in the order, then we should completely remove the order
-          if (order.orderItemDetails.length === 1) {
-            state = state.filter((order) => order.orderId !== orderID);
-          } else {
-            // else just remove the item from the order
-            order.orderItemDetails = order.orderItemDetails.filter((item) => {
-              return item.itemId !== action.payload;
-            });
-          }
-        }
-      });
-
-      return state;
+      state.push(action.payload);
+    },
+    toggleIngredientOpenOrders: (state, action: PayloadAction<Toggle>) => {
+      const order = state.find((order) => order.orderId === action.payload.orderID);
+      const item = order?.orderItemDetails.find((item) => item.itemId === action.payload.itemID);
+      const ingredient = item?.ingredients?.find((ingredient) => ingredient.ingredientId === action.payload.ingredientID);
+      if (ingredient?.selected) {
+        ingredient.selected = !ingredient.selected;
+      }
+    },
+    removeItemFromOpenOrders: (state, action: PayloadAction<Remove>) => {
+      const order = state.find((order) => order.orderId === action.payload.orderID);
+      // if there is only one item in the order, then we should completely remove the order
+      if (order?.orderItemDetails.length === 1) {
+        state = state.filter((order) => order.orderId !== action.payload.orderID);
+      } else {
+        // else just remove the item from the order
+        if (order?.orderItemDetails)
+          order.orderItemDetails = order.orderItemDetails.filter((item) => {
+            return item.itemId !== action.payload.itemID;
+          });
+      }
     },
     addExtraIngredientToOpenOrders: (state, action: PayloadAction<AddExtra>) => {
-      let orderID: string;
-
-      //first iterate through the open orders to find the order containing the item to add ingredient to
-
-      state.forEach((order) => {
-        order.orderItemDetails.forEach((item) => {
-          if (item.itemId === action.payload.itemID) {
-            orderID = order.orderId;
-          }
-        });
-      });
-
-      const itemToAddTo = state.find((order) => order.orderId === orderID)?.orderItemDetails.find((item) => item.itemId === action.payload.itemID);
-      if (itemToAddTo?.ingredients) {
-        itemToAddTo.ingredients = [...itemToAddTo.ingredients, action.payload.ingredientToAdd];
+      const order = state.find((order) => order.orderId === action.payload.orderID);
+      const itemToAddIngredientTo = order?.orderItemDetails.find((item) => item.itemId === action.payload.itemID);
+      if (itemToAddIngredientTo?.ingredients) {
+        itemToAddIngredientTo.ingredients = [...itemToAddIngredientTo.ingredients, action.payload.ingredientToAdd];
       }
     },
     changeOrderStatus: (state, action: PayloadAction<string>) => {
@@ -81,5 +53,5 @@ const openOrdersSlice = createSlice({
 
 export default openOrdersSlice.reducer;
 
-export const { addOrderToOpenOrders, toggeIngredientOpenOrders, removeItemFromOpenOrders, changeOrderStatus, addExtraIngredientToOpenOrders } =
+export const { addOrderToOpenOrders, toggleIngredientOpenOrders, removeItemFromOpenOrders, changeOrderStatus, addExtraIngredientToOpenOrders } =
   openOrdersSlice.actions;
