@@ -1,0 +1,115 @@
+.mobile-screen {
+  border-radius: 20px;
+  min-width: 320px;
+  max-width: 480px;
+  position: relative;
+  border: 5px solid black;
+}
+
+@media screen and (max-width: 480px) {
+  .mobile-screen {
+    width: 100vw !important;
+    height: 100vh !important;
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+.grid-wrapper-bar,
+.grid-wrapper-food {
+  background: linear-gradient(to top, var(--one), var(--four));
+  border-top: 5px solid black;
+  border-radius: 0 0 14px 14px;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  height: 340px;
+  padding: 5px;
+  position: relative;
+
+  max-width: 390px;
+  margin: 0 auto;
+}
+
+.button {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  color: black;
+  font-size: 0.85em;
+  border-radius: 20px;
+  padding: 0.3em;
+  border: 2px solid black;
+  box-shadow: 2px 2px 7px black;
+  /* background: linear-gradient(to top, var(--three), var(--one)); */
+  background-color: var(--three);
+
+}
+
+.button:hover {
+  background-color: var(--two);
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.button:active {
+  /* background: linear-gradient(to top, rgb(14, 61, 64), rgb(74, 123, 125)); */
+  background-color: var(--one);
+
+}
+
+.text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  text-align: center;
+}
+
+.grid-wrapper-food .button {
+  /* background: linear-gradient(to top, rgb(18, 77, 81), rgb(95, 114, 160)); */
+  background-color: var(--one);
+}
+
+.grid-wrapper-food .button:hover {
+  background-color: var(--two);
+}
+
+.grid-wrapper-food .button:active {
+  background-color: var(--three);
+}
+
+
+.button-food {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-color: var(--one);
+  color: black;
+  font-size: 0.85em;
+  border-radius: 20px;
+  padding: 0.3em;
+  border: 2px solid black;
+  box-shadow: 2px 2px 7px black;
+  /* background: linear-gradient(to top, rgb(18, 77, 81), var(--one)); */
+  background-color: var(--three);
+
+}
+.button-drink {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  color: black;
+  font-size: 0.85em;
+  border-radius: 20px;
+  padding: 0.3em;
+  border: 2px solid black;
+  box-shadow: 2px 2px 7px black;
+  /* background: linear-gradient(to top, rgb(18, 77, 81), var(--one)); */
+  
+  background-color: var(--one)
+}
+

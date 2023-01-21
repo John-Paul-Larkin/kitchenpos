@@ -1,0 +1,196 @@
+.order-item-details {
+  background-color: var(--one);
+  /* padding-left: 1em; */
+  width: 40%;
+  border-radius: 0 14px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.item-options {
+  border-bottom: 1px solid black;
+  background-color: antiquewhite;
+  padding: 7.5px;
+  border-radius: 0 14px 0 0;
+  overflow: hidden;
+  height: 34px;
+}
+
+.remove-button {
+  padding: 0.5em 0.5em 0.3em 0.5em;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.remove-button-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.order-screen {
+  display: flex;
+  height: calc(100% - 345px);
+}
+
+.order-items-screen-container {
+  border-right: 3px solid black;
+  background-color: var(--three);
+  /* overflow: scroll; */
+  width: 60%;
+  border-radius: 14px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-wrapper {
+  padding: 0.5em 1em 1em 1em;
+  flex-grow: 1;
+}
+
+.order-items-screen {
+  padding: 0.5em;
+}
+
+.order-items {
+  background-color: var(--three);
+  padding: 0.1em;
+  margin: 0.2em;
+  border: 1px solid white;
+  cursor: pointer;
+  width: 90%;
+}
+
+.selected {
+  background-color: var(--one);
+  padding: 0.1em;
+  margin: 0.2em;
+  border: 1px solid black;
+  border-right: none;
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  left: -11px;
+  min-height: 1.2em;
+  color: white;
+}
+
+h2 {
+  font-size: 0.8em;
+  text-decoration: underline;
+  text-align: center;
+  display: inline-block;
+}
+
+span {
+  font-size: 0.9em;
+}
+
+.table-select {
+  color: blue;
+  width: 40px;
+  display: inline-block;
+  padding: 0;
+  margin-left: 5px;
+  font-size: 0.5em;
+  text-align: center;
+}
+
+.name-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price {
+  width: 30px;
+  /* margin-right: 10px; */
+}
+
+.order-alterations {
+  /* width: 50px; */
+  font-size: 0.6em;
+  display: flex;
+  flex-direction: row;
+}
+
+.name {
+  flex-grow: 0;
+}
+
+.total-amount {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+}
+
+.amount {
+  border-top: 1px solid white;
+  padding: 3px;
+  margin-right: 0.5em;
+  margin-bottom: 5px;
+  border-bottom: 5px double white;
+  width: 50px;
+}
+
+.middle {
+  flex-grow: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 110%;
+  /* position: relative; */
+  /* z-index: -1; */
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 5px;
+  padding-right: 10px;
+}
+
+.table-number {
+  font-size: 0.7em;
+  /* text-align: center; */
+  /* width: 80%; */
+  display: inline-block;
+  text-align: right;
+}
+
+.top {
+  border-bottom: 1px solid black;
+  background-color: antiquewhite;
+  /* padding: 7px; */
+  border-radius: 14px 0 0 0;
+  height: 34px;
+}
+
+.done-icon {
+  transform: scale(0.5);
+}
+
+.table-select-wrapper {
+  margin-top: 5px;
+  display: inline-block;
+  width: 90px;
+}
+
+.server-name {
+  display: inline-block;
+  width: calc(100% - 95px);
+  margin-left: 5px;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.ingredient-select {
+  width: 114px;
+}
