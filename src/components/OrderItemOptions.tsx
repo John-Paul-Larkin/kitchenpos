@@ -5,7 +5,7 @@ import styles from "../styles/OrderScreen.module.css";
 import SelectExtraIngredients from "./SelectExtraIngredients";
 
 import { removeItemFromOrderDetails, toggleIngredientOnOrderDetails } from "../features/orderDetailsSlice";
-import { addNewEdit } from "../features/unsentOrderEditsSlice";
+import { addNewEdit, addRemoveEdit } from "../features/unsentOrderEditsSlice";
 
 export default function OrderItemOptions() {
   const orderDetails = useAppSelector((state) => state.orderDetails);
@@ -21,12 +21,10 @@ export default function OrderItemOptions() {
     // check if the item has already been sent to the kitchen
     if (orderDetails.orderItemDetails[indexOfItemToToggleIngredient].isSentToKitchen === true) {
       const itemID = orderDetails.orderItemDetails[indexOfItemToToggleIngredient].itemId;
-      const orderID = orderDetails.orderId;
       // if it has locate the item  within the list of open orders
       // and toggle the ingredient to not selected
 
-
-      dispatch(addNewEdit({ orderID:orderID, itemID: itemID, ingredientID: ingredientID, editType: "toggleIngredientOpenOrders" }));
+      dispatch(addNewEdit({ itemID: itemID, ingredientID: ingredientID, editType: "toggleIngredientOpenOrders" }));
     }
     // Then toggle the item on the current order
     dispatch(toggleIngredientOnOrderDetails(ingredientID));
@@ -38,9 +36,10 @@ export default function OrderItemOptions() {
     if (selectedOrderItem?.isSentToKitchen === true) {
       // dispatch(removeItemFromOpenOrders(selectedOrderItem.itemId));
 
-      dispatch(addNewEdit({ orderID:orderDetails.orderId ,itemID:selectedOrderItem.itemId , editType: "removeItemFromOpenOrders" }));
-    }
+      console.log("id ar dispatch", orderDetails.orderId);
 
+      dispatch(addRemoveEdit({ itemID: selectedOrderItem.itemId, editType: "removeItemFromOpenOrders" }));
+    }
     // remove the item - this time from the list of items in the current order. ie visible on screen
     if (selectedOrderItem !== null) {
       dispatch(removeItemFromOrderDetails(selectedOrderItem.itemId));

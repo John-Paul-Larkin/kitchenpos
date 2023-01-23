@@ -13,9 +13,10 @@ interface MenuItem {
   name: string;
   price: number;
   itemId: string;
-  ingredients?: Ingredients[];
+  ingredients: Ingredients[];
   isSentToKitchen?: boolean;
   station: Station;
+  // orderID?: string;
 }
 interface Ingredients {
   ingredient: Ingredient;
@@ -71,20 +72,18 @@ type Edits = RemoveEdit | AddExtraEdit | ToggleEdit;
 
 interface AddExtraEdit {
   ingredientToAdd: Ingredients;
-  orderID: string;
+
   itemID: string;
   editType: "addExtraIngredientToOpenOrders";
 }
 
 interface ToggleEdit {
-  orderID: string;
   itemID: string;
   ingredientID: string;
   editType: "toggleIngredientOpenOrders";
 }
 
 interface RemoveEdit {
-  orderID: string;
   itemID: string;
   editType: "removeItemFromOpenOrders";
 }
@@ -100,16 +99,13 @@ interface Screens {
 interface Toggle {
   itemID: string;
   ingredientID: string;
-  orderID: string;
 }
 
-interface AddExtra {
+interface AddIngredient {
   ingredientToAdd: Ingredients;
   itemID: string;
-  orderID: string;
 }
 
 interface Remove {
-  orderID: string;
   itemID: string;
 }

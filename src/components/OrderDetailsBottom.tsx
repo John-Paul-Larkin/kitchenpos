@@ -15,7 +15,6 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
   const dispatch = useAppDispatch();
   const orderDetails = useAppSelector((state) => state.orderDetails);
   const unsentOrderEdits = useAppSelector((state) => state.unsentOrderEdits);
-  const openOrders = useAppSelector((state) => state.openOrders);
 
   const { setisShowFloorPlan } = useContext(menuContext);
   const sendFirestore = useFirestore();
@@ -25,7 +24,6 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
     const totalPrice = orderDetails.orderItemDetails.reduce((total, current) => {
       return total + current.price;
     }, 0);
-
     return totalPrice.toLocaleString(undefined, {
       style: "currency",
       currency: "EUR",
@@ -35,20 +33,18 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
   const handleSaveEdits = () => {
     unsentOrderEdits.forEach((edit) => {
       const editType = edit.editType;
-      const orderID = edit.orderID;
+ 
       const itemID = edit.itemID;
 
       if (editType === "toggleIngredientOpenOrders") {
-        dispatch(toggleIngredientOpenOrders({ orderID, itemID, ingredientID: edit.ingredientID }));
-        console.log("bd", openOrders);
-
-        sendFirestore({ orderID, itemID, ingredientID: edit.ingredientID, type: "toggle" });
+        dispatch(toggleIngredientOpenOrders({  itemID, ingredientID: edit.ingredientID }));
+        sendFirestore({  itemID, ingredientID: edit.ingredientID, type: "toggle" });
       } else if (edit.editType === "addExtraIngredientToOpenOrders") {
-        dispatch(addExtraIngredientToOpenOrders({ orderID, itemID, ingredientToAdd: edit.ingredientToAdd }));
-        // sendFirestore()
+        dispatch(addExtraIngredientToOpenOrders({  itemID, ingredientToAdd: edit.ingredientToAdd }));
+        sendFirestore({  itemID, ingredientToAdd: edit.ingredientToAdd, type: "addIngredient" });
       } else if (edit.editType === "removeItemFromOpenOrders") {
-        dispatch(removeItemFromOpenOrders({ itemID, orderID }));
-        // sendFirestore()
+        dispatch(removeItemFromOpenOrders({ itemID }));
+        sendFirestore({ itemID, type: "removeItem" });
       }
     });
 
@@ -59,7 +55,7 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
       }
     });
 
-    // Weird bug here. TS wont allow anyNewitems === true
+    // Weird bug here. TS wont allow anyNewItemsAddedSinceEdit === true
     // but will allow the double negative !== false
     // casting anyNewsItems as boolean fixes it????
     if ((anyNewItemsAddedSinceEdit as boolean) === false) {
@@ -82,7 +78,6 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
     setisShowFloorPlan(true);
   };
 
-  console.log("odb", openOrders);
 
   return (
     <div className={styles["bottom"]}>

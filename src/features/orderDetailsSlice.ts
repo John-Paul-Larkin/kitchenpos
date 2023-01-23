@@ -38,16 +38,22 @@ const orderDetailsSlice = createSlice({
     addOrderTimeStripOutSentItemsOrderDetails: (state) => {
       // adding id,server and time when order is sent through to firebase/kitchen
       const timeNow = Date.now();
-
+      const orderID = uuid();
       state.timeOrderPlaced = timeNow;
       state.orderStatus = "pending";
-      state.orderId = uuid();
+      state.orderId = orderID;
+
       if (auth.currentUser && auth.currentUser.displayName !== null) {
         state.server = auth.currentUser.displayName;
       }
-
       // Strip out the items which have already been sent on previous orders.
       state.orderItemDetails = state.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
+
+      // Then mark each item with the orderID
+      // necessary since we amalgamate orders which are on the same table
+      // state.orderItemDetails = state.orderItemDetails.map((item) => {
+      //   return { ...item, orderID: orderID };
+      // });
     },
     clearOrderDetails: (state) => {
       state.tableNumber = "";
@@ -67,7 +73,7 @@ const orderDetailsSlice = createSlice({
       );
     },
 
-    addExtraIngredientOnOrderDetails: (state, action: PayloadAction<AddExtra>) => {
+    addExtraIngredientOnOrderDetails: (state, action: PayloadAction<AddIngredient>) => {
       state.orderItemDetails.forEach((item) => {
         if (item.itemId === action.payload.itemID) {
           item.ingredients?.push(action.payload.ingredientToAdd);

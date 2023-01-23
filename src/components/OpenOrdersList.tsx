@@ -6,8 +6,6 @@ import SingleFoodOrder from "./SingleFoodOrder";
 export default function OpenOrdersList() {
   const openOrders = useAppSelector((state) => state.openOrders);
 
-
-
   return (
     <div className={styles["open-orders-container"]}>
       <div className={styles["food-heading"]}>Food orders</div>
@@ -46,4 +44,3 @@ export default function OpenOrdersList() {
     </div>
   );
 }
-

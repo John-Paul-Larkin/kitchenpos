@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { addNewItemToOrderDetails } from "../features/orderDetailsSlice";
 import { setSelectedOrderItem } from "../features/selectedOrderItemSlice";
 
@@ -8,9 +8,7 @@ import styles from "../styles/MobileScreen.module.css";
 
 export default function MenuItemButton({ item }: { item: MenuItem }) {
   const dispatch = useAppDispatch();
-
   const handleMenuButtonClick = (item: MenuItem) => {
-
     const id = uuid();
     //create an id for the item, as the same item may be in the basket multiple times
     item = { ...item, itemId: id };
