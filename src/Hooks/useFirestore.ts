@@ -1,5 +1,4 @@
 import { deleteDoc, doc, setDoc, updateDoc } from "firebase/firestore";
-import { truncate } from "fs/promises";
 import { useAppSelector } from "../app/hooks";
 
 import db from "../Firebase/firebaseconfig";

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppDispatch } from "../app/hooks";
 import { addNewItemToOrderDetails } from "../features/orderDetailsSlice";
 import { setSelectedOrderItem } from "../features/selectedOrderItemSlice";
 
