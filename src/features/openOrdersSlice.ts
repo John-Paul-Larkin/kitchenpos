@@ -42,8 +42,7 @@ const openOrdersSlice = createSlice({
 
       const order = state.find((order) => order.orderId === orderID);
 
-      console.log("id", order?.orderId);
-      console.log("details", order?.orderItemDetails);
+
 
       if (state.length === 1 && order?.orderItemDetails.length === 1) {
         // if there is only one item on the order, and it is the ONLY order

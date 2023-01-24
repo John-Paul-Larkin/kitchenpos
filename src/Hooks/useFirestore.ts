@@ -1,4 +1,5 @@
-import { collection, deleteDoc, doc, setDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc, updateDoc } from "firebase/firestore";
+import { truncate } from "fs/promises";
 import { useAppSelector } from "../app/hooks";
 
 import db from "../Firebase/firebaseconfig";
@@ -16,7 +17,8 @@ interface FireAddIngredient extends AddIngredient {
   type: "addIngredient";
 }
 
-interface FireRemoveItem extends Remove {
+interface FireRemoveItem {
+  itemIDsToRemove: string[];
   type: "removeItem";
 }
 
@@ -48,53 +50,80 @@ export default function useFirestore() {
           });
         });
 
+        const orderItemWithoutSent = orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
         const docRef = doc(db, "orders", orderID!);
-        await updateDoc(docRef, { orderItemDetails: [...orderDetails.orderItemDetails] });
+        await updateDoc(docRef, { orderItemDetails: [...orderItemWithoutSent] });
       } catch (error) {
         console.log(error);
       }
     }
+
     if (input.type === "removeItem") {
-      let orderID: string | undefined;
+      // input.itemIDsToRemove here is a list of all the items to be removed when the user edits
 
-      openOrders.forEach((order) => {
-        order.orderItemDetails.forEach((item) => {
-          if (item.itemId === input.itemID) {
-            orderID = order.orderId;
-          }
+      let listOfOrderIDs = getOrderIDforEachItemID(input.itemIDsToRemove, openOrders);
+      listOfOrderIDs = removeDuplicates(listOfOrderIDs);
+
+      listOfOrderIDs.forEach((orderID) => {
+        let orderItemDetails = openOrders.find((order) => order.orderId === orderID)?.orderItemDetails;
+
+        orderItemDetails = orderItemDetails?.filter((item) => {
+          if (!input.itemIDsToRemove.includes(item.itemId)) {
+            return item;
+          } else return null;
         });
+
+        sendEditedorderItemIDs(orderItemDetails, orderID);
       });
-
-      const order = openOrders.find((order) => order.orderId === orderID);
-
-      const test = orderDetails.orderItemDetails;
-
-      if (order?.orderItemDetails.length === 1 && orderID !== undefined) {
-        try {
-          const docRef = doc(db, "orders", orderID);
-          await deleteDoc(docRef);
-          console.log("deleted the last");
-        } catch (error) {
-          console.log(error);
-        }
-      } else if (orderID !== undefined) {
-        try {
-          const docRef = doc(db, "orders", orderID);
-          if (order?.orderItemDetails !== undefined) {
-            // let orderItemDetailsToSpread = order?.orderItemDetails.filter((item) => item.orderID === orderID);
-
-            // orderItemDetailsToSpread = orderItemDetailsToSpread.filter((item) => item.itemId !== input.itemID);
-
-            const orderItemDetailsToSpread = order?.orderItemDetails.filter((item) => item.itemId !== input.itemID);
-
-            await updateDoc(docRef, { orderItemDetails: [...orderItemDetailsToSpread] });
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }
     }
   };
 
   return sendFirestore;
+}
+
+function getOrderIDforEachItemID(itemIDsToRemove: string[], openOrders: OrderDetails[]) {
+  let listOfOrderIDs: string[] = [];
+
+  itemIDsToRemove.forEach((itemID) => {
+    openOrders.forEach((order) => {
+      order.orderItemDetails.forEach((item) => {
+        if (item.itemId === itemID) {
+          listOfOrderIDs.push(order.orderId);
+        }
+      });
+    });
+  });
+  return listOfOrderIDs;
+}
+
+function removeDuplicates(arr: string[]) {
+  let unique: string[] = [];
+  arr.forEach((element) => {
+    if (!unique.includes(element)) {
+      unique.push(element);
+    }
+  });
+  return unique;
+}
+
+async function sendEditedorderItemIDs(orderItemDetails: MenuItem[] | undefined, orderID: string) {
+  if (orderItemDetails === undefined || orderItemDetails.length === 0) {
+    try {
+      const docRef = doc(db, "orders", orderID);
+      await deleteDoc(docRef);
+    } catch (error) {
+      console.log(error);
+    }
+  } else {
+    try {
+      const docRef = doc(db, "orders", orderID);
+      // if (order?.orderItemDetails !== undefined) {
+      // let orderItemDetailsToSpread = order?.orderItemDetails.filter((item) => item.orderID === orderID);
+      // orderItemDetailsToSpread = orderItemDetailsToSpread.filter((item) => item.itemId !== input.itemID);
+      // const orderItemDetailsToSpread = order?.orderItemDetails.filter((item) => item.itemId !== input.itemID);
+      await updateDoc(docRef, { orderItemDetails: [...orderItemDetails] });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

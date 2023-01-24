@@ -11,7 +11,6 @@ export default function useSignInAnon() {
       .then(() => {
         setIsLoggedIn(true);
 
-        console.log(auth.currentUser?.displayName);
         if (auth.currentUser) {
           updateProfile(auth.currentUser, {
             displayName: "Tom",
@@ -24,7 +23,6 @@ export default function useSignInAnon() {
               // ...
               console.log(error);
             });
-          console.log(auth.currentUser.displayName);
         }
       })
       .catch((error) => {

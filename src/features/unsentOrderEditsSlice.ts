@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Combine {
-  edits:Edits[];
-  removeEdits:RemoveEdit;
-}
+// interface Combine {
+//   edits:Edits[];
+//   removeEdits:RemoveEdit;
+// }
 
-const initialState:Combine  = {} as Combine;
+
+const initialState:Edits[] = [];
 
 const unsentOrderEditsSlice = createSlice({
   name: "unsentOrderEdits",
@@ -14,16 +15,11 @@ const unsentOrderEditsSlice = createSlice({
     addNewEdit: (state, action: PayloadAction<Edits>) => {
       state.push(action.payload);
     },
-    addRemoveEdit:(state, action: PayloadAction<Edits>) => {
-        action.payload.itemID
-        action.payload.editType
-
-    },
     clearEdits: (state) => {
-      return (state = []);
+      return (state = initialState);
     },
   },
 });
 
 export default unsentOrderEditsSlice.reducer;
-export const { addNewEdit, addRemoveEdit, clearEdits } = unsentOrderEditsSlice.actions;
+export const { addNewEdit,  clearEdits } = unsentOrderEditsSlice.actions;

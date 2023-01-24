@@ -31,22 +31,29 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
   };
 
   const handleSaveEdits = () => {
+    let itemIDsToRemove: string[] = [];
+
     unsentOrderEdits.forEach((edit) => {
+      // here we cycle through the array of edits and send the edit to firestore
+      // the exception is remove edits, which we push to an array, so they can all
+      // be processed in one batch
+
       const editType = edit.editType;
- 
       const itemID = edit.itemID;
 
       if (editType === "toggleIngredientOpenOrders") {
-        dispatch(toggleIngredientOpenOrders({  itemID, ingredientID: edit.ingredientID }));
-        sendFirestore({  itemID, ingredientID: edit.ingredientID, type: "toggle" });
+        dispatch(toggleIngredientOpenOrders({ itemID, ingredientID: edit.ingredientID }));
+        sendFirestore({ itemID, ingredientID: edit.ingredientID, type: "toggle" });
       } else if (edit.editType === "addExtraIngredientToOpenOrders") {
-        dispatch(addExtraIngredientToOpenOrders({  itemID, ingredientToAdd: edit.ingredientToAdd }));
-        sendFirestore({  itemID, ingredientToAdd: edit.ingredientToAdd, type: "addIngredient" });
+        dispatch(addExtraIngredientToOpenOrders({ itemID, ingredientToAdd: edit.ingredientToAdd }));
+        sendFirestore({ itemID, ingredientToAdd: edit.ingredientToAdd, type: "addIngredient" });
       } else if (edit.editType === "removeItemFromOpenOrders") {
         dispatch(removeItemFromOpenOrders({ itemID }));
-        sendFirestore({ itemID, type: "removeItem" });
+        itemIDsToRemove.push(itemID);
       }
     });
+
+    sendFirestore({ itemIDsToRemove, type: "removeItem" });
 
     let anyNewItemsAddedSinceEdit: boolean = false;
     orderDetails.orderItemDetails.forEach((item) => {
@@ -77,7 +84,6 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
     dispatch(clearOrderDetails());
     setisShowFloorPlan(true);
   };
-
 
   return (
     <div className={styles["bottom"]}>

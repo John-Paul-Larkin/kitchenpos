@@ -17,7 +17,6 @@ export default function useSignInGoogle() {
         // // ...
         // console.log(token, user);
         setIsLoggedIn(true);
-        console.log("google", auth.currentUser!.displayName);
       })
       .catch((error) => {
         // Handle Errors here.

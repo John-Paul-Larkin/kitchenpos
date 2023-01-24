@@ -5,7 +5,7 @@ import styles from "../styles/OrderScreen.module.css";
 import SelectExtraIngredients from "./SelectExtraIngredients";
 
 import { removeItemFromOrderDetails, toggleIngredientOnOrderDetails } from "../features/orderDetailsSlice";
-import { addNewEdit, addRemoveEdit } from "../features/unsentOrderEditsSlice";
+import { addNewEdit} from "../features/unsentOrderEditsSlice";
 
 export default function OrderItemOptions() {
   const orderDetails = useAppSelector((state) => state.orderDetails);
@@ -34,11 +34,9 @@ export default function OrderItemOptions() {
 
   const handleremoveItemFromOrderDetails = () => {
     if (selectedOrderItem?.isSentToKitchen === true) {
-      // dispatch(removeItemFromOpenOrders(selectedOrderItem.itemId));
+  
 
-      console.log("id ar dispatch", orderDetails.orderId);
-
-      dispatch(addRemoveEdit({ itemID: selectedOrderItem.itemId, editType: "removeItemFromOpenOrders" }));
+      dispatch(addNewEdit({ itemID: selectedOrderItem.itemId, editType: "removeItemFromOpenOrders" }));
     }
     // remove the item - this time from the list of items in the current order. ie visible on screen
     if (selectedOrderItem !== null) {
