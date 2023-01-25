@@ -1,10 +1,14 @@
 import { signInAnonymously, updateProfile } from "firebase/auth";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext } from "react";
+import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
-import { auth } from "../Firebase/firebaseconfig";
+import { addOrderToOpenOrders } from "../features/openOrdersSlice";
+import db, { auth } from "../Firebase/firebaseconfig";
 
 export default function useSignInAnon() {
   const { setIsLoggedIn } = useContext(menuContext);
+  const dispatch = useAppDispatch();
 
   return function signInAnon() {
     signInAnonymously(auth)
@@ -13,10 +17,14 @@ export default function useSignInAnon() {
 
         if (auth.currentUser) {
           updateProfile(auth.currentUser, {
-            displayName: "Tom",
+            displayName: "Timmy",
           })
             .then(() => {
-              console.log("profile updated");
+              initDataFromFirestore().then((orders) => {
+                orders.forEach((orderDetails) => {
+                  dispatch(addOrderToOpenOrders(orderDetails));
+                });
+              });
             })
             .catch((error) => {
               // An error occurred
@@ -31,4 +39,17 @@ export default function useSignInAnon() {
         console.log(errorCode, errorMessage);
       });
   };
+}
+
+async function initDataFromFirestore() {
+  const q = query(collection(db, "orders"), where("orderStatus", "==", "pending"));
+
+  const data: OrderDetails[] = [];
+
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    data.push(doc.data() as OrderDetails);
+  });
+
+  return data;
 }
