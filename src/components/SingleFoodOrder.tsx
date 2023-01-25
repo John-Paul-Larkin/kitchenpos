@@ -1,4 +1,4 @@
-import { add } from "date-fns";
+import { add, differenceInSeconds } from "date-fns";
 import { motion } from "framer-motion";
 import React, { useContext, useRef, useState } from "react";
 import { useStopwatch, useTimer } from "react-timer-hook";
@@ -51,8 +51,14 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   const dispatch = useAppDispatch();
 
   const orderTime = new Date(order.timeOrderPlaced!);
+  const timeNow = new Date();
+  const offsetFromTenMinues = 600 - differenceInSeconds(timeNow, orderTime);
 
-  const finishTime = useRef(add(orderTime, { seconds: 600 }));
+  // Standard timer is ten mins (600 seconds)
+  // When loading the order for the first time we calculate the difference
+  // between now and the order time. and assign it to a Ref
+
+  const finishTime = useRef(add(orderTime, { seconds: offsetFromTenMinues }));
 
   const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
 
