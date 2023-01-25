@@ -7,10 +7,15 @@ import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
 
 import { useAppDispatch } from "../app/hooks";
+import { differenceInSeconds } from "date-fns";
 
-function Stopwatch() {
-  const { seconds, minutes } = useStopwatch({ autoStart: true });
+function Stopwatch({ orderTime }: { orderTime: Date }) {
+  const stopwatchOffset = new Date();
+  const timeNow = new Date();
 
+  stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + differenceInSeconds(timeNow, orderTime));
+  
+  const { seconds, minutes } = useStopwatch({ autoStart: true, offsetTimestamp: stopwatchOffset });
   return (
     <div className={styles["stopwatch"]}>
       {minutes}:{seconds}
@@ -37,6 +42,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   }
 
   const orderTimeDisplay = new Date(order.timeOrderPlaced!).toLocaleTimeString();
+  const orderTime = new Date(order.timeOrderPlaced!);
 
   return (
     <motion.div
@@ -49,7 +55,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
       <div className={styles["time-order-placed"]}>{orderTimeDisplay}</div>
 
       <div className={styles["table-number"]}>{order.tableNumber}</div>
-      <Stopwatch />
+      <Stopwatch orderTime={orderTime}/>
       <div>
         {order.orderItemDetails.map((item) => {
           if (item.station === "bar") {

@@ -9,8 +9,13 @@ import { changeTableNumberOrderDetails } from "../features/orderDetailsSlice";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
 
-function Stopwatch() {
-  const { seconds, minutes } = useStopwatch({ autoStart: true });
+function Stopwatch({ orderTime }: { orderTime: Date }) {
+  const stopwatchOffset = new Date();
+  const timeNow = new Date();
+
+  stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + differenceInSeconds(timeNow, orderTime) - 600);
+
+  const { seconds, minutes } = useStopwatch({ autoStart: true, offsetTimestamp: stopwatchOffset });
 
   return (
     <div className={styles["stopwatch"]}>
@@ -47,20 +52,16 @@ function Timer({
 
 export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   const [isShowStopWatch, setIsShowStopWatch] = useState(false);
-
+  const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
   const dispatch = useAppDispatch();
 
   const orderTime = new Date(order.timeOrderPlaced!);
   const timeNow = new Date();
   const offsetFromTenMinues = 600 - differenceInSeconds(timeNow, orderTime);
-
   // Standard timer is ten mins (600 seconds)
   // When loading the order for the first time we calculate the difference
   // between now and the order time. and assign it to a Ref
-
   const finishTime = useRef(add(orderTime, { seconds: offsetFromTenMinues }));
-
-  const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
 
   const changeTableNumber = useChangeTableNumber();
 
@@ -91,7 +92,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
 
       <div className={styles["table-number"]}>{order.tableNumber}</div>
       {!isShowStopWatch && <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={finishTime.current} orderID={order.orderId} />}
-      {isShowStopWatch && <Stopwatch />}
+      {isShowStopWatch && <Stopwatch orderTime={orderTime} />}
 
       <div>
         {order.orderItemDetails.map((item) => {

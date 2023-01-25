@@ -21,7 +21,6 @@ export default function useSignInAnon() {
           })
             .then(() => {
               initDataFromFirestore().then((orders) => {
-                orders.reverse();
                 orders.forEach((orderDetails) => {
                   dispatch(addOrderToOpenOrders(orderDetails));
                 });
