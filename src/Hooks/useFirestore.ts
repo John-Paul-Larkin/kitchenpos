@@ -36,11 +36,10 @@ export default function useFirestore() {
       } catch (error) {
         console.log(error);
       }
-    }
-    if (input.type === "toggle" || input.type === "addIngredient") {
+    } else if (input.type === "toggle" || input.type === "addIngredient") {
       try {
         let orderID: string | undefined;
-
+        // find the id of the order which contains the item to edit
         openOrders.forEach((order) => {
           order.orderItemDetails.forEach((item) => {
             if (item.itemId === input.itemID) {
@@ -49,16 +48,21 @@ export default function useFirestore() {
           });
         });
 
-        const orderItemWithoutSent = orderDetails.orderItemDetails.filter((item) => item.isSentToKitchen !== true);
+        // get array of item IDs which were on that particulaar order
+        const itemIDsInOrder = openOrders.find((order) => order.orderId === orderID)?.orderItemDetails.map((item) => item.itemId)!;
+
+        // filter order Items to only include items from the particular ID
+        const onlyRelevantItemDetails = orderDetails.orderItemDetails.filter((item) => itemIDsInOrder.includes(item.itemId));
+
+        // const orderItemDetails = openOrders.find(order=>order.orderId === orderID)?.orderItemDetails
         const docRef = doc(db, "orders", orderID!);
-        await updateDoc(docRef, { orderItemDetails: [...orderItemWithoutSent] });
+
+        await updateDoc(docRef, { orderItemDetails: [...onlyRelevantItemDetails] });
       } catch (error) {
         console.log(error);
       }
-    }
-
-    if (input.type === "removeItem") {
-      // input.itemIDsToRemove here is a list of all the items to be removed when the user edits
+    } else if (input.type === "removeItem") {
+      // input.itemIDsToRemove is a list of all the items to be removed when the user edits
 
       let listOfOrderIDs = getOrderIDforEachItemID(input.itemIDsToRemove, openOrders);
       listOfOrderIDs = removeDuplicates(listOfOrderIDs);
@@ -72,7 +76,7 @@ export default function useFirestore() {
           } else return null;
         });
 
-        sendEditedorderItemIDs(orderItemDetails, orderID);
+        sendEditedOrderItemIDs(orderItemDetails, orderID);
       });
     }
   };
@@ -105,7 +109,7 @@ function removeDuplicates(arr: string[]) {
   return unique;
 }
 
-async function sendEditedorderItemIDs(orderItemDetails: MenuItem[] | undefined, orderID: string) {
+async function sendEditedOrderItemIDs(orderItemDetails: MenuItem[] | undefined, orderID: string) {
   if (orderItemDetails === undefined || orderItemDetails.length === 0) {
     try {
       const docRef = doc(db, "orders", orderID);
@@ -116,10 +120,6 @@ async function sendEditedorderItemIDs(orderItemDetails: MenuItem[] | undefined, 
   } else {
     try {
       const docRef = doc(db, "orders", orderID);
-      // if (order?.orderItemDetails !== undefined) {
-      // let orderItemDetailsToSpread = order?.orderItemDetails.filter((item) => item.orderID === orderID);
-      // orderItemDetailsToSpread = orderItemDetailsToSpread.filter((item) => item.itemId !== input.itemID);
-      // const orderItemDetailsToSpread = order?.orderItemDetails.filter((item) => item.itemId !== input.itemID);
       await updateDoc(docRef, { orderItemDetails: [...orderItemDetails] });
     } catch (error) {
       console.log(error);
