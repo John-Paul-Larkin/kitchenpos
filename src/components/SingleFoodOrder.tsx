@@ -17,9 +17,16 @@ function Stopwatch({ startTime }: { startTime: Date }) {
 
   const { seconds, minutes } = useStopwatch({ autoStart: true, offsetTimestamp: stopwatchOffset });
 
+  // extra digit for formatting under ten seconds
+  let extraDigit: null | string = null;
+  if (seconds < 10) {
+    extraDigit = "0";
+  }
+
   return (
     <div className={styles["stopwatch"]}>
-      {minutes}:{seconds}
+      {minutes}:{extraDigit}
+      {seconds}
     </div>
   );
 }
@@ -62,7 +69,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
   const dispatch = useAppDispatch();
 
-  const finishTime = new Date(order.timeOrderPlaced! + 60000);
+  const finishTime = new Date(order.timeOrderPlaced! + 600000);
 
   const changeTableNumber = useChangeTableNumber();
 
