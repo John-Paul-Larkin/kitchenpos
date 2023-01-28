@@ -99,7 +99,7 @@ export const foodMenuItems: MenuItem[] = [
   {
     itemId: "9",
     name: "Steak sandwich",
-    station: "salad",
+    station: "grill",
     price: 15.95,
     ingredients: [
       { ingredient: "Fried onions", selected: true },

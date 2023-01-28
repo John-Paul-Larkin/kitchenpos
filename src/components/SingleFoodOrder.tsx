@@ -1,6 +1,6 @@
-import { add, differenceInSeconds } from "date-fns";
+import { differenceInSeconds } from "date-fns";
 import { motion } from "framer-motion";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useStopwatch, useTimer } from "react-timer-hook";
 import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
@@ -55,13 +55,16 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
   const dispatch = useAppDispatch();
 
-  const orderTime = new Date(order.timeOrderPlaced!);
-  const timeNow = new Date();
-  const offsetFromTenMinues = 600 - differenceInSeconds(timeNow, orderTime);
+  // const orderTime = new Date(order.timeOrderPlaced!);
+  // const timeNow = new Date();
+  // const offsetFromTenMinues = 600 - differenceInSeconds(timeNow, orderTime);
   // Standard timer is ten mins (600 seconds)
   // When loading the order for the first time we calculate the difference
   // between now and the order time. and assign it to a Ref
-  const finishTime = useRef(add(orderTime, { seconds: offsetFromTenMinues }));
+  // const finishTime = useRef(add(orderTime, { seconds: offsetFromTenMinues }));
+
+  const finishTime = new Date(order.timeOrderPlaced! + 600000);
+  const orderTime = new Date(order.timeOrderPlaced!);
 
   const changeTableNumber = useChangeTableNumber();
 
@@ -91,7 +94,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
       <div className={styles["time-order-placed"]}>{orderTimeDisplay}</div>
 
       <div className={styles["table-number"]}>{order.tableNumber}</div>
-      {!isShowStopWatch && <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={finishTime.current} orderID={order.orderId} />}
+      {!isShowStopWatch && <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={finishTime} orderID={order.orderId} />}
       {isShowStopWatch && <Stopwatch orderTime={orderTime} />}
 
       <div>

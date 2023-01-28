@@ -5,3 +5,6 @@
 
 mutltiple states/reducers for orderdetails etc
 how to handle edits
+
+issue with timer not syncing up.
+non serialized data in a redux reducer
