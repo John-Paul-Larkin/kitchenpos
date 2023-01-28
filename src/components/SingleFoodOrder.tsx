@@ -9,11 +9,11 @@ import { changeTableNumberOrderDetails } from "../features/orderDetailsSlice";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
 
-function Stopwatch({ orderTime }: { orderTime: Date }) {
+function Stopwatch({ startTime }: { startTime: Date }) {
   const stopwatchOffset = new Date();
   const timeNow = new Date();
 
-  stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + differenceInSeconds(timeNow, orderTime) - 600);
+  stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + differenceInSeconds(timeNow, startTime));
 
   const { seconds, minutes } = useStopwatch({ autoStart: true, offsetTimestamp: stopwatchOffset });
 
@@ -43,9 +43,16 @@ function Timer({
     },
   });
 
+  let extraDigit: null | string = null;
+
+  if (seconds < 10) {
+    extraDigit = "0";
+  }
+
   return (
     <div className={styles["timer"]}>
-      {minutes} {seconds}{" "}
+      {minutes}:{extraDigit}
+      {seconds}
     </div>
   );
 }
@@ -55,16 +62,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
   const dispatch = useAppDispatch();
 
-  // const orderTime = new Date(order.timeOrderPlaced!);
-  // const timeNow = new Date();
-  // const offsetFromTenMinues = 600 - differenceInSeconds(timeNow, orderTime);
-  // Standard timer is ten mins (600 seconds)
-  // When loading the order for the first time we calculate the difference
-  // between now and the order time. and assign it to a Ref
-  // const finishTime = useRef(add(orderTime, { seconds: offsetFromTenMinues }));
-
-  const finishTime = new Date(order.timeOrderPlaced! + 600000);
-  const orderTime = new Date(order.timeOrderPlaced!);
+  const finishTime = new Date(order.timeOrderPlaced! + 60000);
 
   const changeTableNumber = useChangeTableNumber();
 
@@ -95,7 +93,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
 
       <div className={styles["table-number"]}>{order.tableNumber}</div>
       {!isShowStopWatch && <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={finishTime} orderID={order.orderId} />}
-      {isShowStopWatch && <Stopwatch orderTime={orderTime} />}
+      {isShowStopWatch && <Stopwatch startTime={finishTime} />}
 
       <div>
         {order.orderItemDetails.map((item) => {
