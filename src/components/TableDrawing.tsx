@@ -15,11 +15,11 @@ export default function TableDrawing({
 }) {
   const openOrders = useAppSelector((state) => state.openOrders);
 
-  console.log(
-    openOrders.map((order) => {
-      return { table: order.tableNumber, stat: order.orderStatus };
-    })
-  );
+  // console.log(
+  //   openOrders.map((order) => {
+  //     return { table: order.tableNumber, stat: order.orderStatus };
+  //   })
+  // );
 
   let tableColor = "black";
 

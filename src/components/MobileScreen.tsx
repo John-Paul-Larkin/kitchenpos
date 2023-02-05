@@ -11,7 +11,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { motion } from "framer-motion";
 import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
-import { changeOrderStatusOnInit } from "../features/openOrdersSlice";
+import { changeOrderStatusOnInit, closeOrders } from "../features/openOrdersSlice";
 import db from "../Firebase/firebaseconfig";
 import useSignInAnon from "../Hooks/useSignInAnon";
 import useSignInGoogle from "../Hooks/useSignInGoogle";
@@ -52,9 +52,10 @@ export default function MobileScreen() {
   }, []);
 
   orders.forEach((order) => {
-    console.log('here')
     dispatch(changeOrderStatusOnInit({ orderID: order.orderId, status: order.orderStatus }));
   });
+
+  dispatch(closeOrders(orders));
 
   return (
     <>

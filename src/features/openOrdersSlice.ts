@@ -87,11 +87,18 @@ const openOrdersSlice = createSlice({
     },
     changeOrderStatusOnInit: (state, action: PayloadAction<ChangeStatus>) => {
       const order = state.find((order) => order.orderId === action.payload.orderID);
-      console.log("order", order);
       if (order) {
-        console.log("stat", action.payload.status);
         order.orderStatus = action.payload.status;
       }
+    },
+    closeOrders: (state, action: PayloadAction<OrderDetails[]>) => {
+      return (state = state.filter((stateOrder) => {
+        console.log(
+          "222",
+          action.payload.some((order) => order.orderId === stateOrder.orderId)
+        );
+        return action.payload.some((order) => order.orderId === stateOrder.orderId);
+      }));
     },
   },
 });
@@ -105,4 +112,5 @@ export const {
   changeOrderStatus,
   changeOrderStatusOnInit,
   addExtraIngredientToOpenOrders,
+  closeOrders,
 } = openOrdersSlice.actions;
