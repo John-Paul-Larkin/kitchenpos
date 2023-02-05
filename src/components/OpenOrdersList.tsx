@@ -6,6 +6,8 @@ import SingleFoodOrder from "./SingleFoodOrder";
 export default function OpenOrdersList() {
   const openOrders = useAppSelector((state) => state.openOrders);
 
+  // openOrders.forEach((order) => console.log(order.tableNumber, order.orderStatus));
+
   return (
     <div className={styles["open-orders-container"]}>
       <div className={styles["food-heading"]}>Food orders</div>

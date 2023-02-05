@@ -1,11 +1,16 @@
 interface OrderDetails {
   orderId: string;
   tableNumber: string;
-  timeOrderPlaced: number | null;
   server: string;
   orderItemDetails: MenuItem[];
-  orderStatus: "pending" | "time up" | "ready" | "closed";
+  orderStatus: OrderStatus;
+  timeOrderPlaced: number | null;
+  timeTimeUp: number | null;
+  timeReady: number | null;
+  timeClosed: number | null;
 }
+
+type OrderStatus = "pending" | "time up" | "ready" | "closed";
 
 type Station = "bar" | "salad" | "fry" | "grill" | "expeditor";
 
@@ -88,6 +93,11 @@ interface RemoveEdit {
   editType: "removeItemFromOpenOrders";
 }
 
+interface ChangeStatus {
+  orderID: string;
+  status: OrderStatus;
+}
+
 interface Screens {
   value: {
     width: number;
@@ -109,3 +119,4 @@ interface AddIngredient {
 interface Remove {
   itemID: string;
 }
+

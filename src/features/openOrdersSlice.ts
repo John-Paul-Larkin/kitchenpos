@@ -42,8 +42,6 @@ const openOrdersSlice = createSlice({
 
       const order = state.find((order) => order.orderId === orderID);
 
-
-
       if (state.length === 1 && order?.orderItemDetails.length === 1) {
         // if there is only one item on the order, and it is the ONLY order
         // then we should clear the openOrder array
@@ -87,10 +85,19 @@ const openOrdersSlice = createSlice({
         }
       });
     },
+    changeOrderStatusOnInit: (state, action: PayloadAction<ChangeStatus>) => {
+      state.map((order) => {
+        if (order.orderId === action.payload.orderID ) {
+          return { ...order, orderStatus: action.payload.status };
+        } else {
+          return order;
+        }
+      });
+    },
   },
 });
 
 export default openOrdersSlice.reducer;
 
-export const { addOrderToOpenOrders, toggleIngredientOpenOrders, removeItemFromOpenOrders, changeOrderStatus, addExtraIngredientToOpenOrders } =
+export const { addOrderToOpenOrders, toggleIngredientOpenOrders, removeItemFromOpenOrders, changeOrderStatus, changeOrderStatusOnInit, addExtraIngredientToOpenOrders } =
   openOrdersSlice.actions;

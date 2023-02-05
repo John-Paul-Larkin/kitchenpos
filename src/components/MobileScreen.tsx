@@ -1,14 +1,18 @@
 import styles from "../styles/MobileScreen.module.css";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MenuItemButton from "./MenuItemButton";
 import ScreenSizeSelector from "./ScreenSizeSelector";
 
 import { drinkMenuItems, foodMenuItems } from "../Assets/FoodMenuItems";
 import OrderScreen from "./OrderScreen";
 
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { motion } from "framer-motion";
+import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
+import { changeOrderStatusOnInit } from "../features/openOrdersSlice";
+import db from "../Firebase/firebaseconfig";
 import useSignInAnon from "../Hooks/useSignInAnon";
 import useSignInGoogle from "../Hooks/useSignInGoogle";
 import Floorplan from "./Floorplan";
@@ -29,6 +33,28 @@ export default function MobileScreen() {
   const signInAnon = useSignInAnon();
   const signInGoogle = useSignInGoogle();
 
+  const dispatch = useAppDispatch();
+
+  const [orders, setOrders] = useState<OrderDetails[]>([]);
+
+  useEffect(() => {
+    const q = query(collection(db, "orders"), where("orderStatus", "!=", "closed"));
+    // const q = query(collection(db, "orders"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let orders: OrderDetails[] = [];
+      querySnapshot.forEach((doc) => {
+        orders.push(doc.data() as OrderDetails);
+      });
+      setOrders([...orders]);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  orders.forEach((order) => {
+    console.log('here')
+    dispatch(changeOrderStatusOnInit({ orderID: order.orderId, status: order.orderStatus }));
+  });
 
   return (
     <>

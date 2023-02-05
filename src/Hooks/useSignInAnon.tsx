@@ -42,7 +42,7 @@ export default function useSignInAnon() {
 }
 
 async function initDataFromFirestore() {
-  const q = query(collection(db, "orders"), where("orderStatus", "==", "pending"));
+  const q = query(collection(db, "orders"), where("orderStatus", "!=", "closed"));
 
   const data: OrderDetails[] = [];
 
