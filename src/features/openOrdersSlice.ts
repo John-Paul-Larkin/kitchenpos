@@ -86,18 +86,23 @@ const openOrdersSlice = createSlice({
       });
     },
     changeOrderStatusOnInit: (state, action: PayloadAction<ChangeStatus>) => {
-      state.map((order) => {
-        if (order.orderId === action.payload.orderID ) {
-          return { ...order, orderStatus: action.payload.status };
-        } else {
-          return order;
-        }
-      });
+      const order = state.find((order) => order.orderId === action.payload.orderID);
+      console.log("order", order);
+      if (order) {
+        console.log("stat", action.payload.status);
+        order.orderStatus = action.payload.status;
+      }
     },
   },
 });
 
 export default openOrdersSlice.reducer;
 
-export const { addOrderToOpenOrders, toggleIngredientOpenOrders, removeItemFromOpenOrders, changeOrderStatus, changeOrderStatusOnInit, addExtraIngredientToOpenOrders } =
-  openOrdersSlice.actions;
+export const {
+  addOrderToOpenOrders,
+  toggleIngredientOpenOrders,
+  removeItemFromOpenOrders,
+  changeOrderStatus,
+  changeOrderStatusOnInit,
+  addExtraIngredientToOpenOrders,
+} = openOrdersSlice.actions;
