@@ -92,13 +92,9 @@ const openOrdersSlice = createSlice({
       }
     },
     closeOrders: (state, action: PayloadAction<OrderDetails[]>) => {
-      return (state = state.filter((stateOrder) => {
-        console.log(
-          "222",
-          action.payload.some((order) => order.orderId === stateOrder.orderId)
-        );
+      return state.filter((stateOrder) => {
         return action.payload.some((order) => order.orderId === stateOrder.orderId);
-      }));
+      });
     },
   },
 });

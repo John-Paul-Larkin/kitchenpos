@@ -41,9 +41,13 @@
   display: flex;
   align-items: center;
   /* justify-content: flex-end; */
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   overflow-y: hidden;
   flex-wrap: nowrap;
+}
+
+.food-orders::-webkit-scrollbar {
+  display: none;
 }
 
 .food-orders > :first-child {
@@ -93,7 +97,7 @@
 
 .open-orders-hover {
   position: absolute;
-  top:70px;
+  top: 70px;
   font-size: 0.6em;
   border: 5px solid black;
   display: inline-block;
