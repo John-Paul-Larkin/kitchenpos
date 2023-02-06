@@ -1,5 +1,5 @@
 import styles from "../styles/FloorPlan.module.css";
-import SingleCompleteOrder from "./SingleCompleteOrder";
+import TableDetailsOnHover from "./TableDetailsOnHover";
 
 import { useState } from "react";
 import { useAppSelector } from "../app/hooks";
@@ -47,7 +47,7 @@ export default function TableDrawing({
     <>
       {numberOfseats === 4 && (
         <div className={styles["table-container"]} onMouseEnter={() => checkIsTableOpen()} onMouseLeave={() => setIsShowTableDetails(false)}>
-          {isShowTableDetails && <SingleCompleteOrder tableNumber={tableNumber} />}
+          {isShowTableDetails && <TableDetailsOnHover tableNumber={tableNumber} />}
           <span className={styles[`table-${tableNumber}`]} onClick={() => handleTableClick(tableNumber)}>
             <span className={`${styles["table-num"]}  ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
             <svg width="70" height="90">
@@ -64,7 +64,7 @@ export default function TableDrawing({
 
       {numberOfseats === 2 && (
         <div className={styles["table-container"]} onMouseEnter={() => checkIsTableOpen()} onMouseLeave={() => setIsShowTableDetails(false)}>
-          {isShowTableDetails && <SingleCompleteOrder tableNumber={tableNumber} />}
+          {isShowTableDetails && <TableDetailsOnHover tableNumber={tableNumber} />}
 
           <span className={styles["table-" + tableNumber]} onClick={() => handleTableClick(tableNumber)}>
             <span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
@@ -80,7 +80,7 @@ export default function TableDrawing({
 
       {numberOfseats === 6 && (
         <div className={styles["table-container"]} onMouseEnter={() => checkIsTableOpen()} onMouseLeave={() => setIsShowTableDetails(false)}>
-          {isShowTableDetails && <SingleCompleteOrder tableNumber={tableNumber} />}
+          {isShowTableDetails && <TableDetailsOnHover tableNumber={tableNumber} />}
           <span className={styles["table-" + tableNumber]} onClick={() => handleTableClick(tableNumber)}>
             <span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
             <svg width="90" height="90">
@@ -105,7 +105,7 @@ export default function TableDrawing({
           onMouseEnter={() => checkIsTableOpen()}
           onMouseLeave={() => setIsShowTableDetails(false)}
         >
-          {isShowTableDetails && <SingleCompleteOrder tableNumber={tableNumber} />}
+          {isShowTableDetails && <TableDetailsOnHover tableNumber={tableNumber} />}
 
           <span className={`${styles["table-num"]} ${styles[`num-${tableNumber}`]}`}>{tableNumber}</span>
 

@@ -2,10 +2,8 @@ import { motion } from "framer-motion";
 import { useAppSelector } from "../app/hooks";
 import styles from "../styles/FloorPlan.module.css";
 
-export default function SingleCompleteOrder({ tableNumber }: { tableNumber: string }) {
-
-
-  const openOrders = useAppSelector(state=>state.openOrders)
+export default function TableDetailsOnHover({ tableNumber }: { tableNumber: string }) {
+  const openOrders = useAppSelector((state) => state.openOrders);
 
   const orders = openOrders.filter((order) => order.tableNumber === tableNumber);
 
