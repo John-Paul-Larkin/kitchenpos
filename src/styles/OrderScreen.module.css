@@ -90,11 +90,11 @@ span {
 
 .table-select {
   color: blue;
-  width: 40px;
+  width: 36px;
   display: inline-block;
   padding: 0;
-  margin-left: 5px;
-  font-size: 0.5em;
+  margin-left: 3px;
+  font-size: 0.6em;
   text-align: center;
 }
 
@@ -158,7 +158,7 @@ span {
 }
 
 .table-number {
-  font-size: 0.7em;
+  font-size: 0.6em;
   /* text-align: center; */
   /* width: 80%; */
   display: inline-block;
@@ -168,7 +168,6 @@ span {
 .top {
   border-bottom: 1px solid black;
   background-color: antiquewhite;
-  /* padding: 7px; */
   border-radius: 14px 0 0 0;
   height: 34px;
 }

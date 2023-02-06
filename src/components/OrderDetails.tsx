@@ -25,8 +25,8 @@ export default function OrderDetails() {
   const unsentOrderEdits = useAppSelector((state) => state.unsentOrderEdits);
   // const openOrders = useAppSelector((state) => state.openOrders);
 
-  // console.log("oo", openOrders);
-  // console.log("OD", orderDetails);
+  // console.log("oO", openOrders);
+  // console.log("oD", orderDetails);
 
   const sendFirestore = useFirestore();
 
