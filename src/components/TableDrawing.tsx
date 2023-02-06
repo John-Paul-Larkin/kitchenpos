@@ -23,8 +23,6 @@ export default function TableDrawing({
 
   let tableColor = "black";
 
-  // console.log(tableColor);
-
   openOrders.forEach((order) => {
     if (order.tableNumber === tableNumber) {
       if (order.orderStatus === "pending") {
