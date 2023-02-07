@@ -55,28 +55,27 @@
   /* use !important to prevent breakage from child margin settings */
 }
 
-.drinks-orders {
+.ready-orders {
   background-color: antiquewhite;
   height: 50%;
   border-radius: 0 0 14px 14px;
   border-top: 5px solid black;
   display: flex;
   align-items: center;
-  /* justify-content: flex-end; */
   overflow-x: scroll;
   overflow-y: hidden;
 
   height: 113%;
 }
 
-.drinks-orders-wrapper {
+.ready-orders-wrapper {
   height: 50%;
   width: 100%;
   overflow: hidden;
   border-radius: 0 0 14px 14px;
 }
 
-.drinks-orders > :first-child {
+.ready-orders > :first-child {
   margin-left: auto !important;
   /* use !important to prevent breakage from child margin settings */
 }

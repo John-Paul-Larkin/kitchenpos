@@ -69,7 +69,8 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
   const dispatch = useAppDispatch();
 
-  const finishTime = new Date(order.timeOrderPlaced! + 600000);
+  // const swfinishTime = new Date(order.timeTimeUp!);
+  const tenMinutes = 600000;
 
   const changeTableNumber = useChangeTableNumber();
 
@@ -88,7 +89,7 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
     borderColor = "3px solid green";
   }
 
-  const orderTimeDisplay = new Date(order.timeOrderPlaced!).toLocaleTimeString().substring(0,4);
+  let orderTimeDisplay = new Date(order.timeOrderPlaced!).toLocaleTimeString().substring(0, 4);
 
   return (
     <motion.div
@@ -101,18 +102,18 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
       <div className={styles["time-order-placed"]}>{orderTimeDisplay}</div>
 
       <div className={styles["table-number"]}>{order.tableNumber}</div>
-      {!isShowStopWatch && <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={finishTime} orderID={order.orderId} />}
-      {isShowStopWatch && <Stopwatch startTime={finishTime} />}
+      {!isShowStopWatch && (
+        <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={new Date(order.timeOrderPlaced! + tenMinutes)} orderID={order.orderId} />
+      )}
+      {isShowStopWatch && <Stopwatch startTime={new Date(order.timeTimeUp!)} />}
 
       <div>
         {order.orderItemDetails.map((item) => {
-          if (item.station !== "bar") {
-            return (
-              <div className={styles["items"]} key={item.itemId}>
-                {item.name}
-              </div>
-            );
-          } else return null;
+          return (
+            <div className={styles["items"]} key={item.itemId}>
+              {item.name}
+            </div>
+          );
         })}
       </div>
     </motion.div>
