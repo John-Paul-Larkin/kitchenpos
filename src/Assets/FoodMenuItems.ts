@@ -161,32 +161,35 @@ export const foodMenuItems: MenuItem[] = [
   },
   {
     itemId: "15",
-    name: "Soup",
+    name: "Soup of the day",
     station: "expeditor",
     price: 4.95,
     ingredients: [],
   },
   {
     itemId: "16",
-    name: "extra 16",
-    price: 0,
+    name: "Fried Brie",
+    price: 8.95,
     station: "expeditor",
-
-    ingredients: [],
+    ingredients: [{ ingredient: "Side salad", selected: true }],
   },
   {
     itemId: "17",
-    name: "extra 17",
-    price: 0,
+    name: "Roast chicken",
+    price: 17.95,
     station: "expeditor",
-    ingredients: [],
+    ingredients: [
+      { ingredient: "Gravy", selected: true },
+      { ingredient: "Coleslaw", selected: true },
+      { ingredient: "Stuffing", selected: true },
+    ],
   },
   {
     itemId: "18",
-    name: "extra 18",
-    price: 0,
+    name: "Chicken curry",
+    price: 14.95,
     station: "expeditor",
-    ingredients: [],
+    ingredients: [{ ingredient: "Rice", selected: true }],
   },
   {
     itemId: "19",
@@ -432,4 +435,3 @@ export const ingredientsList: Ingredient[] = [
   "Gravy",
   "Mushrooms",
 ];
-

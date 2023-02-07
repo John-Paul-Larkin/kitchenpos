@@ -55,7 +55,10 @@ type Ingredient =
   | "Dill sauce"
   | "Pastry"
   | "Gravy"
-  | "Mushrooms";
+  | "Mushrooms"
+  | "Stuffing"
+  | "Coleslaw"
+  | "Rice";
 
 // Context API types
 
@@ -119,4 +122,3 @@ interface AddIngredient {
 interface Remove {
   itemID: string;
 }
-

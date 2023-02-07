@@ -84,9 +84,11 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
 
   if (order.orderStatus === "time up") {
     borderColor = "3px solid orange";
+  } else if (order.orderStatus === "ready") {
+    borderColor = "3px solid green";
   }
 
-  const orderTimeDisplay = new Date(order.timeOrderPlaced!).toLocaleTimeString();
+  const orderTimeDisplay = new Date(order.timeOrderPlaced!).toLocaleTimeString().substring(0,4);
 
   return (
     <motion.div

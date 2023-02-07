@@ -39,7 +39,7 @@ export default function SelectExtraIngredients() {
 
   return (
     <>
-      {selectedOrderItem.itemId && (
+      {selectedOrderItem.itemId && selectedOrderItem.ingredients.length > 0 && (
         <>
           {!showIngredientDropdown && <button onClick={handleAddIngredient}>Add extra</button>}
 
