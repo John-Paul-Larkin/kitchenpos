@@ -1,6 +1,6 @@
 import { differenceInSeconds } from "date-fns";
 import { motion } from "framer-motion";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useStopwatch, useTimer } from "react-timer-hook";
 import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
@@ -88,6 +88,11 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
   } else if (order.orderStatus === "ready") {
     borderColor = "3px solid green";
   }
+  useEffect(() => {
+    if (order.timeTimeUp) {
+      setIsShowStopWatch(true);
+    }
+  }, [order.timeTimeUp]);
 
   let orderTimeDisplay = new Date(order.timeOrderPlaced!).toLocaleTimeString().substring(0, 4);
 

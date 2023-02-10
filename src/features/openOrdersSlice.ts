@@ -98,6 +98,10 @@ const openOrdersSlice = createSlice({
         return action.payload.some((order) => order.orderId === stateOrder.orderId);
       });
     },
+
+    addUpdatedOrdersToOpenOrders: (state, action: PayloadAction<OrderDetails[]>) => {
+      return (state = [...action.payload]);
+    },
   },
 });
 
@@ -111,4 +115,5 @@ export const {
   changeOrderStatusOnInit,
   addExtraIngredientToOpenOrders,
   closeOrders,
+  addUpdatedOrdersToOpenOrders,
 } = openOrdersSlice.actions;
