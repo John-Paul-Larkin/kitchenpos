@@ -69,11 +69,7 @@ const orderDetailsSlice = createSlice({
           if (ingredient.ingredientId === action.payload) {
             ingredient.selected = !ingredient.selected;
             if (item.isSentToKitchen === true) {
-              if (ingredient.edited === true) {
-                ingredient.edited = false;
-              } else {
-                ingredient.edited = true;
-              }
+              ingredient.edited = true;
             }
           }
         })
