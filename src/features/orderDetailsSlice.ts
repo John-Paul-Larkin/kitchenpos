@@ -68,6 +68,9 @@ const orderDetailsSlice = createSlice({
         item.ingredients?.forEach((ingredient) => {
           if (ingredient.ingredientId === action.payload) {
             ingredient.selected = !ingredient.selected;
+            if (item.isSentToKitchen === true) {
+              ingredient.edited = true;
+            }
           }
         })
       );
@@ -76,7 +79,11 @@ const orderDetailsSlice = createSlice({
     addExtraIngredientOnOrderDetails: (state, action: PayloadAction<AddIngredient>) => {
       state.orderItemDetails.forEach((item) => {
         if (item.itemId === action.payload.itemID) {
-          item.ingredients?.push(action.payload.ingredientToAdd);
+          let ingredientToAdd = action.payload.ingredientToAdd;
+          if (item.isSentToKitchen === true) {
+            ingredientToAdd = { ...ingredientToAdd, edited: true };
+          }
+          item.ingredients?.push(ingredientToAdd);
         }
       });
     },

@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// interface Combine {
-//   edits:Edits[];
-//   removeEdits:RemoveEdit;
-// }
+
 
 
 const initialState:Edits[] = [];

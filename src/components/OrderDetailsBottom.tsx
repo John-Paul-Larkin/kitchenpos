@@ -34,9 +34,11 @@ export default function OrderDetailsBottom({ isAnyEdits, handleSendOrder }: { is
     let itemIDsToRemove: string[] = [];
 
     unsentOrderEdits.forEach((edit) => {
-      // here we cycle through the array of edits and send the edit to firestore
+      // array contains any edits made(to an order already sent to the kitchen )
+      // here we cycle through the array of edits and send each edit to firestore
       // the exception is remove edits, which we push to an array, so they can all
       // be processed in one batch
+      // the order must also be edited in the open order
 
       const editType = edit.editType;
       const itemID = edit.itemID;

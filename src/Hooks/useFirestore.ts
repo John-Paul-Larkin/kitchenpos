@@ -37,6 +37,7 @@ export default function useFirestore() {
         console.log(error);
       }
     } else if (input.type === "toggle" || input.type === "addIngredient") {
+      //ie an edit to an already sent order
       try {
         let orderID: string | undefined;
         // find the id of the order which contains the item to edit
@@ -52,7 +53,7 @@ export default function useFirestore() {
         const itemIDsInOrder = openOrders.find((order) => order.orderId === orderID)?.orderItemDetails.map((item) => item.itemId)!;
 
         // filter order Items to only include items from the particular ID
-        const onlyRelevantItemDetails = orderDetails.orderItemDetails.filter((item) => itemIDsInOrder.includes(item.itemId));
+        let onlyRelevantItemDetails = orderDetails.orderItemDetails.filter((item) => itemIDsInOrder.includes(item.itemId));
 
         // const orderItemDetails = openOrders.find(order=>order.orderId === orderID)?.orderItemDetails
         const docRef = doc(db, "orders", orderID!);

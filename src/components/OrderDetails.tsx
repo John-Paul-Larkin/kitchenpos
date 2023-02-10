@@ -55,6 +55,7 @@ export default function OrderDetails() {
   }, [orderDetails.timeOrderPlaced]);
 
   useEffect(() => {
+    // Displays a button to save edits
     if (unsentOrderEdits.length > 0) {
       setIsAnyEdits(true);
     } else {

@@ -5,6 +5,8 @@ import SingleFoodOrder from "./SingleFoodOrder";
 export default function OpenOrdersList() {
   const openOrders = useAppSelector((state) => state.openOrders);
 
+
+
   // openOrders.forEach((order) => console.log(order.tableNumber, order.orderStatus));
 
   return (

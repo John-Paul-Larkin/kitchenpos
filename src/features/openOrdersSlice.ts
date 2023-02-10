@@ -25,8 +25,9 @@ const openOrdersSlice = createSlice({
       const order = state.find((order) => order.orderId === orderID);
       const item = order?.orderItemDetails.find((item) => item.itemId === action.payload.itemID);
       const ingredient = item?.ingredients?.find((ingredient) => ingredient.ingredientId === action.payload.ingredientID);
-      if (ingredient?.selected) {
+      if (ingredient) {
         ingredient.selected = !ingredient.selected;
+        ingredient.edited = true;
       }
     },
     removeItemFromOpenOrders: (state, action: PayloadAction<Remove>) => {
@@ -73,7 +74,8 @@ const openOrdersSlice = createSlice({
       const order = state.find((order) => order.orderId === orderID);
       const itemToAddIngredientTo = order?.orderItemDetails.find((item) => item.itemId === action.payload.itemID);
       if (itemToAddIngredientTo?.ingredients) {
-        itemToAddIngredientTo.ingredients = [...itemToAddIngredientTo.ingredients, action.payload.ingredientToAdd];
+        const ingredientToAdd = { ...action.payload.ingredientToAdd, edited: true };
+        itemToAddIngredientTo.ingredients = [...itemToAddIngredientTo.ingredients, ingredientToAdd];
       }
     },
     changeOrderStatus: (state, action: PayloadAction<string>) => {
