@@ -7,9 +7,11 @@ const openOrdersSlice = createSlice({
   initialState,
   reducers: {
     addOrderToOpenOrders: (state, action: PayloadAction<OrderDetails>) => {
-      // return (state = [...state, action.payload]);
-
-      state.push(action.payload);
+      if (state.some((order) => order.orderId === action.payload.orderId) === false) {
+        // first check if the order has not already been loaded
+        // prevents bug in which order is doubled up on initial load
+        state.push(action.payload);
+      }
     },
     toggleIngredientOpenOrders: (state, action: PayloadAction<Toggle>) => {
       let orderID: string | undefined;

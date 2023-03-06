@@ -1,7 +1,7 @@
 import { signInAnonymously, updateProfile } from "firebase/auth";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useContext } from "react";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch} from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
 import { addOrderToOpenOrders } from "../features/openOrdersSlice";
 import db, { auth } from "../Firebase/firebaseconfig";
@@ -9,6 +9,8 @@ import db, { auth } from "../Firebase/firebaseconfig";
 export default function useSignInAnon() {
   const { setIsLoggedIn } = useContext(menuContext);
   const dispatch = useAppDispatch();
+
+
 
   return function signInAnon() {
     signInAnonymously(auth)

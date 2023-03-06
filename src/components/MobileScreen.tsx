@@ -39,7 +39,7 @@ export default function MobileScreen() {
 
   useEffect(() => {
     const q = query(collection(db, "orders"), where("orderStatus", "!=", "closed"));
-    // const q = query(collection(db, "orders"));
+
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let orders: OrderDetails[] = [];
       querySnapshot.forEach((doc) => {
@@ -50,10 +50,6 @@ export default function MobileScreen() {
 
     return () => unsubscribe();
   }, []);
-
-  // orders.forEach((order) => {
-  //   dispatch(changeOrderStatusOnInit({ orderID: order.orderId, status: order.orderStatus }));
-  // });
 
   dispatch(addUpdatedOrdersToOpenOrders(orders));
 
