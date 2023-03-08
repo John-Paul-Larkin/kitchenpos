@@ -26,12 +26,12 @@ export const foodMenuItems: MenuItem[] = [
       { ingredient: "Tomato", selected: true },
     ],
   },
+
   {
     itemId: "3",
     name: "Caesar salad",
     station: "salad",
-
-    price: 10.95,
+    price: 12.95,
     ingredients: [
       { ingredient: "Chicken", selected: true },
       { ingredient: "Bacon", selected: true },
@@ -42,15 +42,18 @@ export const foodMenuItems: MenuItem[] = [
   },
   {
     itemId: "4",
-    name: "Chicken wings",
-    station: "fry",
-    price: 8.95,
+    name: "Waldorf salad",
+    price: 12.95,
+    station: "salad",
     ingredients: [
-      { ingredient: "Blue cheese dip", selected: true },
+      { ingredient: "Apple", selected: true },
+      { ingredient: "Grapes", selected: true },
       { ingredient: "Celery", selected: true },
-      { ingredient: "Side salad", selected: true },
+      { ingredient: "Walnuts", selected: true },
+      { ingredient: "Lettuce", selected: true },
     ],
   },
+
   {
     itemId: "5",
     name: "Club sandwich",
@@ -152,20 +155,27 @@ export const foodMenuItems: MenuItem[] = [
       { ingredient: "Onion rings", selected: true },
     ],
   },
+
   {
     itemId: "14",
-    name: "Chips",
+    name: "Chicken wings",
     station: "fry",
-    price: 3.7,
-    ingredients: [],
+    price: 8.95,
+    ingredients: [
+      { ingredient: "Blue cheese dip", selected: true },
+      { ingredient: "Celery", selected: true },
+      { ingredient: "Side salad", selected: true },
+    ],
   },
+
   {
     itemId: "15",
-    name: "Soup of the day",
+    name: "Shepherd pie",
+    price: 14.95,
     station: "expeditor",
-    price: 4.95,
-    ingredients: [],
+    ingredients: [{ ingredient: "Peas", selected: true }],
   },
+
   {
     itemId: "16",
     name: "Fried Brie",
@@ -186,51 +196,56 @@ export const foodMenuItems: MenuItem[] = [
   },
   {
     itemId: "18",
-    name: "Chicken curry",
+    name: "Chicken Curry",
     price: 14.95,
     station: "expeditor",
     ingredients: [{ ingredient: "Rice", selected: true }],
   },
   {
     itemId: "19",
-    name: "extra 19",
-    price: 0,
+    name: "Beef Stroganoff",
+    price: 13.95,
     station: "expeditor",
-    ingredients: [],
+    ingredients: [{ ingredient: "Rice", selected: true }],
   },
   {
     itemId: "20",
-    name: "extra 20",
-    price: 0,
+    name: "Lasagna",
+    price: 14.95,
     station: "expeditor",
-    ingredients: [],
+    ingredients: [{ ingredient: "Side salad", selected: true }],
   },
   {
     itemId: "21",
-    name: "extra 21",
-    price: 0,
+    name: "Roast Vegetables",
+    price: 4.0,
     station: "expeditor",
     ingredients: [],
   },
   {
     itemId: "22",
-    name: "extra 22",
-    price: 0,
+    name: "Soup of the day",
     station: "expeditor",
+    price: 4.95,
     ingredients: [],
   },
   {
     itemId: "23",
-    name: "extra 23",
+    name: "Baked Potato",
     price: 0,
     station: "expeditor",
-    ingredients: [],
+    ingredients: [
+      { ingredient: "Sour cream", selected: true },
+      { ingredient: "Cheese", selected: true },
+      { ingredient: "Bacon", selected: true },
+    ],
   },
+
   {
     itemId: "24",
-    name: "extra 24",
-    price: 0,
-    station: "expeditor",
+    name: "Chips",
+    station: "fry",
+    price: 3.7,
     ingredients: [],
   },
 ];
@@ -434,4 +449,9 @@ export const ingredientsList: Ingredient[] = [
   "Pastry",
   "Gravy",
   "Mushrooms",
+  "Apple",
+  "Grapes",
+  "Walnuts",
+  "Peas",
+  "Sour cream",
 ];

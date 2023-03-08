@@ -21,16 +21,14 @@ interface MenuItem {
   ingredients: Ingredients[];
   isSentToKitchen?: boolean;
   station: Station;
-  edited?:boolean;
-
+  edited?: boolean;
 }
 interface Ingredients {
   ingredient: Ingredient;
   selected: boolean;
   added?: boolean;
   ingredientId?: string;
-  edited?:boolean;
-
+  edited?: boolean;
 }
 
 type Ingredient =
@@ -61,7 +59,12 @@ type Ingredient =
   | "Mushrooms"
   | "Stuffing"
   | "Coleslaw"
-  | "Rice";
+  | "Rice"
+  | "Apple"
+  | "Grapes"
+  | "Walnuts"
+  | "Peas"
+  | "Sour cream";
 
 // Context API types
 
