@@ -2,6 +2,8 @@
 
 ### Overview
 
+hosted on netlify
+
 Kitchen POS is a point of sale application for restaurants, designed to simplify the process of order taking, while streamlining communication between the server in the front of house, and the chefs in the kitchen. I built this app to work  to work in conjunction with a kitchen display app.
 
 #### How to use
@@ -10,10 +12,27 @@ Following this you can open the <a href="https://kitchenpos.netlify.app/">kitche
 
 <a href="https://github.com/Fishamble/kitchen_back_end">Kitchen display Github</a>
 
-### 
+### Image
+
+<h2 align="center">
+    <a href="https://kitchenpos.netlify.app/">
+      <img src="https://github.com/Fishamble/kitchenpos/blob/master/src/Assets/KitchenPOS.jpg?raw=true" alt="POS" width="200px" />      
+    </a>
+    <br>
+</h2>
+
+
+
+
+
+
+
 
 
 // issues bugs
+
+
+
 // conditional rendering of components with timers resetting
 // scroll overflow affectedd by flex end
 // custom hooks
