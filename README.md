@@ -1,3 +1,4 @@
+# <a href="https://kitchenpos.netlify.app/">Restaurant Point of sale App</a>
 
 // issues bugs
 // conditional rendering of components with timers resetting
