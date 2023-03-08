@@ -232,7 +232,7 @@ export const foodMenuItems: MenuItem[] = [
   {
     itemId: "23",
     name: "Baked Potato",
-    price: 0,
+    price: 11.95,
     station: "expeditor",
     ingredients: [
       { ingredient: "Sour cream", selected: true },
@@ -240,7 +240,6 @@ export const foodMenuItems: MenuItem[] = [
       { ingredient: "Bacon", selected: true },
     ],
   },
-
   {
     itemId: "24",
     name: "Chips",

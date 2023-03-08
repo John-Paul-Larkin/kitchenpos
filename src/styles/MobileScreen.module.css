@@ -46,7 +46,6 @@
   box-shadow: 2px 2px 7px black;
   /* background: linear-gradient(to top, var(--three), var(--one)); */
   background-color: var(--three);
-
 }
 
 .button:hover {
@@ -58,7 +57,6 @@
 .button:active {
   /* background: linear-gradient(to top, rgb(14, 61, 64), rgb(74, 123, 125)); */
   background-color: var(--one);
-
 }
 
 .text-container {
@@ -82,7 +80,6 @@
   background-color: var(--three);
 }
 
-
 .button-food {
   display: inline-block;
   width: 60px;
@@ -96,7 +93,6 @@
   box-shadow: 2px 2px 7px black;
   /* background: linear-gradient(to top, rgb(18, 77, 81), var(--one)); */
   background-color: var(--three);
-
 }
 .button-drink {
   display: inline-block;
@@ -109,7 +105,19 @@
   border: 2px solid black;
   box-shadow: 2px 2px 7px black;
   /* background: linear-gradient(to top, rgb(18, 77, 81), var(--one)); */
-  
-  background-color: var(--one)
+
+  background-color: var(--one);
 }
 
+.login-screen {
+  height: 100%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.server-name {
+  height: 50px;
+  width: 100%;
+  background-color: yellow;
+}

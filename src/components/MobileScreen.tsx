@@ -58,13 +58,15 @@ export default function MobileScreen() {
   return (
     <>
       {!isLoggedIn && (
-        <>
-          <div>not logged in</div>
-          <div>
-            <button onClick={() => signInAnon()}>Sign in anonymously</button>
-            <button onClick={() => signInGoogle()}>Sign in with google</button>
+        <div className={styles["mobile-screen"]} style={{ width: screen?.value.width, height: screen?.value.height }}>
+          <div className={styles["login-screen"]}>
+            <div className={styles["server-name"]}>Server name</div>
+            <div>
+              <button onClick={() => signInAnon()}>Sign in anonymously</button>
+              <button onClick={() => signInGoogle()}>Sign in with google</button>
+            </div>
           </div>
-        </>
+        </div>
       )}
 
       {isLoggedIn && (
