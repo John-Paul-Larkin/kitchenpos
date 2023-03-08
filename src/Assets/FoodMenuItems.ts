@@ -170,7 +170,7 @@ export const foodMenuItems: MenuItem[] = [
     itemId: "16",
     name: "Fried Brie",
     price: 8.95,
-    station: "expeditor",
+    station: "fry",
     ingredients: [{ ingredient: "Side salad", selected: true }],
   },
   {
