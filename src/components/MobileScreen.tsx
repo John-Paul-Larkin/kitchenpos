@@ -15,7 +15,6 @@ import { menuContext } from "../Context/MenuContext";
 import { addUpdatedOrdersToOpenOrders, closeOrders } from "../features/openOrdersSlice";
 import db from "../Firebase/firebaseconfig";
 import useSignInAnon from "../Hooks/useSignInAnon";
-import useSignInGoogle from "../Hooks/useSignInGoogle";
 import Floorplan from "./Floorplan";
 
 export default function MobileScreen() {
@@ -32,7 +31,7 @@ export default function MobileScreen() {
   const { isShowFloorPlan, isLoggedIn } = useContext(menuContext);
 
   const signInAnon = useSignInAnon();
-  const signInGoogle = useSignInGoogle();
+  // const signInGoogle = useSignInGoogle();
 
   const dispatch = useAppDispatch();
 
