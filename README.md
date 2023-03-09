@@ -9,7 +9,7 @@
 
 Both apps are deployed on netlify. First open the <a href="https://kitchenpos.netlify.app/">POS app</a>, select a table and add some orders. Optionally  you can customise the order with extra ingredients before sending it through to the kitchen.
 Following this you can open the <a href="https://kitchendisplay.netlify.app/">kitchen display app</a>, where you can view all the open orders along a timeline.
-
+Note: While the POS app was designed for mobile, the display app requires a **larger screen** to display correctly.
 
 <a href="https://github.com/Fishamble/kitchen_back_end">Kitchen display Github</a>
 
@@ -20,6 +20,8 @@ Following this you can open the <a href="https://kitchendisplay.netlify.app/">ki
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
 ![Framer](https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=blue)
+
+My principal objective while developing this project was to expand my knowledge around Redux and how it can be used to manage complex state in React applications.  I developed my understanding of the Redux architecture, including its core principles, such as state management, immutability, and reducers. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 ### Image
