@@ -37,8 +37,8 @@
 .food-orders {
   height: 100%;
   width: 100%;
-  /* background-color: aqua; */
-  background-color: var(--two);
+  background-color: #ffff00;
+  /* background-color: var(--two); */
 
   display: flex;
   align-items: center;

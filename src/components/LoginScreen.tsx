@@ -29,6 +29,11 @@ export default function LoginScreen({
       "John",
       "Andrew",
       "Andy",
+      "Colin",
+      "Brendan",
+      "Lisa",
+      "Jenny",
+      "Tara",
       "Michelle",
       "Grace",
       "Nicola",
@@ -55,18 +60,18 @@ export default function LoginScreen({
           <img src={waiter} alt="waiter" />
 
           <div className={styles["intro"]}>
-            <p>
-              Welcome to restaurant POS, an app with a user-friendly interface, allowing waitstaff to input orders, customize menu items, and send
-              orders through to chefs in the kitchen.
-            </p>
-            <br />
 
-            <p>To continue please type a username, or alternatively let the app choose one for you by clicking :</p>
+            <h3>Welcome to restaurant POS</h3>
+            <p>
+              An app with a user-friendly interface, allowing waitstaff to input orders, customize menu items, and send
+              orders through to the chefs in the kitchen.
+            </p>
+      
           </div>
 
           <div className={styles["button-wrapper"]}>
             <button className={styles["random-button"]} onClick={handleRandomClick}>
-              Random
+              Random name
             </button>
             <br />
             <input
@@ -74,7 +79,7 @@ export default function LoginScreen({
               type="text"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              placeholder="Username"
+              placeholder="or type a server name"
               ref={elementRef}
             />
             <br />
@@ -84,7 +89,7 @@ export default function LoginScreen({
               onClick={() => {
                 if (userName) signInAnon(userName);
                 else {
-                  elementRef.current!.placeholder = "...enter a username";
+                  elementRef.current!.placeholder = "...enter a server name";
 
                   const id = setInterval(() => {
                     elementRef.current!.style.border === "3px solid black"
@@ -94,7 +99,7 @@ export default function LoginScreen({
 
                   setTimeout(() => {
                     clearInterval(id);
-                    elementRef.current!.placeholder = "Username";
+                    elementRef.current!.placeholder = "enter a name";
                   }, 1400);
                 }
               }}
