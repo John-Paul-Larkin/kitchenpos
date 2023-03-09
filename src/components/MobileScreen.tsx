@@ -65,7 +65,7 @@ export default function MobileScreen() {
 
   return (
     <>
-      {!isLoggedIn && <LoginScreen screen={screen} />}
+      {!isLoggedIn && <LoginScreen screen={screen} setScreen={setScreen} screens={screens}  />}
 
       {isLoggedIn && (
         <>
@@ -78,7 +78,7 @@ export default function MobileScreen() {
               style={{ width: screen?.value.width, height: screen?.value.height }}
             >
               <ScreenSizeSelector screen={screen} setScreen={setScreen} screens={screens} />
-
+              
               <OrderScreen />
 
               {isShowFoodMenu && (

@@ -11,7 +11,7 @@ export default function ScreenSizeSelector({
   setScreen: React.Dispatch<React.SetStateAction<Screens | null>>;
 }): JSX.Element {
   return (
-    <div style={{ position: "absolute", zIndex: "1", top: "-50px" }}>
+    <div style={{ position: "absolute", zIndex: "1", top: "-70px" }}>
       <Select options={screens} value={screen} onChange={(option) => setScreen(option)} instanceId="screen select" />
     </div>
   );

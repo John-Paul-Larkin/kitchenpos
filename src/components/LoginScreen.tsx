@@ -3,8 +3,17 @@ import useSignInAnon from "../Hooks/useSignInAnon";
 import styles from "../styles/MobileScreen.module.css";
 
 import { useRef, useState } from "react";
+import ScreenSizeSelector from "./ScreenSizeSelector";
 
-export default function LoginScreen({ screen }: { screen: Screens | null }) {
+export default function LoginScreen({
+  screen,
+  setScreen,
+  screens,
+}: {
+  screens: Screens[];
+  screen: Screens | null;
+  setScreen: React.Dispatch<React.SetStateAction<Screens | null>>;
+}) {
   const [userName, setUserName] = useState("");
 
   const signInAnon = useSignInAnon();
@@ -39,6 +48,8 @@ export default function LoginScreen({ screen }: { screen: Screens | null }) {
 
   return (
     <div className={styles["mobile-screen"]} style={{ width: screen?.value.width, height: screen?.value.height }}>
+      <ScreenSizeSelector screen={screen} setScreen={setScreen} screens={screens} />
+
       <div className={styles["login-screen"]}>
         <div className={styles["server-name"]}>
           <img src={waiter} alt="waiter" />
