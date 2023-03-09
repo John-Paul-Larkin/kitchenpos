@@ -44,7 +44,16 @@ export default function MobileScreen() {
       let orders: OrderDetails[] = [];
 
       querySnapshot.forEach((doc) => {
-        orders.push(doc.data() as OrderDetails);
+        // ----
+        const order = doc.data() as OrderDetails;
+        const timeNow = new Date().getTime();
+        const twentyMinutes = 1200000;
+        if (timeNow - order.timeOrderPlaced! < twentyMinutes) {
+          orders.push(order);
+        }
+        // ----
+
+        // orders.push(doc.data() as OrderDetails);
       });
       setOrders([...orders]);
     });
