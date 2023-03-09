@@ -42,6 +42,7 @@ export default function MobileScreen() {
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let orders: OrderDetails[] = [];
+
       querySnapshot.forEach((doc) => {
         orders.push(doc.data() as OrderDetails);
       });

@@ -21,7 +21,14 @@ Note: While the POS app was designed for mobile, the display app requires a **la
 ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
 ![Framer](https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=blue)
 
-My principal objective while developing this project was to expand my knowledge around Redux and how it can be used to manage complex state in React applications.  I developed my understanding of the Redux architecture, including its core principles, such as state management, immutability, and reducers. 
+My primary objective while developing this project was to expand my knowledge around Redux and how it can be used to manage complex state in React applications.  I developed my understanding of the Redux architecture, including its core principles, such as state management, immutability, and reducers. 
+Other objective included reinforcing my prior understanding of reacts core concepts, such as components, state, props, and lifecycle methods. 
+
+I am satisfied I achieved my initial learning goals, however, I also gained an appreciation and rudimentary understanding of the concepts 
+around data modeling, software architecture and the importance of initial design in facilitating the evolution of the software as requirements changed.
+As the project grew I realised that 
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 ### Image

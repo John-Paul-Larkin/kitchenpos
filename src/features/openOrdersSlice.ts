@@ -8,7 +8,7 @@ const openOrdersSlice = createSlice({
   reducers: {
     addOrderToOpenOrders: (state, action: PayloadAction<OrderDetails>) => {
       if (state.some((order) => order.orderId === action.payload.orderId) === false) {
-        // first check if the order has not already been loaded
+        // first check if the order has already been loaded
         // prevents bug in which order is doubled up on initial load
         state.push(action.payload);
       }
