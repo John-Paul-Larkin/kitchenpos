@@ -117,7 +117,84 @@
 }
 
 .server-name {
-  height: 50px;
+  height: 100%;
   width: 100%;
   background-color: yellow;
+}
+
+.random-name {
+  width: 50%;
+  display: inline-block;
+}
+
+.intro {
+  margin: 20px;
+}
+
+.input {
+  margin: 20px;
+}
+
+/* CSS */
+.random-button {
+  background-color: black;
+  border-radius: 12px;
+  color: yellow;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 50%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.random-button:not(:disabled):hover,
+.random-button:not(:disabled):focus {
+  outline: 0;
+  background: black;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.random-button:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+label {
+  font-size: 16px;
+}
+
+input {
+  font-size: 16px;
+}
+
+.sign-in-button {
+  background-color: black;
+  border-radius: 12px;
+  color: yellow;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 25%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }

@@ -1,3 +1,4 @@
+import waiter from "../Assets/waiter.png";
 import styles from "../styles/MobileScreen.module.css";
 
 import { useContext, useEffect, useState } from "react";
@@ -65,15 +66,66 @@ export default function MobileScreen() {
 
   dispatch(closeOrders(orders));
 
+  const [userName, setUserName] = useState("");
+
+  const handleRandomClick = () => {
+    const serverNames = [
+      "Aaran",
+      "Mark",
+      "Tony",
+      "Brian",
+      "Dermot",
+      "Thomas",
+      "John",
+      "Andrew",
+      "Andy",
+      "Michelle",
+      "Grace",
+      "Nicola",
+      "Lily",
+      "Andrea",
+      "Brigid",
+      "Caroline",
+      "Aoife",
+      "Mary",
+    ];
+
+    const server = serverNames[Math.floor(Math.random() * serverNames.length)];
+    setUserName(server);
+  };
+
   return (
     <>
       {!isLoggedIn && (
         <div className={styles["mobile-screen"]} style={{ width: screen?.value.width, height: screen?.value.height }}>
           <div className={styles["login-screen"]}>
-            <div className={styles["server-name"]}>Server name</div>
-            <div>
-              <button onClick={() => signInAnon()}>Sign in anonymously</button>
-              <button onClick={() => signInGoogle()}>Sign in with google</button>
+            <div className={styles["server-name"]}>
+              <img src={waiter} alt="waiter" />
+
+              <p className={styles["intro"]}>
+                Welcome to restaurant POS, an app designed for taking restaurant orders. To continue please type a username, or alternatively let the
+                app choose one for you by clicking :
+              </p>
+              <div className={styles["button-wrapper"]}>
+                <button className={styles["random-button"]} onClick={handleRandomClick}>
+                  Random
+                </button>
+              </div>
+
+              <br />
+
+              <div className={styles["input"]}>
+                <label>
+                  Username :
+                  <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                </label>
+              </div>
+
+              <div className={styles["button-wrapper"]}>
+                <button className={styles["random-button"]} onClick={() => signInAnon(userName)}>
+                  Sign in
+                </button>
+              </div>
             </div>
           </div>
         </div>

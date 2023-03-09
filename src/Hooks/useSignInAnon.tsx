@@ -10,14 +10,14 @@ export default function useSignInAnon() {
   const { setIsLoggedIn } = useContext(menuContext);
   const dispatch = useAppDispatch();
 
-  return function signInAnon() {
+  return function signInAnon(userName: string) {
     signInAnonymously(auth)
       .then(() => {
         setIsLoggedIn(true);
 
         if (auth.currentUser) {
           updateProfile(auth.currentUser, {
-            displayName: "Timmy",
+            displayName: userName,
           })
             .then(() => {
               initDataFromFirestore().then((orders) => {
