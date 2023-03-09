@@ -12,7 +12,7 @@ h2,
 h3,
 h4,
 p {
-  margin: 0; 
+  margin: 0;
 }
 
 /* Make images easier to work with */
@@ -31,6 +31,14 @@ picture {
   justify-content: center;
 }
 
+button {
+  background-color: var(--four);
+  border-radius: 5px;
+  border: 1px solid black;
+  margin-right: 3px;
+  cursor: pointer;
+}
+
 :root {
   --one: #ad8b73;
   --two: #ceab93;
@@ -38,10 +46,11 @@ picture {
   --four: #fffbe9;
 }
 
-button {
-  background-color: var(--four);
-  border-radius: 5px;
-  border: 1px solid black;
-    margin-right:3px ;
-    cursor: pointer;
-  }
+/* :root {
+  --one: #FFFF00;
+  --two: #85e858;
+  --three: #00c584;
+  --four: #009c95;
+  --five: #007184;
+  --six: #2f4858;
+} */

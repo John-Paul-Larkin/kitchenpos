@@ -1,4 +1,3 @@
-import waiter from "../Assets/waiter.png";
 import styles from "../styles/MobileScreen.module.css";
 
 import { useContext, useEffect, useState } from "react";
@@ -14,8 +13,8 @@ import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
 import { addUpdatedOrdersToOpenOrders, closeOrders } from "../features/openOrdersSlice";
 import db from "../Firebase/firebaseconfig";
-import useSignInAnon from "../Hooks/useSignInAnon";
 import Floorplan from "./Floorplan";
+import LoginScreen from "./LoginScreen";
 
 export default function MobileScreen() {
   const screens = [
@@ -30,7 +29,6 @@ export default function MobileScreen() {
 
   const { isShowFloorPlan, isLoggedIn } = useContext(menuContext);
 
-  const signInAnon = useSignInAnon();
   // const signInGoogle = useSignInGoogle();
 
   const dispatch = useAppDispatch();
@@ -65,70 +63,9 @@ export default function MobileScreen() {
 
   dispatch(closeOrders(orders));
 
-  const [userName, setUserName] = useState("");
-
-  const handleRandomClick = () => {
-    const serverNames = [
-      "Aaran",
-      "Mark",
-      "Tony",
-      "Brian",
-      "Dermot",
-      "Thomas",
-      "John",
-      "Andrew",
-      "Andy",
-      "Michelle",
-      "Grace",
-      "Nicola",
-      "Lily",
-      "Andrea",
-      "Brigid",
-      "Caroline",
-      "Aoife",
-      "Mary",
-    ];
-
-    const server = serverNames[Math.floor(Math.random() * serverNames.length)];
-    setUserName(server);
-  };
-
   return (
     <>
-      {!isLoggedIn && (
-        <div className={styles["mobile-screen"]} style={{ width: screen?.value.width, height: screen?.value.height }}>
-          <div className={styles["login-screen"]}>
-            <div className={styles["server-name"]}>
-              <img src={waiter} alt="waiter" />
-
-              <p className={styles["intro"]}>
-                Welcome to restaurant POS, an app designed for taking restaurant orders. To continue please type a username, or alternatively let the
-                app choose one for you by clicking :
-              </p>
-              <div className={styles["button-wrapper"]}>
-                <button className={styles["random-button"]} onClick={handleRandomClick}>
-                  Random
-                </button>
-              </div>
-
-              <br />
-
-              <div className={styles["input"]}>
-                <label>
-                  Username :
-                  <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
-                </label>
-              </div>
-
-              <div className={styles["button-wrapper"]}>
-                <button className={styles["random-button"]} onClick={() => signInAnon(userName)}>
-                  Sign in
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {!isLoggedIn && <LoginScreen screen={screen} />}
 
       {isLoggedIn && (
         <>
