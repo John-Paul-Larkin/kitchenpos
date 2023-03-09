@@ -50,7 +50,12 @@ async function initDataFromFirestore() {
 
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
-    data.push(doc.data() as OrderDetails);
+    const order = doc.data() as OrderDetails;
+    const timeNow = new Date().getTime();
+    const twentyMinutes = 1200000;
+    if (timeNow - order.timeOrderPlaced! < twentyMinutes) {
+      data.push(order);
+    }
   });
 
   return data;
