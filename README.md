@@ -9,7 +9,7 @@
 ### How to use
 
 Both apps are deployed on netlify. First open the <a href="https://kitchenpos.netlify.app/">POS app</a>, select a table and add some orders. Optionally you can customise the order with extra ingredients before sending it through to the kitchen.
-Following this you can open the <a target="_blank" href="https://kitchendisplay.netlify.app/">kitchen display app</a>, where you can view all the open orders along a timeline.
+Following this you can open the <a href="https://kitchendisplay.netlify.app/">kitchen display app</a>, where you can view all the open orders along a timeline.
 Note: While the POS app was designed for mobile, the display app requires a **larger screen** to display correctly.
 
 ## Built with
@@ -25,7 +25,6 @@ Other objective included reinforcing my prior understanding of reacts core conce
 
 I am satisfied I achieved my initial learning goals, however, I also gained an appreciation and rudimentary understanding of the concepts
 around data modeling, software architecture and the importance of initial design in facilitating the evolution of the software as requirements changed.
-As the project grew I realised that
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 <span>
