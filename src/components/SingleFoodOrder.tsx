@@ -112,9 +112,12 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
     >
       {isShowTableDetails && createPortal(<TableDetailsOnHover tableNumber={order.tableNumber} />, document.getElementById(order.tableNumber)!)}
 
+        <div className={styles["server-name"]}>{order.server}</div>
+      <div>
       <div className={styles["time-order-placed"]}>{orderTimeDisplay}</div>
+        <div className={styles["table-number"]}>{order.tableNumber}</div>
+      </div>
 
-      <div className={styles["table-number"]}>{order.tableNumber}</div>
       {!isShowStopWatch && (
         <Timer setIsShowStopWatch={setIsShowStopWatch} finishTime={new Date(order.timeOrderPlaced! + tenMinutes)} orderID={order.orderId} />
       )}

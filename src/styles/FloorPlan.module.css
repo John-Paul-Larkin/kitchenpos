@@ -37,7 +37,7 @@
 .food-orders {
   height: 100%;
   width: 100%;
-  background-color: #ffff00;
+  background-color: var(--three);
   /* background-color: var(--two); */
 
   display: flex;
@@ -89,24 +89,26 @@
   padding: 3px;
   margin: 5px;
   /* background-color: aqua; */
-  background-color: var(--three);
+  background-color: var(--four);
   color: black;
   cursor: pointer;
   min-width: 80px;
   height: 93%;
   border-radius: 10px;
   z-index: 99;
+  font-weight: 600;
 }
 
 .open-orders-hover {
   position: absolute;
   top: 70px;
   font-size: 0.6em;
+
   border: 5px solid black;
   display: inline-block;
   padding: 3px;
   margin: 5px;
-  background-color: aqua;
+  background-color: var(--four);
   cursor: pointer;
   min-width: 80px;
   min-height: 100px;
@@ -116,15 +118,25 @@
 
 .stopwatch {
   border: 1px solid black;
+  width: 30px;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 .timer {
   border: 1px solid black;
+  width: 30px;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 .time-order-placed {
   width: 30px;
   display: inline-block;
+  margin-bottom: 5px;
+}
+
+.server-name {
 }
 
 .table-number {
@@ -132,6 +144,8 @@
   border: 1px solid black;
   padding: 0.3em;
   margin-left: 20px;
+  border-radius: 5px;
+  display: inline-block;
 }
 
 .floor-plan {

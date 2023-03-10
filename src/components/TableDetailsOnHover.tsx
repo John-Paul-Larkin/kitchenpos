@@ -28,7 +28,13 @@ export default function TableDetailsOnHover({ tableNumber }: { tableNumber: stri
     setSelectedTableNumber(order.tableNumber);
   };
 
-  
+  let borderColor = "3px solid red";
+
+  if (order.orderStatus === "time up") {
+    borderColor = "3px solid orange";
+  } else if (order.orderStatus === "ready") {
+    borderColor = "3px solid green";
+  }
 
   return (
     <motion.div
@@ -38,7 +44,7 @@ export default function TableDetailsOnHover({ tableNumber }: { tableNumber: stri
       whileTap={{ scale: 0.9 }}
       className={styles["open-orders-hover"]}
       onClick={handleOpenOrderClick}
-
+      style={{ border: borderColor }}
     >
       <div className={styles["table-number"]}>{tableNumber}</div>
       <div>
