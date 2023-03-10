@@ -9,7 +9,7 @@
 ### How to use
 
 Both apps are deployed on netlify. First open the <a href="https://kitchenpos.netlify.app/">POS app</a>, select a table and add some orders. Optionally you can customise the order with extra ingredients before sending it through to the kitchen.
-Following this you can open the <a href="https://kitchendisplay.netlify.app/">kitchen display app</a>, where you can view all the open orders along a timeline.
+Following this you can open the <a target="_blank" href="https://kitchendisplay.netlify.app/">kitchen display app</a>, where you can view all the open orders along a timeline.
 Note: While the POS app was designed for mobile, the display app requires a **larger screen** to display correctly.
 
 ## Built with
