@@ -1,3 +1,4 @@
+import { Fade } from "react-awesome-reveal";
 import waiter from "../Assets/waiter.png";
 import useSignInAnon from "../Hooks/useSignInAnon";
 import styles from "../styles/MobileScreen.module.css";
@@ -60,13 +61,15 @@ export default function LoginScreen({
           <img src={waiter} alt="waiter" />
 
           <div className={styles["intro"]}>
-
-            <h3>Welcome to restaurant POS</h3>
-            <p>
-              An app with a user-friendly interface, allowing waitstaff to input orders, customize menu items, and send
-              orders through to the chefs in the kitchen.
-            </p>
-      
+            <Fade>
+              <h3>Welcome to restaurant POS</h3>
+            </Fade>
+            <Fade delay={1000}>
+              <p>
+                An app with a user-friendly interface, allowing waitstaff to input orders, customize menu items, and send orders through to the chefs
+                in the kitchen.
+              </p>
+            </Fade>
           </div>
 
           <div className={styles["button-wrapper"]}>

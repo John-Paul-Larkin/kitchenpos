@@ -44,13 +44,34 @@ button {
   --two: #ceab93;
   --three: #e3caa5;
   --four: #fffbe9;
+   --five:   #ceab93; 
+  --five: #FFFF00;
 }
 
-/* :root {
-  --one: #FFFF00;
-  --two: #85e858;
-  --three: #00c584;
-  --four: #009c95;
-  --five: #007184;
+/* 
+:root {
+  --two: #007184;
+  --three: #85e858;
+  --four: #00c584;
+  --one: #009c95;
+  --five: #ffff00;
   --six: #2f4858;
+}
+
+:root {
+  --one: #b3b300;
+  --three: #007184;
+  --tow: #b3b300;
+  --four: #002db3;
+  --five: #ffff00;
+  --six: #ff0000;
+} */
+
+/* :root {
+  --one: #b3b300;
+  --two: #b3b300;
+  --four: #24488a;
+  --three: #007184;
+  --five: #ffff00;
+  --one: #ffff00;
 } */

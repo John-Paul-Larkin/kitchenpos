@@ -120,7 +120,7 @@
   height: 100%;
   width: 100%;
   border-radius: 14px;
-  background-color: yellow;
+  background-color: var(--five);;
 }
 
 .random-name {
@@ -131,7 +131,7 @@
 .random-button {
   background-color: black;
   border-radius: 12px;
-  color: #ffff00;
+  color: var(--five);
   cursor: pointer;
   font-weight: bold;
   padding: 10px 15px;

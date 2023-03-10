@@ -89,7 +89,7 @@
   padding: 3px;
   margin: 5px;
   /* background-color: aqua; */
-  background-color: var(--four);
+  background-color: var(--three);
   color: black;
   cursor: pointer;
   min-width: 80px;
@@ -140,6 +140,7 @@
   border-radius: 14px;
   display: grid;
   grid-template-columns: repeat(4, 25%);
+  /* background-color: var(--five); */
 }
 
 span {
@@ -203,6 +204,8 @@ span {
   background-color: white;
   color: black;
   z-index: 1;
+  /* color: #ffff00; */
+  font-weight: 600;
 }
 
 .num-1,

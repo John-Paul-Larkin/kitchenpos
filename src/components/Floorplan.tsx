@@ -1,4 +1,3 @@
-
 import { useContext } from "react";
 import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
@@ -17,7 +16,6 @@ export default function Floorplan() {
   const { setisShowFloorPlan } = useContext(menuContext);
 
   const handleTableClick = (table: string) => {
-
     setisShowFloorPlan(false);
 
     dispatch(clearOrderDetails());
@@ -51,6 +49,7 @@ export default function Floorplan() {
         <TableDrawing tableNumber={"11"} numberOfseats={6} handleTableClick={handleTableClick} />
 
         <TableDrawing tableNumber={"bar"} numberOfseats={7} handleTableClick={handleTableClick} />
+
         <TableDrawing tableNumber={"12"} numberOfseats={2} handleTableClick={handleTableClick} />
 
         <TableDrawing tableNumber={"13"} numberOfseats={2} handleTableClick={handleTableClick} />

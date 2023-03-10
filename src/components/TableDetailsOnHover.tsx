@@ -1,5 +1,9 @@
 import { motion } from "framer-motion";
-import { useAppSelector } from "../app/hooks";
+import { useContext } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { menuContext } from "../Context/MenuContext";
+import { changeTableNumberOrderDetails } from "../features/orderDetailsSlice";
+import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
 
 export default function TableDetailsOnHover({ tableNumber }: { tableNumber: string }) {
@@ -7,12 +11,35 @@ export default function TableDetailsOnHover({ tableNumber }: { tableNumber: stri
 
   const orders = openOrders.filter((order) => order.tableNumber === tableNumber);
 
+  const order = orders[0];
+
   let itemDetails: MenuItem[] = [];
 
   orders.forEach((order) => order.orderItemDetails.forEach((item) => itemDetails.push(item)));
 
+  const { setisShowFloorPlan, setSelectedTableNumber } = useContext(menuContext);
+  const dispatch = useAppDispatch();
+  const changeTableNumber = useChangeTableNumber();
+
+  const handleOpenOrderClick = () => {
+    setisShowFloorPlan(false);
+    dispatch(changeTableNumberOrderDetails(order.orderId));
+    changeTableNumber(order.tableNumber);
+    setSelectedTableNumber(order.tableNumber);
+  };
+
+  
+
   return (
-    <motion.div whileHover={{ scale: 1.07 }} whileTap={{ scale: 0.9 }} className={styles["open-orders-hover"]}>
+    <motion.div
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      whileHover={{ scale: 1.07 }}
+      whileTap={{ scale: 0.9 }}
+      className={styles["open-orders-hover"]}
+      onClick={handleOpenOrderClick}
+
+    >
       <div className={styles["table-number"]}>{tableNumber}</div>
       <div>
         {itemDetails.map((item) => {

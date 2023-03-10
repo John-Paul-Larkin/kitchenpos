@@ -1,6 +1,7 @@
 import { differenceInSeconds } from "date-fns";
 import { motion } from "framer-motion";
 import React, { useContext, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useStopwatch, useTimer } from "react-timer-hook";
 import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
@@ -8,6 +9,7 @@ import { changeOrderStatus } from "../features/openOrdersSlice";
 import { changeTableNumberOrderDetails } from "../features/orderDetailsSlice";
 import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
+import TableDetailsOnHover from "./TableDetailsOnHover";
 
 function Stopwatch({ startTime }: { startTime: Date }) {
   const stopwatchOffset = new Date();
@@ -96,6 +98,8 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
 
   let orderTimeDisplay = new Date(order.timeOrderPlaced!).toLocaleTimeString().substring(0, 4);
 
+  const [isShowTableDetails, setIsShowTableDetails] = useState(false);
+
   return (
     <motion.div
       whileHover={{ scale: 1.07 }}
@@ -103,7 +107,11 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
       className={styles["open-orders"]}
       onClick={handleOpenOrderClick}
       style={{ border: borderColor }}
+      onHoverStart={() => setIsShowTableDetails(true)}
+      onHoverEnd={() => setIsShowTableDetails(false)}
     >
+      {isShowTableDetails && createPortal(<TableDetailsOnHover tableNumber={order.tableNumber} />, document.getElementById(order.tableNumber)!)}
+
       <div className={styles["time-order-placed"]}>{orderTimeDisplay}</div>
 
       <div className={styles["table-number"]}>{order.tableNumber}</div>
