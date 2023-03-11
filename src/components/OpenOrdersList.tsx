@@ -5,7 +5,9 @@ import SingleFoodOrder from "./SingleFoodOrder";
 export default function OpenOrdersList() {
   const openOrders = useAppSelector((state) => state.openOrders);
 
-
+  const ordersPending = openOrders.filter((order) => order.orderStatus === "pending").sort((a, b) => b.timeOrderPlaced! - a.timeOrderPlaced!);
+  const ordersTimeUp = openOrders.filter((order) => order.orderStatus === "time up").sort((a, b) => b.timeTimeUp! - a.timeTimeUp!);
+  const ordersReady = openOrders.filter((order) => order.orderStatus === "ready").sort((a, b) => b.timeTimeUp! - a.timeTimeUp!);
 
   // openOrders.forEach((order) => console.log(order.tableNumber, order.orderStatus));
 
@@ -15,21 +17,13 @@ export default function OpenOrdersList() {
 
       <div className={styles["food-orders-wrapper"]}>
         <div className={styles["food-orders"]}>
-          {openOrders &&
-            openOrders.filter((order) => order.orderStatus === "pending").map((order) => <SingleFoodOrder key={order.orderId} order={order} />)}
+          {ordersPending && ordersPending.map((order) => <SingleFoodOrder key={order.orderId} order={order} />)}
         </div>
       </div>
       <div className={styles["ready-orders-wrapper"]}>
         <div className={styles["ready-orders"]}>
-          {openOrders &&
-            openOrders
-              .filter((order) => order.orderStatus !== "pending")
-              .sort((a, b) => {
-                if (a.orderStatus > b.orderStatus) {
-                  return -1;
-                } else return 1;
-              })
-              .map((order) => <SingleFoodOrder key={order.orderId} order={order} />)}
+          {ordersTimeUp && ordersTimeUp.map((order) => <SingleFoodOrder key={order.orderId} order={order} />)}
+          {ordersReady && ordersReady.map((order) => <SingleFoodOrder key={order.orderId} order={order} />)}
         </div>
       </div>
     </div>
