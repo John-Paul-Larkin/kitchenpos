@@ -105,11 +105,11 @@ export const foodMenuItems: MenuItem[] = [
     station: "grill",
     price: 15.95,
     ingredients: [
+      { ingredient: "Mushrooms", selected: true },
       { ingredient: "Fried onions", selected: true },
       { ingredient: "Lettuce", selected: true },
-      { ingredient: "Tomato", selected: true },
+      { ingredient: "Mayo", selected: true },
       { ingredient: "Side salad", selected: true },
-      { ingredient: "Mushrooms", selected: true },
     ],
   },
 
