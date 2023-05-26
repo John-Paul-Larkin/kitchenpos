@@ -13,7 +13,7 @@ export default function TableDrawing({
   numberOfseats: number;
   handleTableClick: (table: string) => void;
 }) {
-  const openOrders = useAppSelector((state) => state.openOrders);
+  const openOrders: OrderDetails[] = useAppSelector((state) => state.openOrders);
 
   let tableColor = "black";
 

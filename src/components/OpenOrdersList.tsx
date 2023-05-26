@@ -9,6 +9,7 @@ export default function OpenOrdersList() {
   const ordersTimeUp = openOrders.filter((order) => order.orderStatus === "time up").sort((a, b) => b.timeTimeUp! - a.timeTimeUp!);
   const ordersReady = openOrders.filter((order) => order.orderStatus === "ready").sort((a, b) => b.timeTimeUp! - a.timeTimeUp!);
 
+
   // openOrders.forEach((order) => console.log(order.tableNumber, order.orderStatus));
 
   return (

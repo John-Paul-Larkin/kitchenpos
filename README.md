@@ -65,3 +65,10 @@ Issue with timer not syncing up. Originally I utitilised Date objects to store t
 // mutltiple states/reducers for orderdetails etc
 // how to handle edits
 // Fixed bug in which default food item would not toggle selected on the open orders array
+
+
+
+designed so chef only clicks twice. once when they are finished preparing. again when the order is ready.
+click on each station to highlight the items 
+hover on closed orders to reveal details
+

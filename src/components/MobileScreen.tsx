@@ -9,10 +9,10 @@ import OrderScreen from "./OrderScreen";
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { motion } from "framer-motion";
-import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
-import { addUpdatedOrdersToOpenOrders, closeOrders } from "../features/openOrdersSlice";
 import db from "../Firebase/firebaseconfig";
+import { useAppDispatch } from "../app/hooks";
+import { addUpdatedOrdersToOpenOrders, closeOrders } from "../features/openOrdersSlice";
 import Floorplan from "./Floorplan";
 import LoginScreen from "./LoginScreen";
 
@@ -34,8 +34,37 @@ export default function MobileScreen() {
   const dispatch = useAppDispatch();
 
   const [orders, setOrders] = useState<OrderDetails[]>([]);
+  // const [readyTables, setReadyTables] = useState<number[]>([]);
+  const [showNotification, setShowNotificaiton] = useState(false);
 
   useEffect(() => {
+    // firstore snapshot which listens for an order status change to ready
+    // then displays a notification to the user
+
+    const q = query(collection(db, "orders"), where("orderStatus", "==", "ready"));
+    let timeOutId: NodeJS.Timeout;
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        // const order = doc.data() as OrderDetails;
+        if (change.type === "added") {
+          const order = change.doc.data() as OrderDetails;
+          console.log(order.tableNumber);
+          setShowNotificaiton(true);
+          timeOutId = setTimeout(() => setShowNotificaiton(false), 3000);
+        }
+      });
+    });
+    return () => {
+      unsubscribe();
+      clearTimeout(timeOutId);
+    };
+  }, []);
+
+  useEffect(() => {
+    // when app first runs query firestore for any open orders.
+    // we only select those which are less than twenty mins old
+    // and the others will have order status changed to closed.
+
     const q = query(collection(db, "orders"), where("orderStatus", "!=", "closed"));
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -65,8 +94,9 @@ export default function MobileScreen() {
 
   return (
     <>
-      {!isLoggedIn && <LoginScreen screen={screen} setScreen={setScreen} screens={screens}  />}
+      {showNotification && <div>Order ready notification</div>}
 
+      {!isLoggedIn && <LoginScreen screen={screen} setScreen={setScreen} screens={screens} />}
       {isLoggedIn && (
         <>
           <div style={{ display: isShowFloorPlan ? "none" : "initial" }}>
@@ -78,7 +108,7 @@ export default function MobileScreen() {
               style={{ width: screen?.value.width, height: screen?.value.height }}
             >
               <ScreenSizeSelector screen={screen} setScreen={setScreen} screens={screens} />
-              
+
               <OrderScreen />
 
               {isShowFoodMenu && (
