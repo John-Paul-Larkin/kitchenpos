@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import React, { useContext, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useStopwatch, useTimer } from "react-timer-hook";
-import { useAppDispatch } from "../app/hooks";
 import { menuContext } from "../Context/MenuContext";
+import useChangeTableNumber from "../Hooks/useChangeTableNumber";
+import { useAppDispatch } from "../app/hooks";
 import { changeOrderStatus } from "../features/openOrdersSlice";
 import { changeTableNumberOrderDetails } from "../features/orderDetailsSlice";
-import useChangeTableNumber from "../Hooks/useChangeTableNumber";
 import styles from "../styles/FloorPlan.module.css";
 import TableDetailsOnHover from "./TableDetailsOnHover";
 
@@ -112,9 +112,9 @@ export default function SingleFoodOrder({ order }: { order: OrderDetails }) {
     >
       {isShowTableDetails && createPortal(<TableDetailsOnHover tableNumber={order.tableNumber} />, document.getElementById(order.tableNumber)!)}
 
-        <div className={styles["server-name"]}>{order.server}</div>
+      <div className={styles["server-name"]}>{order.server}</div>
       <div>
-      <div className={styles["time-order-placed"]}>{orderTimeDisplay}</div>
+        <div className={styles["time-order-placed"]}>{orderTimeDisplay}</div>
         <div className={styles["table-number"]}>{order.tableNumber}</div>
       </div>
 

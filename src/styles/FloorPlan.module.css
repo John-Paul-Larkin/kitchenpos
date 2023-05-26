@@ -97,6 +97,8 @@
   border-radius: 10px;
   z-index: 99;
   font-weight: 600;
+ overflow-y: hidden;
+
 }
 
 .open-orders-hover {
@@ -136,8 +138,6 @@
   margin-bottom: 5px;
 }
 
-.server-name {
-}
 
 .table-number {
   display: inline-block;
