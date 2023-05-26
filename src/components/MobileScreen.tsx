@@ -9,6 +9,8 @@ import OrderScreen from "./OrderScreen";
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { motion } from "framer-motion";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 import { menuContext } from "../Context/MenuContext";
 import db from "../Firebase/firebaseconfig";
 import { useAppDispatch } from "../app/hooks";
@@ -34,23 +36,35 @@ export default function MobileScreen() {
   const dispatch = useAppDispatch();
 
   const [orders, setOrders] = useState<OrderDetails[]>([]);
-  // const [readyTables, setReadyTables] = useState<number[]>([]);
-  const [showNotification, setShowNotificaiton] = useState(false);
+
+  const notify = (tableNumber: string) =>
+    toast("Table " + tableNumber + " is ready", {
+      position: "top-center",
+      autoClose: 3500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
 
   useEffect(() => {
-    // firstore snapshot which listens for an order status change to ready
+    // firstore snapshot which listens for when an order status changes to 'ready'
     // then displays a notification to the user
-
     const q = query(collection(db, "orders"), where("orderStatus", "==", "ready"));
     let timeOutId: NodeJS.Timeout;
     const unsubscribe = onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
-        // const order = doc.data() as OrderDetails;
         if (change.type === "added") {
           const order = change.doc.data() as OrderDetails;
-          console.log(order.tableNumber);
-          setShowNotificaiton(true);
-          timeOutId = setTimeout(() => setShowNotificaiton(false), 3000);
+
+          //Prevents old notifications showing when the app is restarted
+          const timeNow = new Date().getTime();
+          const timeReady = order.timeReady;
+          if (timeReady && timeNow - timeReady < 2000) {
+            notify(order.tableNumber);
+          }
         }
       });
     });
@@ -94,7 +108,7 @@ export default function MobileScreen() {
 
   return (
     <>
-      {showNotification && <div>Order ready notification</div>}
+      <ToastContainer />
 
       {!isLoggedIn && <LoginScreen screen={screen} setScreen={setScreen} screens={screens} />}
       {isLoggedIn && (
