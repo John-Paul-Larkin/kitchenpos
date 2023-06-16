@@ -34,6 +34,10 @@ around data modeling, software architecture and the importance of initial design
     <br>
 </span>
 
+<span>
+<iframe src="[https://www.youtube.com/embed/aFnXjlkPwfc](https://youtu.be/vgQ1oEJDxEU)" height="300px" width="450" allowfullscreen></iframe>
+</span>
+
 <!-- CONTACT -->
 
 ## Contact
